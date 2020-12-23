@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+      - name: "Include dunst"
+        include_role:
+            name: "dunst"

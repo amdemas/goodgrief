@@ -1,0 +1,22 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  ansible-lint
+platforms:
+  - name: ubuntu
+    image: geerlingguy/docker-ubuntu1804-ansible
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /run/udev:/run/udev:ro
+    privileged: true
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../default/converge.yml
+verifier:
+  name: ansible
+scenario:
+  name: ubuntu

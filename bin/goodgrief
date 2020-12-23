@@ -1,0 +1,192 @@
+#!/bin/sh
+
+set -o errexit
+set -o nounset
+
+DOT_PATH="$HOME/.config/dotfiles"
+REPOSITORY="https://github.com/amdemas/dotfiles.git"
+TAGS=${TAGS:-all}
+PROFILE=${PROFILE:-gnome}
+
+
+check_dependencies() {
+
+    missing_dependencies=false
+
+    command_exists ansible || {
+        missing_dependencies=true
+		error "ansible is not installed"
+	}
+
+    command_exists git || {
+        missing_dependencies=true
+		error "git is not installed"
+	}
+
+    command_exists sudo || {
+        missing_dependencies=true
+		error "sudo is not installed"
+	}
+
+    if [ $missing_dependencies = true ]; then
+        exit 1
+    else
+        info "Checking dependencies...  Passed!"
+    fi
+}
+
+clone_repository() {
+    if [ -d ${DOT_PATH} ]; then
+        info "Old installation found. Deleting..."
+        rm -rf ${DOT_PATH}
+    fi
+
+    info "Clonning repository into '${DOT_PATH}'..."
+    mkdir -p $DOT_PATH
+    git clone $REPOSITORY $DOT_PATH
+}
+
+command_exists() {
+	command -v "$@" >/dev/null 2>&1
+}
+
+error() {
+    echo ' '
+	echo ${RED}"Error: $@"${RESET} >&2;
+}
+
+warning() {
+    echo ${YELLOW}"Warning: $@"${RESET}
+}
+
+info() {
+    echo ${GREEN}"$@"${RESET}
+}
+
+header() {
+    echo -e " __________________________________ "
+    echo -e "|     ,-'                \`-._      |"
+    echo -e "|   ,'   _       _  _  _  _  \`.    |"
+    echo -e "|  /    / \|_|  /__/ \/ \| \   \   |"
+    echo -e "| :     \_/| |, \_/\_/\_/|,'    :  |"
+    echo -e "| :        _  _    _  _         ;  |"
+    echo -e "|  \      /__|,' ||_ |_ |      /   |"
+    echo -e "|   '.    \_/|\`. ||_ |  .    ,'    |"
+    echo -e "|     \`.                  _.'      |"
+    echo -e "|       \(\`--..._____..-''         |"
+    echo -e "|        \`\  _____                 |"
+    echo -e "|          ,' _  _\`.               |"
+    echo -e "|         /  ,' _ \`.\              |"
+    echo -e "|        :    ' _)'  :             |"
+    echo -e "|       (_           ;)            |"
+    echo -e "|         \  ..---. /              |"
+    echo -e "|          \`..__ _.'               |"
+    echo -e "|            ,'._(_                |"
+    echo -e "|           ,'\`' \`-'               |"
+    echo -e "|          /    _   \              |"
+    echo -e "|---------/__,)/)\._|\-------------|"
+    echo -e "|---------(   _,.\`   ;-------------|"
+    echo -e "|_________|\`-'\_/\`--'|__________SSt|"
+}
+
+help() {
+    echo ' '
+    echo 'Dotfile playbook'
+    echo ' '
+    echo 'goodgrief [options]'
+    echo ' '
+    echo 'supplying no options will run the playbook with defaults'
+    echo ' '
+    echo 'options:'
+    echo '-h, --help                show brief help'
+    echo '-d, --deps                check dependencies'
+    echo '-t, --tags=tag1,tag2      specify which tags the playbook will run'
+    echo '-t, --profile=profile     specify which desktop the playbook will setup'
+    echo '-u, --update              update dotfile config directory'
+    echo '-r, --run                 run the playbook'
+    exit 0
+}
+
+run_playbook() {
+    info "Running playbook..."
+    cd $DOT_PATH
+    ansible-playbook \
+            --ask-become-pass \
+            --diff \
+            -i inventory \
+            --limit $PROFILE \
+            --tags $TAGS \
+            playbook.yml
+}
+
+setup_colors() {
+	# Only use colors if connected to a terminal
+	if [ -t 1 ]; then
+		GREEN=$(printf '\033[32m')
+        RED=$(printf '\033[31m')
+		RESET=$(printf '\033[m')
+		YELLOW=$(printf '\033[33m')
+	else
+		GREEN=""; RED=""; RESET=""; YELLOW=""
+	fi
+}
+
+main() {
+    setup_colors
+    if [ $# -eq 0 ]; then
+        header
+        help
+        # check_dependencies
+        # clone_repository
+        # run_playbook
+    else
+        header
+        while test $# -gt 0; do
+            case "$1" in
+                -h|--help)
+                help
+                ;;
+                -d|--deps)
+                check_dependencies
+                shift
+                ;;
+                -t|--tags)
+                shift
+                if test $# -gt 0; then
+                    TAGS=$1
+                    info "Using the following tags: $TAGS"
+                else
+                    warn 'no tags specified, using all'
+                fi
+                shift
+                ;;
+                -p|--profile*)
+                shift
+                if test $# -gt 0; then
+                    PROFILE=$1
+                    info "Using the following profile: $PROFILE"
+                else
+                    warn 'no prfile specified, using gnome'
+                fi
+                shift
+                ;;
+                -u|--update)
+                shift
+                info "Updating repository into '${DOT_PATH}'..."
+                clone_repository
+                shift
+                ;;
+                -r|--run)
+                info 'Running playbook... Good Grief!'
+                run_playbook
+                ;;
+                *)
+                header
+                check_dependencies
+                ;;
+            esac
+        done
+    fi
+}
+
+main "$@"

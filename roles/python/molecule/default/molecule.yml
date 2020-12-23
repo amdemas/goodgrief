@@ -1,0 +1,21 @@
+---
+dependency:
+    name: galaxy
+driver:
+    name: docker
+platforms:
+    - name: default
+      image: geerlingguy/docker-fedora31-ansible:latest
+      command: ${MOLECULE_DOCKER_COMMAND:-""}
+      capabilities:
+          - SYS_ADMIN
+      volumes:
+          - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      override_command: true
+      privileged: true
+provisioner:
+    name: ansible
+scenario:
+    name: default
+verifier:
+    name: ansible

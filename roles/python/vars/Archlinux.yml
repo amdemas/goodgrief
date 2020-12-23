@@ -1,0 +1,8 @@
+---
+python_system_packages:
+    - name: base-devel
+    - name: openssl
+    - name: zlib
+    - name: xz
+    - name: git
+    - name: python-pip

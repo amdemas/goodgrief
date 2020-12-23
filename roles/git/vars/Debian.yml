@@ -1,0 +1,5 @@
+git_packages:
+    - git
+    - gawk
+    - git-extras
+    - hub

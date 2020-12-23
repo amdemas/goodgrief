@@ -1,0 +1,16 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+      - name: "vscode - check vscode package status"
+        package:
+            name: "code"
+            state: "installed"
+        check_mode: yes
+        register: pkg_status
+
+      - name: "vscode - test vscode package is installed"
+        assert:
+            that:
+                - not pkg_status.changed

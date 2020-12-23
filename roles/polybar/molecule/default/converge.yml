@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+      - name: "Include polybar"
+        include_role:
+            name: "polybar"
+        vars:
+            theme: "nord"

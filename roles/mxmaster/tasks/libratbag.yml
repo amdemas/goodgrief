@@ -1,0 +1,65 @@
+# ---
+# - name: Install meson builder
+#   pip:
+#       name: meson
+#       executable: "pip3"
+#       extra_args: --user
+
+# - name: Clone lastest libratbag
+#   git:
+#       repo: https://github.com/libratbag/libratbag.git
+#       dest: "tmp/libratbag"
+#       update: yes
+#       accept_hostkey: yes
+
+# - name: Run meson build from sources
+#   shell: meson builddir
+#   args:
+#       chdir: "/tmp/libratbag"
+
+# - name: Run ninja from sources
+#   shell: ninja -C builddir
+#   args:
+#       chdir: "/tmp/libratbag"
+
+# - name: Run ninja install from sources
+#   shell: ninja -C builddir install
+#   args:
+#       chdir: "/tmp/libratbag"
+#   become: yes
+
+# - name: Clone lastest piper
+#   git:
+#       repo: https://github.com/libratbag/piper.git
+#       dest: "tmp/piper"
+#       update: yes
+#       accept_hostkey: yes
+
+# - name: Run meson build from sources
+#   shell: meson builddir
+#   args:
+#       chdir: "/tmp/piper"
+
+# - name: Run ninja from sources
+#   shell: ninja -C builddir
+#   args:
+#       chdir: "/tmp/piper"
+
+# - name: Run ninja install from sources
+#   shell: ninja -C builddir install
+#   args:
+#       chdir: "/tmp/piper"
+#   become: yes
+
+# - name: Reload and start dbus
+#   systemd:
+#       name: dbus.service
+#       daemon_reload: yes
+#       state: reloaded
+#   become: yes
+
+# - name: Reload and start libratbag
+#   systemd:
+#       name: ratbagd.service
+#       state: restarted
+#   become: yes

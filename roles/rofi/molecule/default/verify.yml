@@ -1,0 +1,28 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+      - name: "rofi - check rofi package status"
+        package:
+            name: "rofi"
+            state: "installed"
+        check_mode: yes
+        register: pkg_status
+
+      - name: "rofi - test rofi package is installed"
+        assert:
+            that:
+                - not pkg_status.changed
+
+      - name: "rofi - check for the launch.sh script"
+        stat:
+            path: "/root/.config/rofi/launch.sh"
+        register: stat_result
+
+      - name: "rofi - check that the launch.sh exists"
+        assert:
+            that:
+                - stat_result.stat.exists

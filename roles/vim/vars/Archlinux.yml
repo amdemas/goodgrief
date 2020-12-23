@@ -1,0 +1,12 @@
+---
+vim_packages:
+    - name: ShellCheck
+    - name: tidy
+    - name: nodejs
+    - name: npm
+    - name: vim
+    - name: neovim
+    - name: python2-neovim
+    - name: python3-neovim
+    - name: silversearcher-ag
+    - name: exuberant-ctags

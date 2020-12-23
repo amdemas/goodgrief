@@ -1,0 +1,19 @@
+---
+# handlers file for mxmaster
+- name: reload udev # noqa 503 305
+  shell: udevadm control --reload
+  become: yes
+  when: udev.stat.exists
+
+- name: trigger udev # noqa 305
+  shell: udevadm trigger
+  become: yes
+  when: udev.stat.exists
+
+- name: reload logiops
+  systemd:
+    name: logid.service
+    daemon_reload: yes
+    enabled: yes
+    state: reloaded
+  become: yes

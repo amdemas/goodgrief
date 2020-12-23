@@ -1,0 +1,61 @@
+---
+# tasks file for node
+
+- name: cerate nvm directory
+  file:
+      path: "{{ nvm_link_dir }}"
+      state: directory
+      mode: "0755"
+
+- name: download nvm
+  get_url:
+      url: "https://raw.githubusercontent.com/creationix/nvm/v{{ nvm_script_version }}/install.sh"
+      dest: "{{ ansible_user_dir }}/install.sh"
+
+- name: install nvm
+  shell: "sh {{ ansible_user_dir }}/install.sh"
+  args:
+      chdir: "{{ nvm_link_dir }}"
+      creates: "{{ nvm_link_dir }}/nvm.sh"
+  environment:
+      XDG_CONFIG_HOME: "{{ ansible_user_dir }}/.config/"
+      NVM_DIR: "{{ nvm_link_dir }}"
+
+# - name: remove temp nvm installer
+#   file:
+#       path: /tmp/install.sh
+#       state: absent
+
+- name: install node via nvm
+  shell: >
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm install {{ node_version }}
+  args:
+      executable: /bin/bash
+      chdir: "{{ nvm_link_dir }}"
+      creates: "{{ nvm_link_dir }}/versions/node/v{{ node_version }}"
+  environment:
+      XDG_CONFIG_HOME: "{{ ansible_user_dir }}/.config/"
+      NVM_DIR: "{{ nvm_link_dir }}"
+
+- name: install packages via npm
+  npm:
+      name: "{{ item.name }}"
+      global: true
+      state: '{{ item.state | default("present") }}'
+  with_items: "{{ node_install_packages }}"
+  environment:
+      XDG_CONFIG_HOME: "{{ ansible_user_dir }}/.config/"
+      NVM_DIR: "{{ nvm_link_dir }}"
+      PATH: "{{ lookup('env', 'PATH') }}:{{ nvm_link_dir }}/versions/node/v{{ node_version }}/bin"
+
+- name: make npm config directory
+  file:
+      path: "{{ ansible_user_dir }}/.config/npm"
+      state: directory
+      mode: 0755
+
+- name: copy npmrc config
+  copy:
+      src: npmrc
+      dest: "{{ ansible_user_dir }}/.config/npm/npmrc"
+      mode: preserve

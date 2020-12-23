@@ -1,0 +1,36 @@
+---
+# tasks file for zsh
+
+# Installation and setup
+- name: make sure zsh is installed
+  package:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - zsh
+      - git
+      - direnv
+  become: yes
+
+- name: copy zshrc configs
+  copy:
+      src: zshrc
+      dest: "{{ ansible_user_dir }}/.zshrc"
+      force: yes
+      mode: preserve
+
+- name: clone latest zplug
+  git:
+      repo: "https://github.com/zplug/zplug.git"
+      dest: "{{ ansible_user_dir }}/.local/share/zplug"
+      accept_hostkey: yes
+      version: 2.4.2
+      force: yes
+
+- name: changing default shell to zsh
+  user:
+      name: "{{ ansible_user_id }}"
+      shell: /usr/bin/zsh
+      state: present
+  become: yes
+  when: ansible_facts.user_shell != '/usr/bin/zsh'

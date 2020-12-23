@@ -1,0 +1,38 @@
+---
+- name: gather the package facts
+  package_facts:
+      manager: auto
+
+- name: install needed system packages
+  package:
+      name: "sxhkd"
+      state: present
+  become: yes
+
+- name: make sure destination for templates exists
+  file:
+      path: "{{ ansible_user_dir }}/.config/sxhkd"
+      state: directory
+      mode: 0755
+
+- name: copy configs to directory
+  copy:
+      src: "{{ item }}"
+      dest: "{{ ansible_user_dir }}/.config/sxhkd/"
+      mode: preserve
+  with_fileglob:
+      - files/*
+
+- name: make sure destination for autostart files exists
+  file:
+      path: "{{ ansible_user_dir }}/.config/autostart"
+      state: directory
+      mode: 0755
+  when: "'gnome-shell' in ansible_facts.packages"
+
+- name: copy autstart to directory if gnome
+  copy:
+      src: "files/sxhkd.desktop"
+      dest: "{{ ansible_user_dir }}/.config/autostart/"
+      mode: preserve
+  when: "'gnome-shell' in ansible_facts.packages"

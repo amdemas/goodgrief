@@ -1,0 +1,83 @@
+---
+- name: include distro-specific tasks
+  include_vars: "{{ ansible_os_family }}.yml"
+
+# - name: "Enable external repos {{ ansible_os_family }}"
+#   apt_repository:
+#       repo: "{{ item.repo | default('') }}"
+#       state: "{{ item.state | default('present') }}"
+#   loop: "{{ gnome_theme_repos | default([]) }}"
+#   become: yes
+
+- name: "install packages"
+  package:
+      name: "{{ item.name }}"
+      state: '{{ item.state | default("present") }}'
+  loop: "{{ gnome_packages | default([]) }}"
+  become: yes
+
+- name: make sure destination for templates exists
+  file:
+      path: "{{ item.dest | dirname }}"
+      state: directory
+      mode: 0755
+  with_items: "{{ gnome_files|default([]) }}"
+
+- name: create config templates in destination
+  template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      force: yes
+      mode: preserve
+  with_items: "{{ gnome_files|default([]) }}"
+
+- name: create new font directory
+  file:
+      path: /home/{{ ansible_user_id }}/.fonts
+      state: directory
+      mode: 0755
+  with_items: "{{ gnome_fonts|default([]) }}"
+  become: yes
+
+- name: create font directories
+  file:
+      path: /home/{{ ansible_user_id }}/.fonts/{{ item.name }}
+      state: directory
+      mode: 0755
+  with_items: "{{ gnome_fonts|default([]) }}"
+  become: yes
+
+- name: download fonts
+  get_url:
+      url: "{{ item.url }}"
+      dest: "/tmp/{{ item.name }}.zip"
+      force: yes
+  with_items: "{{ gnome_fonts|default([]) }}"
+
+- name: unpack and install fonts
+  unarchive:
+      src: "/tmp/{{ item.name }}.zip"
+      dest: "/home/{{ ansible_user_id }}/.fonts/{{ item.name }}"
+      remote_src: true
+  with_items: "{{ gnome_fonts|default([]) }}"
+  become: true
+  notify: refresh fonts
+
+- name: load Gnome extension information
+  include_tasks: get_extension_info.yml
+  with_items: "{{ gnome_install_extensions }}"
+
+- include_tasks: install_extensions.yml
+  vars:
+      gnome_extension: "{{ item }}"
+  loop: "{{ gnome_extensions_full }}"
+
+- name: modify gnome settings using gsettings
+  gsetting:
+      user: "{{ ansible_user_id }}"
+      key: "{{ item.schema }}.{{ item.key }}"
+      value: "{{ item.value }}"
+  with_items: "{{ gnome_config_gsettings|default([]) }}"
+  become: yes
+
+- include_tasks: gedit.yml

@@ -1,0 +1,18 @@
+---
+dependency:
+    name: galaxy
+    options:
+        role-file: ../../galaxy_roles/requirements.yml
+driver:
+    name: docker
+lint: |
+    yamllint .
+    flake8
+    ansible-lint
+platforms:
+    - name: default
+      image: centos:7
+provisioner:
+    name: ansible
+verifier:
+    name: ansible

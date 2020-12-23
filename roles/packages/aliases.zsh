@@ -1,0 +1,1 @@
+alias gdb="gdb -nh -x $XDG_CONFIG_HOME/gbd/gdbinit"

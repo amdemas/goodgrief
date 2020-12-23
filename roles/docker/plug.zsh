@@ -1,0 +1,1 @@
+zplug "luismayta/zsh-docker-aliases", from:"github"

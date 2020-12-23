@@ -1,0 +1,12 @@
+---
+rbenv_packages:
+    - curl
+    - gcc
+    - openssl-devel
+    - libyaml-devel
+    - readline-devel
+    - zlib-devel
+    - libffi-devel
+    - git
+    - bzip2
+    - make

@@ -1,0 +1,62 @@
+#!/usr/bin/python
+
+from ansible.module_utils.basic import AnsibleModule
+
+
+def _enable(module, extension):
+    if module.check_mode:
+        return True
+
+    return not module.run_command(["gnome-extensions", "enable", extension])[1].strip()
+
+
+def _disable(module, extension):
+    if module.check_mode:
+        return True
+
+    return not module.run_command(["gnome-extensions", "disable", extension])[1].strip()
+
+
+def _list(module):
+    extensions = module.run_command(["dconf", "read", "/org/gnome/shell/enabled-extensions"])[1]
+    # Remove array braces
+    extensions = extensions[1:-1].split(", ")
+    # Remove quotes from values
+    return [extension[1:-1] for extension in extensions]
+
+
+def main():
+    module = AnsibleModule(
+        argument_spec={
+            "extension": {
+                "required": True,
+                "type": "str"
+            },
+            "state": {
+                "required": True,
+                "type": "str",
+                "choices": ["present", "absent"]
+            },
+        },
+        supports_check_mode=True)
+
+    extension = module.params["extension"]
+    present = module.params["state"] == "present"
+
+    changed = False
+    failed = False
+
+    current_exts = _list(module)
+    if present:
+        if extension not in current_exts:
+            changed = True
+            failed = not _enable(module, extension)
+    else:
+        if extension in current_exts:
+            changed = True
+            failed = not _disable(module, extension)
+
+    module.exit_json(failed=failed, changed=changed)
+
+
+main()

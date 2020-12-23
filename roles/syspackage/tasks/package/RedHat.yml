@@ -1,0 +1,7 @@
+---
+- name: install needed system packages
+  dnf:
+      name: "{{ item.name }}"
+      state: '{{ item.state | default("present") }}'
+  with_items: "{{ os_packages }}"
+  become: yes

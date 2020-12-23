@@ -1,0 +1,20 @@
+---
+python_system_packages:
+    - name: make
+    - name: build-essential
+    - name: libssl-dev
+    - name: zlib1g-dev
+    - name: libbz2-dev
+    - name: libreadline-dev
+    - name: libsqlite3-dev
+    - name: wget
+    - name: curl
+    - name: llvm
+    - name: libncurses5-dev
+    - name: libncursesw5-dev
+    - name: xz-utils
+    - name: tk-dev
+    - name: libffi-dev
+    - name: liblzma-dev
+    - name: python-openssl
+    - name: git

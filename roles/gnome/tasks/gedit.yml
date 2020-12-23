@@ -1,0 +1,24 @@
+---
+- name: create style directory
+  file:
+      path: "{{ ansible_user_dir }}/.config/share/gedit/styles"
+      state: directory
+      mode: 0755
+
+- name: copy configs to directory
+  copy:
+      src: "theme/{{ theme }}.xml"
+      dest: "{{ ansible_user_dir }}/.config/share/gedit/styles/"
+      mode: preserve
+
+- name: update Gedit theme
+  dconf:
+      key: "/org/gnome/gedit/preferences/editor/scheme"
+      value: "'{{ theme }}-gedit'"
+      state: present
+
+- name: update Gedit font
+  dconf:
+      key: "/org/gnome/gedit/preferences/editor/editor-font"
+      value: "'FiraCode NF 14'"
+      state: present

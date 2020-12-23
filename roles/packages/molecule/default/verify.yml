@@ -1,0 +1,28 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+      - name: "packages - check curl package status"
+        package:
+            name: "curl"
+            state: "installed"
+        check_mode: yes
+        register: pkg_status
+
+      - name: "packages - test curl package is installed"
+        assert:
+            that:
+                - not pkg_status.changed
+
+      - name: "packages - check that curlrc exists"
+        stat:
+            path: "/root/.config/curl/curlrc"
+        register: stat_result
+
+      - name: "packages - test curlrc exists"
+        assert:
+            that:
+                - stat_result.stat.exists

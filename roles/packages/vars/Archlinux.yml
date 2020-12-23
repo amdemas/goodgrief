@@ -1,0 +1,11 @@
+install_packages:
+    - name: curl
+    - name: wget
+    - name: zopfli
+    - name: libevent
+    - name: libxslt
+    - name: libxml2
+    - name: go
+    - name: ansible-lint
+    - name: flameshot
+    - name: okular

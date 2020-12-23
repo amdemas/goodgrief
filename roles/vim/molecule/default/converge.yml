@@ -1,0 +1,19 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+      - name: "Include git"
+        include_role:
+            name: "git"
+      - name: "Include node"
+        include_role:
+            name: "node"
+      - name: "Include python"
+        include_role:
+            name: "python"
+      - name: "Include zsh"
+        include_role:
+            name: "zsh"
+      - name: "Include vim"
+        include_role:
+            name: "vim"

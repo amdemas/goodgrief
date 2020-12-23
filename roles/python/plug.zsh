@@ -1,0 +1,1 @@
+zplug "pyenv/pyenv", from:"github", use:completions/pyenv.zsh

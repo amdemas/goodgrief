@@ -1,0 +1,28 @@
+---
+mxmaster_packages:
+  - name: git
+  - name: make
+  - name: libevdev-devel
+  - name: tinyxml2-devel
+  - name: libudev-devel
+  - name: cmake
+  - name: libconfig-devel
+  - name: gcc
+  - name: gcc-c++
+  - name: evemu
+  - name: solaar
+
+mxmaster_pip_packages:
+  - name: evdev
+# Used for libratbag and Piper
+# piper_packages:
+# - name: systemd-devel
+# - name: json-glib-devel
+# - name: libunistring-devel
+# - name: check-devel
+# - name: valgrind-devel
+# - name: swig
+# - name: python3-lxml
+# - name: ninja-build
+# piper_pip_packages:
+# - name: meson

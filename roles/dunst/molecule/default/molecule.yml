@@ -1,0 +1,22 @@
+---
+dependency:
+    name: galaxy
+driver:
+    name: docker
+lint: |
+    ansible-lint
+platforms:
+    - name: default
+      image: geerlingguy/docker-fedora32-ansible:latest
+      command: ${MOLECULE_DOCKER_COMMAND:-""}
+      capabilities:
+          - SYS_ADMIN
+      volumes:
+          - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      override_command: true
+      privileged: true
+      pre_build_image: true
+provisioner:
+    name: ansible
+verifier:
+    name: ansible

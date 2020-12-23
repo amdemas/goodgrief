@@ -1,0 +1,24 @@
+---
+- name: check grub for deep suspend
+  shell: "grep 'GRUB_CMDLINE_LINUX_DEFAULT=.*mem_sleep_default.*' /etc/default/grub"
+  register: grub_cfg_grep
+  changed_when: false
+  failed_when: false
+
+- name: add deep suspend if not found
+  replace:
+      path: "/etc/default/grub"
+      regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="((\w.?)*)"$'
+      replace: 'GRUB_CMDLINE_LINUX_DEFAULT="\1 mem_sleep_default=deep"'
+  when: '"mem_sleep_default" not in grub_cfg_grep'
+
+- name: set options for Dell laptop
+  copy:
+      content: |
+          options dell-smm-hwmon ignore_dmi=1
+      dest: /etc/modprobe.d/dell_5540.conf
+      mode: "0644"
+      owner: root
+      group: root
+  become: yes
+  notify: update initrd

@@ -1,0 +1,7 @@
+---
+# defaults file for git
+
+git_user_full_name: "Andrew Demas"
+git_signing_key: ""
+git_user_github: "amdemas"
+git_user_email: "andrew.m.demas@gmail.com"

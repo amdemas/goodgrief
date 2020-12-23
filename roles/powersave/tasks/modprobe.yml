@@ -1,0 +1,33 @@
+---
+- name: intel graphics power saving
+  copy:
+      content: |
+          options i915 modeset=1 i915_enable_rc6=1 i915_enable_fbc=1 lvds_downclock=1
+      dest: /etc/modprobe.d/i915.conf
+      mode: "0644"
+      owner: root
+      group: root
+  become: yes
+  notify: update initrd
+
+- name: intel wireless power saving
+  copy:
+      content: |
+          options iwlagn power_save=1 power_level=5
+      dest: /etc/modprobe.d/iwlagn.conf
+      mode: "0644"
+      owner: root
+      group: root
+  become: yes
+  notify: update initrd
+
+- name: intel sound power saving
+  copy:
+      content: |
+          options snd_hda_intel power_save=1 power_save_controller=Y
+      dest: /etc/modprobe.d/snd_hda_intel.conf
+      mode: "0644"
+      owner: root
+      group: root
+  become: yes
+  notify: update initrd

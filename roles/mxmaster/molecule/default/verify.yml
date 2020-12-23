@@ -1,0 +1,27 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: mxmaster - check logiops service
+      systemd:
+        name: logid.service
+        daemon_reload: yes
+        enabled: yes
+      check_mode: yes
+      register: pkg_status
+
+    - name: mxmaster - test logiops service is installed
+      assert:
+        that:
+          - not pkg_status.changed
+
+    - name: mxmaster - check that logid.cfg exists
+      stat:
+        path: /etc/logid.cfg
+      register: stat_result
+
+    - name: mxmaster - test logid.cfg exists
+      assert:
+        that:
+          - stat_result.stat.exists

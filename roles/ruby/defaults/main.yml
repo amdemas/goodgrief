@@ -1,0 +1,19 @@
+---
+# defaults file for python
+
+xdg_data_home: "{{ ansible_env.HOME }}/.local/share"
+
+rbenv_repo: https://github.com/rbenv/rbenv.git
+
+rbenv_root: "{{ xdg_data_home }}/rbenv"
+
+rbenv_versions:
+    - "2.7.2"
+
+rbenv_plugins:
+    - name: rbenv-update
+      repo: https://github.com/rkh/rbenv-update.git
+    - name: ruby-build
+      repo: https://github.com/rbenv/ruby-build.git
+
+default_ruby: 2.7.2

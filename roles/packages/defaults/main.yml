@@ -1,0 +1,20 @@
+---
+# defaults file for packages
+
+# install_packages: []
+
+# external_packages: []
+
+symlink_files:
+    - file: curlrc
+      path: curl
+    - file: gdbinit
+      path: gdb
+    - file: inputrc
+      path: readline
+    - file: irbrc
+      path: irb
+    - file: screenrc
+      path: screen
+    - file: wgetrc
+      path: wget

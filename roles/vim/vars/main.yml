@@ -1,0 +1,28 @@
+---
+vim_repo: "https://github.com/amdemas/vim-config.git"
+
+nvm_link_dir: "{{ ansible_env.HOME }}/.config/nvm"
+node_version: "13.12.0"
+
+npm_executable: "{{ ansible_env.HOME }}/.config/nvm/versions/node/v13.12.0/bin/npm"
+
+npm_packages:
+    - jshint
+    - jsxhint
+    - jsonlint
+    - stylelint
+    - sass-lint
+    - raml-cop
+    - markdownlint-cli
+    - write-good
+    - tern
+
+pip_executable: ""
+
+python_pip_install_packages:
+    - pycodestyle
+    - pyflakes
+    - flake8
+    - proselint
+    - yamllint
+    - vim-vint

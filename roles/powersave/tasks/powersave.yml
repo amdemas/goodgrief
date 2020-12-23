@@ -1,0 +1,22 @@
+---
+- name: install powersaving packages
+  package:
+      name: "{{ item }}"
+      state: '{{ item.state | default("present") }}'
+  become: yes
+  with_items: "{{ powersave_packages }}"
+  notify:
+      - detect_sensors
+
+- name: enable powersaving services
+  systemd:
+      name: "{{ item }}"
+      enabled: yes
+  become: yes
+  with_items:
+      - "fstrim.timer"
+      - "thermald.service"
+      #   - "powertop.service"
+  register: services_created
+  notify:
+      - restart_service

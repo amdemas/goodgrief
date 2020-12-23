@@ -1,0 +1,14 @@
+- name: include OS specific vars
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: install aws cli tool
+  include_role:
+    name: syspackage
+  vars:
+    os_packages: "{{ aws_packages }}"
+
+- name: make sure awscli config directory exists
+  file:
+    path: "{{ ansible_user_dir }}/.config/aws"
+    state: directory
+    mode: 0755

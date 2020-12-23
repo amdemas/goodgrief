@@ -1,0 +1,1 @@
+export PATH=${PATH}:${RBENV_ROOT}/bin:${RBENV_ROOT}/shims

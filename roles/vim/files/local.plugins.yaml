@@ -1,0 +1,8 @@
+---
+- repo: mhinz/vim-startify
+# - {repo: neoclide/coc.nvim, build: 'npm install -g coc' }
+# - {repo: ncm2/ncm2, depends: nvim-yarp }
+# - {repo: ncm2/ncm2-d, on_ft: d, depends: ncm2 }
+# - {repo: ncm2/ncm2-jedi, on_ft: python }
+# - {repo: ncm2/ncm2-bufword }
+# - {repo: ncm2/ncm2-path }

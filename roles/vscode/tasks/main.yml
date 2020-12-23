@@ -1,0 +1,9 @@
+---
+- name: install vscode
+  include_role:
+      name: gantsign.visual-studio-code
+#   vars:
+#       users:
+#           - username: "{{ vscode_users.username }}"
+#             visual_studio_code_extensions: "{{ vscode_users.code_extensions }}"
+#             visual_studio_code_settings_overwrite: true

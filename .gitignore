@@ -1,0 +1,8 @@
+*.retry
+__pycache__
+.envrc
+.vscode
+venv
+galaxy_roles/*
+**/local.zsh
+!galaxy_roles/requirements.yml

@@ -1,0 +1,35 @@
+---
+- name: checkout rbenv_repo for system
+  git:
+      repo: "{{ rbenv_repo }}"
+      dest: "{{ rbenv_root }}"
+      accept_hostkey: yes
+      force: yes
+
+- name: create plugins directory for system
+  file:
+      path: "{{ rbenv_root }}/plugins"
+      state: directory
+
+- name: install plugins for system
+  git:
+      repo: "{{ item.repo }}"
+      dest: "{{ rbenv_root }}/plugins/{{ item.name }}"
+      accept_hostkey: yes
+      force: yes
+  with_items: "{{ rbenv_plugins }}"
+
+- name: install ruby versions for system
+  shell:
+      cmd: "{{ rbenv_root }}/bin/rbenv install --skip-existing {{ item }}"
+      creates: "{{ rbenv_root }}/versions/{{ item }}"
+  environment:
+      RBENV_ROOT: "{{ rbenv_root }}"
+  with_items:
+      - "{{ rbenv_versions }}"
+- name: set ruby {{ default_ruby }} for system
+  shell:
+      cmd: "{{ rbenv_root }}/bin/rbenv global {{ default_ruby }}"
+      creates: "{{ rbenv_root }}/versions/version"
+  environment:
+      RBENV_ROOT: "{{ rbenv_root }}"

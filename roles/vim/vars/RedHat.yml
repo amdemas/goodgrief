@@ -1,0 +1,10 @@
+---
+vim_packages:
+    - name: ShellCheck
+    - name: tidy
+    - name: vim
+    - name: neovim
+    - name: python3-neovim
+    - name: the_silver_searcher
+    - name: ctags
+    - name: make

@@ -1,0 +1,73 @@
+---
+- block:
+      - name: "check if extension is already installed - {{ gnome_extension.name }}"
+        stat:
+            path: "{{ gnome_extension_path }}/{{ gnome_extension.name }}"
+        register: r_gnome_extension_check_existing
+
+      - name: "download extension - {{ gnome_extension.name }}"
+        get_url:
+            url: "{{ gnome_extension.url }}"
+            dest: "/tmp/{{ gnome_extension.name }}.zip"
+        register: r_gnome_extension_download
+        when: not r_gnome_extension_check_existing.stat.exists
+
+      - name: "create install directory - {{ gnome_extension.name }}"
+        file:
+            path: "{{ gnome_extension_path }}/{{ gnome_extension.name }}"
+            state: directory
+            owner: "{{ ansible_user_uid }}"
+            group: "{{ ansible_user_gid }}"
+            mode: 0775
+        when: not r_gnome_extension_check_existing.stat.exists
+
+      - name: "install extension - {{ gnome_extension.name }}"
+        unarchive:
+            src: "/tmp/{{ gnome_extension.name }}.zip"
+            dest: "{{ gnome_extension_path }}/{{ gnome_extension.name }}"
+            remote_src: yes
+        when: not r_gnome_extension_check_existing.stat.exists
+
+      - name: "check if extension has a schema - {{ gnome_extension.name }}"
+        stat:
+            path: "{{ gnome_extension_path }}/{{ gnome_extension.name }}/schemas/"
+        register: r_gnome_extension_check_schema_dir
+
+      - name: "copy all schemas for gsettings - {{ gnome_extension.name }}"
+        copy:
+            src: "{{ gnome_extension_path }}/{{ gnome_extension.name }}/schemas/"
+            dest: /usr/share/glib-2.0/schemas/
+            remote_src: yes
+            mode: preserve
+        become: yes
+        when: (not r_gnome_extension_check_existing.stat.exists) and (r_gnome_extension_check_schema_dir.stat.exists)
+        register: r_gnome_extension_copy_schema
+
+      - name: init schemas
+        command: glib-compile-schemas /usr/share/glib-2.0/schemas/
+        when: r_gnome_extension_copy_schema is changed
+        become: yes
+
+      - name: "modify extension settings - {{ gnome_extension.name }}"
+        gsetting:
+            user: "{{ ansible_user_id }}"
+            key: "{{ outer_item.schema }}.{{ outer_item.key }}"
+            value: "{{ outer_item.value }}"
+        become: yes
+        with_items: "{{ gnome_extension.configs|default([]) }}"
+        loop_control:
+            loop_var: outer_item
+        when: gnome_extension.configs
+
+      - name: enable extension - "{{ gnome_extension.name }}"
+        gnome_shell_extension:
+            extension: "{{ gnome_extension.name }}"
+            state: present
+
+  always:
+      - name: delete temporary download directory
+        file:
+            path: "/tmp/{{ gnome_extension.name }}.zip"
+            state: absent
+        changed_when: false
+        when: not r_gnome_extension_check_existing.stat.exists

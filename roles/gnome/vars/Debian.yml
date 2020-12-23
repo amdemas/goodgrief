@@ -1,0 +1,24 @@
+---
+gnome_packages:
+    - name: gnome-shell
+      state: present
+    - name: dconf
+      state: present
+    - name: dbus-x11
+      state: present
+    - name: unzip
+      state: present
+    - name: dconf
+      state: present
+    - name: dconf-editor
+      state: present
+    - name: python3-psutil
+      state: present
+    - name: chrome-gnome-shell
+      state: present
+    - name: papirus-icon-theme
+      state: present
+    - name: fonts-font-awesome
+      state: present
+    - name: procps
+      state: present

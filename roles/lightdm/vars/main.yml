@@ -1,0 +1,6 @@
+light_dm_theme_repo: https://github.com/AlphaNecron/lightdm-gab-nord.git
+
+lightdm_packages:
+    - git
+    - lightdm
+    - numlockx

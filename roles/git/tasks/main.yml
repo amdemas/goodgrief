@@ -1,0 +1,30 @@
+---
+- name: include OS specific vars
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: install git and relevant packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ git_packages }}"
+  become: yes
+
+- name: create global git config directory
+  file:
+    path: "{{ ansible_user_dir }}/.config/git"
+    state: directory
+    mode: 0755
+
+- name: copy global git config files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/git/{{ item.split('/')[-1].split('.')[0] }}"
+    mode: preserve
+  with_fileglob:
+    - files/*
+
+- name: make sure gitconfig is up to date
+  template:
+    src: gitconfig.j2
+    dest: "{{ ansible_user_dir }}/.config/git/config"
+    mode: preserve

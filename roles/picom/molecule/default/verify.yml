@@ -1,0 +1,28 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+      - name: "picom - check picom package status"
+        package:
+            name: "picom"
+            state: "installed"
+        check_mode: yes
+        register: pkg_status
+
+      - name: "picom - test picom package is installed"
+        assert:
+            that:
+                - not pkg_status.changed
+
+      - name: "picom - check that picom.conf exists"
+        stat:
+            path: "/root/.config/picom/picom.conf"
+        register: stat_result
+
+      - name: "picom - test picom.conf exists"
+        assert:
+            that:
+                - stat_result.stat.exists

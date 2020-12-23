@@ -1,0 +1,18 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  ansible-lint
+platforms:
+  - name: arch
+    image: chriswayg/docker-archlinux-ansible:latest
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../default/converge.yml
+verifier:
+  name: ansible
+scenario:
+  name: arch

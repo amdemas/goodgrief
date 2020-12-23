@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+      - name: "Include Python"
+        include_role:
+            name: "python"
+      - name: "Include taskwarrior"
+        include_role:
+            name: "taskwarrior"

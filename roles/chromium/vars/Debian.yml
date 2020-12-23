@@ -1,0 +1,4 @@
+---
+chromium_package:
+    - name: chromium
+      state: present

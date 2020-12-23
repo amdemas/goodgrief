@@ -1,0 +1,24 @@
+---
+# defaults file for python
+
+pyenv_root: "{{ ansible_env.HOME }}/.config/pyenv"
+
+pyenv_versions:
+    - "3.7.6"
+
+pyenv_plugins:
+    - pyenv-virtualenv
+    - pyenv-virtualenvwrapper
+
+python_pip_install_packages:
+    - name: jedi
+    - name: ansible-lint
+    - name: virtualenv
+    - name: glances
+    - name: pipenv
+
+poetry_dir: "{{ xdg_data_home }}/poetry"
+
+python_packages:
+    - name: git
+    - name: python3

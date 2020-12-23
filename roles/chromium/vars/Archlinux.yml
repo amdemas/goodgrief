@@ -1,0 +1,7 @@
+---
+chromium_package:
+    - name: chromium
+      state: present
+
+chromium_aur:
+    - name: chromium-widevine

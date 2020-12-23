@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=sxhkd for GNOME
+Comment=run sxhkd
+Exec=sxhkd -c /home/andrew/.config/sxhkd/sxhkdrc_base
+Icon=input-keyboard
+X-GNOME-Autostart-enabled=true
+Type=Application
+OnlyShowIn=GNOME

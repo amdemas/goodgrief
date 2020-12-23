@@ -1,0 +1,6 @@
+---
+sxhkd:
+    - name: sxhkd
+      state: present
+    - name: feh
+      state: present

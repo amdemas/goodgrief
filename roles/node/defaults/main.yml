@@ -1,0 +1,15 @@
+---
+# defaults file for node
+
+node_install_packages:
+    - name: grunt
+      state: present
+    - name: replace
+      state: present
+    - name: yosay
+      state: present
+
+nvm_user: "{{ ansible_user_id }}"
+nvm_link_dir: "{{ ansible_env.HOME }}/.config/nvm"
+node_version: "13.12.0"
+nvm_script_version: "0.35.3"

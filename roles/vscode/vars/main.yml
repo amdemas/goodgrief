@@ -1,0 +1,30 @@
+---
+vscode_users:
+    username: "{{ ansible_user_id }}"
+    code_extensions:
+        - vscoss.vscode-ansible
+        - hookyqr.beautify
+        - coenraads.bracket-pair-colorizer-2
+        - ms-vscode.cpptools
+        - xaver.clang-format
+        - equinusocio.vsc-community-material-theme
+        - msjsdiag.debugger-for-chrome
+        - firefox-devtools.vscode-firefox-debug
+        - batisteo.vscode-django
+        - ms-azuretools.vscode-docker
+        - editorconfig.editorconfig
+        - dbaeumer.vscode-eslint
+        - donjayamanne.git-extension-pack
+        - donjayamanne.githistory
+        - bierner.github-markdown-preview
+        - codezombiech.gitignore
+        - eamodio.gitlens
+        - bierner.markdown-checkbox
+        - bierner.markdown-emoji
+        - ms-python.python
+        - ms-vscode-remote.vscode-remote-extensionpack
+        - alexcvzz.vscode-sqlite
+        - redhat.vscode-xml
+        - redhat.vscode-yaml
+        - vscodevim.vim
+        - alefragnani.Bookmarks

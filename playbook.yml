@@ -1,0 +1,70 @@
+---
+# - name: classify hosts depending on their OS distribution
+#   group_by:
+#   key: os_{{ ansible_facts['distribution'] }}
+
+- name: setup system
+  hosts: all
+  connection: local
+  roles:
+    - role: alacritty
+      tags: alacritty
+    - role: chromium
+      tags: chromium
+    - role: docker
+      tags: docker
+    - role: git
+      tags: [git, bootstrap]
+    - role: mxmaster
+      tags: mxmaster
+    - role: node
+      tags: [node, bootstrap]
+    - role: packages
+      tags: [packages, bootstrap]
+    # - role: robertdebock.rpmfusion
+    #   tags: packages
+    - role: powersave
+      tags: powersave
+    - role: linux-system-roles.tuned
+      tags: [tuned, powersave]
+      become: true
+    - role: python
+      tags: [python, boostrap]
+    - role: aws
+      tags: aws
+    - role: ruby
+      tags: [ruby, boostrap]
+    - role: sxhkd
+      tags: sxhkd
+    - role: taskwarrior
+      tags: taskwarrior
+    - role: tmux
+      tags: tmux
+    - role: vim
+      tags: vim
+    - role: vscode
+      tags: vscode
+    - role: zsh
+      tags: [zsh, boostrap]
+
+- name: setup Gnome DE
+  hosts: gnome
+  roles:
+    - role: gnome
+      tags: gnome
+
+- name: setup bspwm WM
+  hosts: bspwm
+  roles:
+    - role: bspwm
+      tags: bspwm
+    - role: lightdm
+      tags: lightdm
+    - role: picom
+      tags: picom
+    - role: polybar
+      tags: polybar
+    - role: rofi
+      tags: rofi
+    - role: dunst
+      tags: dunst

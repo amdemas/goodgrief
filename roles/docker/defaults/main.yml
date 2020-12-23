@@ -1,0 +1,11 @@
+---
+# defaults file for docker
+user_docker_edition: "ce"
+user_docker_package: "docker-{{ user_docker_edition }}"
+user_docker_package_state: present
+user_docker_service_state: started
+user_docker_service_enabled: true
+user_docker_restart_handler_state: restarted
+user_docker_install_compose: true
+
+user_docker_users: "{{ ansible_user_id }}"

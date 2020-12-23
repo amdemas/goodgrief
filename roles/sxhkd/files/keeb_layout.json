@@ -1,0 +1,274 @@
+[
+  {
+    "backcolor": "#545151",
+    "name": "Corne",
+    "author": "https://github.com/amdemas",
+    "plate": false,
+    "keyboard-layout-editor": "http://www.keyboard-layout-editor.com/#/gists/adfa7c3cd8f0c6d3a7b9155c6eab1748#file-corne-crkbd_c0psrul3-default-json",
+    "qmk-config": "https://config.qmk.fm/#/crkbd/rev1/LAYOUT"
+  },
+  [
+    {
+      "x": 3,
+      "c": "#a2a2a6"
+    },
+    "E\n3",
+    {
+      "x": 7
+    },
+    "I\n8"
+  ],
+  [
+    {
+      "y": -0.9,
+      "x": 2
+    },
+    "W\n2"
+  ],
+  [
+    {
+      "y": -1,
+      "x": 4
+    },
+    "R\n4",
+    {
+      "x": 5
+    },
+    "U\n7",
+    {
+      "x": 1
+    },
+    "O\n9"
+  ],
+  [
+    {
+      "y": -0.9,
+      "x": 5
+    },
+    "T\n5",
+    {
+      "x": 3
+    },
+    "Y\n6"
+  ],
+  [
+    {
+      "y": -0.9,
+      "a": 0
+    },
+    "Tab\n\n\n\nCtrl\nRst",
+    {
+      "a": 4
+    },
+    "Q\n1",
+    {
+      "x": 11
+    },
+    "P\n0",
+    {
+      "a": 0
+    },
+    "Bksp\n\n\n\nRst"
+  ],
+  [
+    {
+      "y": -0.30000000000000004,
+      "x": 3,
+      "a": 4
+    },
+    "D\nF3",
+    {
+      "x": 7,
+      "a": 0,
+      "fa": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "K\n<i class='fa fa-arrow-up'>\n\n\n<i class='fa fa-volume-up'></i>\n\nPGUP"
+  ],
+  [
+    {
+      "y": -0.8999999999999999,
+      "x": 2,
+      "a": 4
+    },
+    "S\nF2",
+    {
+      "x": 1
+    },
+    "F\nF4",
+    {
+      "x": 5,
+      "a": 0
+    },
+    "J\n<i class='fa fa-arrow-down'>\n\n\n<i class='fa fa-volume-down'>\n\nPGDN",
+    {
+      "x": 1,
+      "f": 3
+    },
+    "L\n<i class='fa fa-arrow-right'>\n\n\n<i class='fa fa-fast-forward'></i>\n\nHome"
+  ],
+  [
+    {
+      "y": -0.8999999999999999,
+      "x": 5,
+      "a": 4
+    },
+    "G\nF5",
+    {
+      "x": 3,
+      "a": 0,
+      "f": 3
+    },
+    "H\n<i class='fa fa-arrow-left'>\n\n\n<i class='fa fa-volume-off'>\n\nEnd"
+  ],
+  [
+    {
+      "y": -0.8999999999999999
+    },
+    "Esc\n\n\n\n~\nEEP",
+    "A\nF1\n\n\nAlt",
+    {
+      "x": 11
+    },
+    ":\n;\n\n\nCtrl",
+    {
+      "f": 3
+    },
+    "\"\n'\n\n\nEEP\n\n`"
+  ],
+  [
+    {
+      "y": -0.2999999999999998,
+      "x": 3,
+      "f": 3
+    },
+    "C\nF8\n\n\nLsad\n\n{",
+    {
+      "x": 7,
+      "a": 4,
+      "f": 3
+    },
+    "<\n,\n\n\n\n\n}"
+  ],
+  [
+    {
+      "y": -0.8999999999999999,
+      "x": 2,
+      "a": 0,
+      "f": 3
+    },
+    "X\nF7\n\n\nLhud\n\n<",
+    {
+      "x": 1,
+      "f": 3
+    },
+    "V\nF9\n\n\nLvad\n\n(",
+    {
+      "x": 5,
+      "a": 4,
+      "f": 3
+    },
+    "M\nF12\n\n\n\n\n)",
+    {
+      "x": 1,
+      "f": 3
+    },
+    ">\n.\n\n\n\n\n>"
+  ],
+  [
+    {
+      "y": -0.8999999999999999,
+      "x": 5,
+      "f": 3
+    },
+    "B\nF10\n\n\n\n\n[",
+    {
+      "x": 3,
+      "f": 3
+    },
+    "N\nF11\n\n\n\n\n]"
+  ],
+  [
+    {
+      "y": -0.8999999999999999
+    },
+    "Del",
+    {
+      "a": 0,
+      "f": 3
+    },
+    "Z\nF6\n\n\nCtrl\nLM\n\\",
+    {
+      "x": 11,
+      "f": 3
+    },
+    "?\n/\n\n\nAlt\n\n/",
+    {
+      "a": 4
+    },
+    "Del"
+  ],
+  [
+    {
+      "y": -0.20000000000000018,
+      "x": 3.5
+    },
+    "Super",
+    {
+      "x": 6
+    },
+    "Super"
+  ],
+  [
+    {
+      "r": 15,
+      "rx": 4.5,
+      "ry": 4.1,
+      "y": -1
+    },
+    "Shift"
+  ],
+  [
+    {
+      "r": 30,
+      "rx": 5.4,
+      "ry": 4.3,
+      "y": -1.5,
+      "x": 0.09999999999999964,
+      "c": "#009057",
+      "a": 0,
+      "h": 1.5
+    },
+    "Enter\n\n\n\nLower"
+  ],
+  [
+    {
+      "r": -30,
+      "rx": 9.6,
+      "y": -1.5,
+      "x": -1.0999999999999996,
+      "c": "#ff6d1a",
+      "h": 1.5
+    },
+    "Space\n\n\n\nRaise"
+  ],
+  [
+    {
+      "r": -15,
+      "rx": 10.5,
+      "ry": 4.1,
+      "y": -1,
+      "x": -1,
+      "c": "#a2a2a6",
+      "a": 4
+    },
+    "Shift"
+  ]
+]

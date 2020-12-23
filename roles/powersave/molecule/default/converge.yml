@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+      - name: "Include powersave"
+        include_role:
+            name: "powersave"
+        vars:
+            install_powersave: true
