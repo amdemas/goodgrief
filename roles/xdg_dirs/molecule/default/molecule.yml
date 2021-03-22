@@ -1,0 +1,14 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  ansible-lint
+platforms:
+  - name: fedora
+    image: geerlingguy/docker-fedora32-ansible:latest
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

@@ -1,0 +1,24 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: gather package facts
+      package_facts:
+        manager: auto
+
+    - name: zathura - test zathura package is installed
+      assert:
+        that: "'{{ item }}' in ansible_facts.packages"
+      with_items:
+        - zathura
+
+    - name: "zathura - check that zathurarc exists"
+      stat:
+        path: "/root/.config/zathura/zathurarc"
+      register: stat_result
+
+    - name: "zathura - test zathurarc exists"
+      assert:
+        that:
+          - stat_result.stat.exists

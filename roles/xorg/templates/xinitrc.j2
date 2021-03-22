@@ -1,0 +1,9 @@
+USERXSESSION="$XDG_CACHE_HOME/x11/xsession"
+USERXSESSIONRC="$XDG_CACHE_HOME/x11/xsessionrc"
+ALTUSERXSESSION="$XDG_CACHE_HOME/x11/Xsession"
+ERRFILE="$XDG_CACHE_HOME/x11/xsession-errors"
+
+xrdb -load ~/.config/X11/xresources
+
+eval $(/usr/bin/gnome-keyring-daemon --star --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK

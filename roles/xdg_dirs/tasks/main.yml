@@ -1,0 +1,12 @@
+- name: create XDG user directories configuration file
+  lineinfile:
+    line: '{{ item.variable }}="{{ item.directory }}"'
+    path: "$HOME/.config/user-dirs.dirs"
+    create: True
+  with_items: "{{ xdg_dirs }}"
+
+- name: create configuration directory
+  file:
+    path: "{{ item.directory }}"
+    state: directory
+  with_items: "{{ xdg_dirs }}"

@@ -1,0 +1,10 @@
+---
+xorg_packages:
+  - name: xf86-video-fbdev
+  - name: xorg
+  - name: xorg-init
+  - name: autorandr
+  - name: xorg-fonts-100dpi
+  - name: xorg-fonts-75dpi
+  - name: xorg-server
+  - name: xorg-sev

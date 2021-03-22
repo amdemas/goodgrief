@@ -1,16 +1,14 @@
 ---
 # tasks file for packages
-- name: include distro-specific vars
+- name: include OS specific vars
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Enable external repos (Debian)
-  apt_repository:
-      repo: "{{ item.repo | default('') }}"
-      state: "{{ item.state | default('present') }}"
-  loop: "{{ external_packages | default([]) }}"
-  become: yes
-  when:
-      - ansible_os_family == 'Debian'
+- name: install packages
+  include_role:
+    name: syspackage
+  vars:
+    os_packages: "{{ xorg_packages }}"
+    apt_repos: "{{ external_packages }}"
 
 - name: make directories base configs
   file:

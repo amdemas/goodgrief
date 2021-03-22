@@ -8,13 +8,13 @@ install_packages:
     - name: libevent-devel
     - name: libxslt-devel
     - name: libxml2-devel
-    - name: ansible-lint
     - name: remmina
-    - name: tilix
     - name: hstr
     - name: nscd
     - name: python3-libselinux
     - name: flameshot
-    - name: okular
+    - name: bottom
 
-external_packages: []
+external_packages:
+    - repo: atim/bottom
+      state: present

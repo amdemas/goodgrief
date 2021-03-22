@@ -1,0 +1,39 @@
+Powersave:
+    ☐ Fix powersave when doing detect_sensors and dracut in docker
+
+Gnome:
+    ☐ Fix when doing dracut in docker
+
+Docker:
+    ☐ Its docker...
+
+Xmonad:
+    ☐ Look into setting up autorandr and have the config kept up to date
+
+Tested:
+    ✔ aws
+    ✔ alacritty
+    ☐ bspwm
+    ☐ chromium
+    ☐ docker
+    ☐ dunst
+    ☐ git
+    ☐ gnome
+    ✔ mxmaster
+    ☐ node
+    ☐ packages
+    ☐ picom
+    ☐ polybar
+    ☐ powersave
+    ☐ python 
+    ☐ rofi
+    ☐ ruby
+    ☐ sxhkd
+    ☐ taskwarrior
+    ✔ tmux
+    ☐ vim
+    ☐ vscode
+    ☐ xbindkeys
+    ☐ xmonad
+    ☐ xorg
+    ☐ zsh
