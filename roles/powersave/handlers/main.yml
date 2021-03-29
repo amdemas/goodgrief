@@ -15,6 +15,10 @@
   ignore_errors: yes
   become: yes
 
-- name: update initrd
-  command: dracut -f
+- name: Update Grub and Initramfs
+  command: '{{ item }}'
+  with_items:
+    - 'grub2-mkconfig -o /boot/grub2/grub.cfg'
+    - 'dracut --force --regenerate-all -v'
+  when: grub_setup.changed
   become: yes

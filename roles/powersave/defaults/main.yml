@@ -5,6 +5,8 @@ install_powersave: false
 
 powersave_packages:
   - git
+  - dptfxtract
+  - hdparm
   - lm_sensors
   - thermald
   - hddtemp

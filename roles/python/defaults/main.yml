@@ -16,6 +16,7 @@ python_pip_install_packages:
     - name: virtualenv
     - name: glances
     - name: pipenv
+    - name: unimatrix
 
 poetry_dir: "{{ xdg_data_home }}/poetry"
 

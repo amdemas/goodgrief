@@ -1,0 +1,73 @@
+---
+
+- name: Install the rpmfusion and fonts repo packages
+  dnf:
+    state: present
+    disable_gpg_check: yes
+    name:
+      - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts.distribution_version }}.noarch.rpm
+      - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts.distribution_version }}.noarch.rpm
+  become: yes
+  when: rpmfusion
+
+- name: Get mounts from /etc/mtab
+  shell: cat /etc/mtab
+  changed_when: no
+  register: mount_options
+
+- name: Ensure fstab uses noatime
+  mount:
+    path: "{{ item.split(' ')[1] }}"
+    state: mounted
+    fstype: "{{ item.split(' ')[2] }}"
+    src: "{{ item.split(' ')[0] }}"
+    opts: "{{ item.split(' ')[3].split(',') | union(['noatime']) | unique | join(',') }}"
+  with_items: "{{ mount_options.stdout_lines }}"
+  when:
+    - item.split(" ")[1] in  ["/", "/boot", "/home"]
+  become: yes
+
+- name: Get mounts from /etc/mtab
+  shell: cat /etc/mtab
+  changed_when: no
+  register: mount_options
+
+- name: Ensure fstab uses nodiratime
+  mount:
+    path: "{{ item.split(' ')[1] }}"
+    state: mounted
+    fstype: "{{ item.split(' ')[2] }}"
+    src: "{{ item.split(' ')[0] }}"
+    opts: "{{ item.split(' ')[3].split(',') | union(['nodiratime']) | unique | join(',') }}"
+  with_items: "{{ mount_options.stdout_lines }}"
+  when:
+    - item.split(" ")[1] in  ["/", "/boot", "/home"]
+  become: yes
+
+- name: Discard Trim Enable
+  systemd:
+    name: fstrim.timer
+    state: started
+    enabled: yes
+    daemon_reload: yes
+  become: yes
+
+- name: Load IO Schedulers at boot
+  blockinfile:
+    path: /etc/modules-load.d/iosched.conf
+    create: yes
+    block: |
+      bfq
+      mq-deadline
+      kyber-iosched
+  become: yes
+
+- name: Improve DNF Performances
+  blockinfile:
+    path: /etc/dnf/dnf.conf
+    create: yes
+    block: |
+      deltarpm=true
+      fastestmirror=true
+      max_parallel_downloads={{ ansible_processor_vcpus }}
+  become: yes

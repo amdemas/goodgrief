@@ -23,3 +23,6 @@
       dest: "{{ ansible_user_dir }}/.config/{{ item.path }}/"
       mode: preserve
   with_items: "{{ symlink_files }}"
+
+- name: include OS specific tasks
+  include_tasks: "{{ ansible_os_family }}.yml"
