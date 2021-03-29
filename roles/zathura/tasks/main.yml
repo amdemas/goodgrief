@@ -1,0 +1,20 @@
+- name: include OS specific vars
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: install zathura package
+  include_role:
+    name: syspackage
+  vars:
+    os_packages: "{{ zathura_packages }}"
+
+- name: make sure destination for templates exists
+  file:
+    path: "{{ ansible_user_dir }}/.config/zathura"
+    state: directory
+    mode: 0755
+
+- name: setup zathura config file
+  template:
+    src: zathurarc.j2
+    dest: "{{ ansible_user_dir }}/.config/zathura/zathurarc"
+    mode: preserve

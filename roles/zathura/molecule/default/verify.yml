@@ -1,0 +1,24 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: gather package facts
+      package_facts:
+        manager: auto
+
+    - name: alacritty - test alacritty package is installed
+      assert:
+        that: "'{{ item }}' in ansible_facts.packages"
+      with_items:
+        - alacritty
+
+    - name: "alacritty - check that alacritty.yml exists"
+      stat:
+        path: "/root/.config/alacritty/alacritty.yml"
+      register: stat_result
+
+    - name: "alacritty - test alacritty.yml exists"
+      assert:
+        that:
+          - stat_result.stat.exists

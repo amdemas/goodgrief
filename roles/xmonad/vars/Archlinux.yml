@@ -1,0 +1,4 @@
+---
+xmonad_packages:
+  - name: xmonad-git
+  - name: xmobar-git

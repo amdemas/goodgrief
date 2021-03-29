@@ -1,5 +1,7 @@
 ---
-gnome_shell_version: "3.34"
+gnome_shell_version: "3.38"
+
+gnome_theme: 'Nordic'
 
 gnome_extension_path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions"
 
@@ -28,6 +30,9 @@ gnome_files:
       dest: "{{ ansible_user_dir }}/.config/gtk-4.0/bookmarks"
 
 gnome_config_gsettings:
+    - schema: org.gnome.software
+      key: first-run
+      value: "false"
     - schema: org.gnome.desktop.interface
       key: clock-show-date
       value: "true"
@@ -57,13 +62,13 @@ gnome_config_gsettings:
       value: "'Cantarell 11'"
     - schema: org.gnome.desktop.interface
       key: icon-theme
-      value: "'Nordic-bluish-accent-standard-buttons'"
+      value: "'{{ gnome_theme }}'"
     - schema: org.gnome.desktop.interface
       key: gtk-theme
-      value: "'Materia-dark'"
+      value: "'{{ gnome_theme }}'"
     - schema: org.gnome.desktop.interface
       key: monospace-font-name
-      value: "'Fira Code Nerd Font Regular'"
+      value: "'JetBrainsMono Nerd Font Mono 14'"
     - schema: org.gnome.desktop.interface
       key: enable-hot-corners
       value: "false"
@@ -75,10 +80,13 @@ gnome_config_gsettings:
       value: "true"
     - schema: org.gnome.desktop.wm.preferences
       key: theme
-      value: "'Adwaita'"
+      value: "'{{ gnome_theme }}'"
     - schema: org.gnome.nautilus.preferences
       key: default-folder-viewer
-      value: "'list-view'"
+      value: "'icon-view'"
+    - schema: org.gnome.nautilus.window-state
+      key: maximized
+      value: "true"
     - schema: org.gnome.shell.weather
       key: automatic-location
       value: "true"
@@ -96,10 +104,16 @@ gnome_config_gsettings:
       value: "['<Shift><Super>Tab']"
     - schema: org.gnome.desktop.wm.keybindings
       key: switch-applications
-      value: "[]"
+      value: "['<Alt>Tab']"
     - schema: org.gnome.desktop.wm.keybindings
       key: switch-applications-backward
-      value: "[]"
+      value: "['<Shift><Alt>Tab']"
+    - schema: org.gnome.settings-daemon.plugins.media-keys
+      key: volume-down
+      value: "['<Primary>Page_Down']"
+    - schema: org.gnome.settings-daemon.plugins.media-keys
+      key: volume-up
+      value: "['<Primary>Page_Up']"
     - schema: org.gtk.settings.file-chooser
       key: clock-format
       value: '"12h"'
@@ -118,6 +132,12 @@ gnome_config_gsettings:
     - schema: org.gtk.settings.file-chooser
       key: sort-order
       value: "descending"
+    - schema: org.gnome.mutter
+      key: center-new-windows
+      value: "true"
+    - schema: org.gnome.desktop.sound
+      key: allow-volume-above-100-percent
+      value: "true"
     - schema: org.gnome.shell
       key: favorite-apps
       value: '["google-chrome.desktop", "com.gexperts.Tilix.desktop", "org.gnome.Nautilus.desktop", "code.desktop", "org.gnome.Software.desktop"]'
@@ -131,78 +151,111 @@ gnome_install_extensions:
       configs:
           - schema: org.gnome.shell.extensions.dash-to-dock
             key: custom-theme-shrink
-            value: "true"
+            value: "false"
           - schema: org.gnome.shell.extensions.dash-to-dock
             key: dash-max-icon-size
-            value: "32"
-          - schema: org.gnome.shell.extensions.dash-to-dock
-            key: dock-fixed
-            value: "true"
+            value: "48"
           - schema: org.gnome.shell.extensions.dash-to-dock
             key: extend-height
-            value: "true"
+            value: "false"
           - schema: org.gnome.shell.extensions.dash-to-dock
             key: show-trash
             value: "false"
           - schema: org.gnome.shell.extensions.dash-to-dock
-            key: force-straight-corner
-            value: "true"
-          - schema: org.gnome.shell.extensions.dash-to-dock
             key: multi-monitor
-            value: "true"
+            value: "false"
           - schema: org.gnome.shell.extensions.dash-to-dock
             key: preferred-monitor
             value: "0"
+          - schema: org.gnome.shell.extensions.dash-to-dock
+            key: running-indicator-style
+            value: "'DOTS'"
     # gsconnect
     - id: 1319
+    # stealmyfocus
+    - id: 234
+    # launch new instance
+    - id: 600
     # impatience
     - id: 277
       configs:
           - schema: org.gnome.shell.extensions.net.gfxmonk.impatience
             key: speed-factor
             value: "0.25"
-    # KStatusNotifierItem/AppIndicator Support
-    - id: 615
-    # Launch new instance
-    - id: 600
-    # Multi Monitors Add-On
-    - id: 921
     # Panel OSD
     - id: 708
       configs:
           - schema: org.gnome.shell.extensions.panel-osd
             key: force-expand
             value: "true"
-    # Suspend Button
-    - id: 826
     # User Themes
     - id: 19
       configs:
           - schema: org.gnome.shell.extensions.user-theme
             key: name
-            value: "'Adapta-FrostBlue4-Nokto'"
+            value: "'{{ gnome_theme }}'"
     # Volume Mixer
     - id: 858
-    - id: 657
+    # system-monitor
+    - id: 120
       configs:
-          - schema: org.gnome.shell.extensions.shelltile
-            key: gap-between-windows
-            value: "3"
-          - schema: org.gnome.shell.extensions.shelltile
-            key: mouse-split-percent
-            value: "true"
-          - schema: org.gnome.shell.extensions.shelltile
-            key: enable-keybindings
-            value: "true"
-          - schema: org.gnome.shell.extensions.shelltile
-            key: tile-down
-            value: "['<Shift><Super>k']"
-          - schema: org.gnome.shell.extensions.shelltile
-            key: tile-left
-            value: "['<Shift><Super>h']"
-          - schema: org.gnome.shell.extensions.shelltile
-            key: tile-right
-            value: "['<Shift><Super>l']"
-          - schema: org.gnome.shell.extensions.shelltile
-            key: tile-up
-            value: "['<Shift><Super>j']"
+        - schema: org.gnome.shell.extensions.system-monitor
+          key: cpu-graph-width
+          value: "63"
+        - schema: org.gnome.shell.extensions.system-monitor
+          key: cpu-show-text
+          value: "false"
+        - schema: org.gnome.shell.extensions.system-monitor
+          key: fan-display
+          value: "true"
+        - schema: org.gnome.shell.extensions.system-monitor
+          key: fan-sensor-file
+          value: "/sys/class/hwmon/hwmon5/fan1_input"
+        - schema: org.gnome.shell.extensions.system-monitor
+          key: fan-show-text
+          value: "false"
+        - schema: org.gnome.shell.extensions.system-monitor
+          key: fan-style
+          value: "'digit'"
+        - schema: org.gnome.shell.extensions.system-monitor
+          key: icon-display
+          value: "false"
+        - schema: org.gnome.shell.extensions.system-monitor
+          key: memory-graph-width
+          value: "63"
+        - schema: org.gnome.shell.extensions.system-monitor
+          key: memory-show-text
+          value: "false"
+        - schema: org.gnome.shell.extensions.system-monitor
+          key: net-graph-width
+          value: "63"
+        - schema: org.gnome.shell.extensions.system-monitor
+          key: net-show-text
+          value: "false"
+    # cpupower
+    - id: 945
+      configs:
+        - schema: org.gnome.shell.extensions.cpupower
+          key: profiles
+          value: "[(0, 10, false, 'Energy Saver', '392760804'), (0, 30, false, 'Quiet', '3277198807'), (20, 80, true, 'Multimedia', '2856613468'), (50, 100, true, 'High Performance', '2676484404')]"
+        - schema: org.gnome.shell.extensions.cpupower
+          key: show-freq-in-taskbar
+          value: "true"
+        - schema: org.gnome.shell.extensions.cpupower
+          key: show-arrow-in-taskbar
+          value: "false"
+    # trayIconsReloaded
+    - id: 2890
+      configs:
+          - schema: org.gnome.shell.extensions.trayIconsReloaded
+            key: icon-brightness
+            value: "-10"
+          - schema: org.gnome.shell.extensions.trayIconsReloaded
+            key: icon-size
+            value: "25"
+          - schema: org.gnome.shell.extensions.trayIconsReloaded
+            key: icons-limit
+            value: "7"
+          - schema: org.gnome.shell.extensions.trayIconsReloaded
+            key: tray-margin-left
+            value: "4"

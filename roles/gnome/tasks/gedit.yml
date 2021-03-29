@@ -20,5 +20,5 @@
 - name: update Gedit font
   dconf:
       key: "/org/gnome/gedit/preferences/editor/editor-font"
-      value: "'FiraCode NF 14'"
+      value: "'JetBrainsMono Nerd Font Mono 14'"
       state: present

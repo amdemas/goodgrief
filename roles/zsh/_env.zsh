@@ -106,3 +106,8 @@ _Z_DATA=${XDG_CACHE_HOME}/z
 # enhancd
 export ENHANCD_FILTER=peco
 export ENHANCD_DIR=${XDG_DATA_HOME}/enhancd
+
+
+# CUDA
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+export STACK_ROOT="$XDG_DATA_HOME"/stack

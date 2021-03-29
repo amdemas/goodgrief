@@ -3,18 +3,13 @@ install_packages:
     - name: curl
     - name: wget
     - name: zopfli
-    - name: rpm-build
     - name: libevent-dev
     - name: libxslt-dev
     - name: libxml2-dev
-    - name: golang
-    - name: ansible-lint
     - name: remmina
-    - name: tilix
     - name: nscd
     - name: flameshot
-    - name: solaar
-    - name: okular
+    - name: bottom
 
 external_packages:
     - repo: ppa:ultradvorka/ppa
