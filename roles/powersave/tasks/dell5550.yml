@@ -15,15 +15,15 @@
     - {option: scsi_mod.use_blk_mq, value: 1}
     - {option: mem_sleep_default, value: deep}
   register: grub_setup
-  become: yes
+  become: true
 
 - name: set options for Dell laptop
   copy:
-      content: |
-          options dell-smm-hwmon ignore_dmi=1
-      dest: /etc/modprobe.d/dell_5540.conf
-      mode: "0644"
-      owner: root
-      group: root
-  become: yes
+    content: |
+        options dell-smm-hwmon ignore_dmi=1
+    dest: /etc/modprobe.d/dell_5540.conf
+    mode: "0644"
+    owner: root
+    group: root
+  become: true
   notify: Update Grub and Initramfs

@@ -1,18 +1,18 @@
 ---
 - name: install powersaving packages
   package:
-      name: "{{ item }}"
-      state: '{{ item.state | default("present") }}'
-  become: yes
+    name: "{{ item }}"
+    state: '{{ item.state | default("present") }}'
+  become: true
   with_items: "{{ powersave_packages }}"
   notify:
-      - detect_sensors
+    - detect_sensors
 
 - name: enable powersaving services
   systemd:
-      name: "{{ item }}"
-      enabled: yes
-  become: yes
+    name: "{{ item }}"
+    enabled: true
+  become: true
   with_items:
     - dptfxtract.service
     - fstrim.timer
@@ -20,4 +20,4 @@
     - powertop.service
   register: services_created
   notify:
-      - restart_service
+    - restart_service

@@ -7,7 +7,7 @@
       mode: "0644"
       owner: root
       group: root
-  become: yes
+  become: true
 
 - name: intel graphics power saving (Dell 5520)
   copy:
@@ -17,7 +17,7 @@
       mode: "0644"
       owner: root
       group: root
-  become: yes
+  become: true
 
 - name: set options for Dell laptop
   copy:
@@ -27,7 +27,7 @@
       mode: "0644"
       owner: root
       group: root
-  become: yes
+  become: true
 
 - name: intel sound power saving
   copy:
@@ -37,5 +37,5 @@
       mode: "0644"
       owner: root
       group: root
-  become: yes
+  become: true
   notify: Update Grub and Initramfs

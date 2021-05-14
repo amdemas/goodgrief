@@ -1,11 +1,11 @@
 ---
 - name: stat computer model
-  shell: "dmidecode --type system | grep 'Product Name' | sed 's/\tProduct Name: //'"
+  shell: "dmidecode -s system-product-name"
   register: computerstat
   become: true
 
 - include_tasks: dell5520.yml
-  when: computerstat.stdout == "'Precision 5520' in computerstat.stdout"
+  when: computerstat.stdout.find('Precision 5520') != -1
 
 - include_tasks: dell5550.yml
-  when: "'Precision 5550' in computerstat.stdout"
+  when: computerstat.stdout.find('Precision 5550') != -1

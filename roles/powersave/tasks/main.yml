@@ -7,11 +7,11 @@
 
 - include_tasks: dell.yml
   when: install_powersave
-  
+
 - name: stat computer cpu
-  shell: dmidecode | grep -A3 '^Socket Designation'
+  shell: "dmidecode -s processor-manufacturer"
   register: computercpu
-  become: yes
+  become: true
 
 - include_tasks: modprobe.yml
   when:

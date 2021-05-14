@@ -1,6 +1,6 @@
 ---
 - block:
-      - name: Setup TLP
-        include_role:
-            name: anthony25.tlp
-  become: yes
+    - name: Setup TLP
+      include_role:
+        name: anthony25.tlp
+  become: true
