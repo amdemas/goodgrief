@@ -1,7 +1,14 @@
 ---
+- name: Remove project integration_tests of the group copr
+  copr:
+    state: '{{ item.state | default("present") }}'
+    name: "{{ item.repo }}"
+  with_items: "{{ external_repos }}"
+  become: true
+
 - name: install needed system packages
   dnf:
-      name: "{{ item.name }}"
-      state: '{{ item.state | default("present") }}'
+    name: "{{ item.name }}"
+    state: '{{ item.state | default("present") }}'
   with_items: "{{ os_packages }}"
   become: true
