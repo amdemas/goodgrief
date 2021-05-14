@@ -12,4 +12,4 @@ node_install_packages:
 nvm_user: "{{ ansible_user_id }}"
 nvm_link_dir: "{{ ansible_env.HOME }}/.config/nvm"
 node_version: "13.12.0"
-nvm_script_version: "0.35.3"
+nvm_script_version: "0.38.0"

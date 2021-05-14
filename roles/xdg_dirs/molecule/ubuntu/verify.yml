@@ -1,0 +1,36 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: true
+  vars:
+    xdg_dirs:
+      - { variable: "XDG_DESKTOP_DIR", directory: "$HOME/Desktop" }
+      - { variable: "XDG_DOCUMENTS_DIR", directory: "$HOME/Documents" }
+      - { variable: "XDG_DOWNLOAD_DIR", directory: "$HOME/Downloads" }
+      - { variable: "XDG_MUSIC_DIR", directory: "$HOME/Music" }
+      - { variable: "XDG_PICTURES_DIR", directory: "$HOME/Pictures" }
+      - { variable: "XDG_PUBLICSHARE_DIR", directory: "$HOME/Public" }
+      - { variable: "XDG_TEMPLATES_DIR", directory: "$HOME/Templates" }
+      - { variable: "XDG_VIDEOS_DIR", directory: "$HOME/Videos" }
+  tasks:
+    - name: "xdg_dirs - check for user-dirs.dirs file"
+      stat:
+        path: "/root/.config/user-dirs.dirs"
+      register: stat_result
+
+    - name: "xdg_dirs - test user-dirs.dirs file exists"
+      assert:
+        that:
+          - stat_result.stat.exists
+
+    - name: "xdg_dirs - check for {{ item.directory }}"
+      stat:
+        path: "{{ item.directory }}"
+      register: stat_result
+      loop: "{{ xdg_dirs }}"
+
+    - name: "xdg_dirs - test {{ item.directory }} exists"
+      assert:
+        that:
+          - item.stat.exists
+      loop: "{{ stat_result.results }}"

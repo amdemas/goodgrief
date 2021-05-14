@@ -7,19 +7,16 @@
       state: directory
       mode: "0755"
 
-- name: download nvm
-  get_url:
-      url: "https://raw.githubusercontent.com/creationix/nvm/v{{ nvm_script_version }}/install.sh"
-      dest: "{{ ansible_user_dir }}/install.sh"
-
-- name: install nvm
-  shell: "sh {{ ansible_user_dir }}/install.sh"
+- name: Install NVM
+  shell: |
+    set -o pipefail
+    "curl -o- https://raw.githubusercontent.com/creationix/nvm/v{{ nvm_version }}/install.sh | NVM_DIR={{ nvm_link_dir }} XDG_CONFIG_HOME={{ ansible_user_dir }}/.config/ bash"
   args:
-      chdir: "{{ nvm_link_dir }}"
-      creates: "{{ nvm_link_dir }}/nvm.sh"
-  environment:
-      XDG_CONFIG_HOME: "{{ ansible_user_dir }}/.config/"
-      NVM_DIR: "{{ nvm_link_dir }}"
+      warn: false
+  register: nvm_result
+  changed_when: "'already installed' not in nvm_result.stdout"
+  failed_when:
+      - "'permission denied' in nvm_result.stderr"
 
 # - name: remove temp nvm installer
 #   file:
