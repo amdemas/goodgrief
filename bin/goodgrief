@@ -120,7 +120,7 @@ run_playbook() {
 }
 
 run_galaxy() {
-    info "Install galaxy requirements..."
+    info "Installing galaxy requirements..."
     cd $DOT_PATH
     ansible-galaxy \
             install \
@@ -129,7 +129,7 @@ run_galaxy() {
 }
 
 run_galaxy_collections() {
-    info "Install galaxy collection requirements..."
+    info "Installing galaxy collection requirements..."
     cd $DOT_PATH
     ansible-galaxy \
             collection \
