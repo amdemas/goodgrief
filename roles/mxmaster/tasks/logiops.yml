@@ -8,78 +8,78 @@
   git:
     repo: https://github.com/PixlOne/hidpp.git
     dest: "/tmp/hidpp"
-    update: yes
-    accept_hostkey: yes
+    update: true
+    accept_hostkey: true
     version: "master"
   register: hidpp
 
-- name: make build directory (hidpp) # noqa 503
+- name: make build directory (hidpp)  # noqa 503
   file:
     path: /tmp/hidpp/build
     state: directory
     mode: 0755
   when: hidpp.changed
 
-- name: run cmake build from sources (hidpp) # noqa 503 305
+- name: run cmake build from sources (hidpp)  # noqa 503 305
   shell: cmake ..
   args:
     chdir: "/tmp/hidpp/build"
   when: hidpp.changed
 
-- name: run make from sources (hidpp) # noqa 503
-  community.general.make:
+- name: run make from sources (hidpp)  # noqa 503
+  make:
     chdir: "/tmp/hidpp/build"
   when: hidpp.changed
 
-- name: run make install from sources (hidpp) # noqa 503
-  community.general.make:
+- name: run make install from sources (hidpp)  # noqa 503
+  make:
     target: install
     chdir: "/tmp/hidpp/build"
-  become: yes
+  become: true
   when: hidpp.changed
   notify:
     - reload udev
     - trigger udev
 
-- name: clone lastest (logiops) # noqa 503
+- name: clone lastest (logiops)  # noqa 503
   git:
     repo: https://github.com/PixlOne/logiops.git
     dest: "/tmp/logiops"
-    update: yes
-    accept_hostkey: yes
+    update: true
+    accept_hostkey: true
     version: "master"
   register: logiops
 
-- name: make build directory (logiops) # noqa 503
+- name: make build directory (logiops)  # noqa 503
   file:
     path: /tmp/logiops/build
     state: directory
     mode: 0755
   when: logiops.changed
 
-- name: run cmake build from sources (logiops) # noqa 503 305
+- name: run cmake build from sources (logiops)  # noqa 503 305
   shell: cmake ..
   args:
     chdir: "/tmp/logiops/build"
   when: logiops.changed
 
-- name: run make from sources (logiops) # noqa 503
-  community.general.make:
+- name: run make from sources (logiops)  # noqa 503
+  make:
     chdir: "/tmp/logiops/build"
   when: logiops.changed
 
-- name: run make install from sources (logiops) # noqa 503
-  community.general.make:
+- name: run make install from sources (logiops)  # noqa 503
+  make:
     chdir: "/tmp/logiops/build"
     target: install
-  become: yes
+  become: true
   when: logiops.changed
 
-- name: copy logid.cfg to /etc/ # noqa 503
+- name: copy logid.cfg to /etc/  # noqa 503
   copy:
     src: logid.cfg
     dest: /etc/logid.cfg
     mode: preserve
-  become: yes
+  become: true
   notify:
     - reload logiops

@@ -48,7 +48,7 @@ lazy_load() {
     $*
 }
 
-group_lazy_load() {
+function group_lazy_load {
     local script
     script=$1
     shift 1

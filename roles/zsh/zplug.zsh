@@ -84,3 +84,4 @@ if ! zplug check --verbose; then
         echo; zplug install
     fi
 fi
+zplug "akarzim/zsh-docker-aliases"

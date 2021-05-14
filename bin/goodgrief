@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 
 DOT_PATH="$HOME/.config/dotfiles"
-REPOSITORY="https://github.com/amdemas/dotfiles.git"
+REPOSITORY="https://github.com/amdemas/goodgrief.git"
 TAGS=${TAGS:-all}
 PROFILE=${PROFILE:-gnome}
 
@@ -119,6 +119,16 @@ run_playbook() {
             playbook.yml
 }
 
+run_galaxy() {
+    info "Install galaxy requirements..."
+    cd $DOT_PATH
+    ansible-galaxy \
+            install \
+            -r \
+            galaxy_roles/requirements.yml
+}
+
+
 setup_colors() {
 	# Only use colors if connected to a terminal
 	if [ -t 1 ]; then
@@ -135,10 +145,10 @@ main() {
     setup_colors
     if [ $# -eq 0 ]; then
         header
-        help
-        # check_dependencies
-        # clone_repository
-        # run_playbook
+        check_dependencies
+        clone_repository
+        run_galaxy
+        run_playbook
     else
         header
         while test $# -gt 0; do
@@ -155,6 +165,8 @@ main() {
                 if test $# -gt 0; then
                     TAGS=$1
                     info "Using the following tags: $TAGS"
+                    run_galaxy
+                    run_playbook
                 else
                     warn 'no tags specified, using all'
                 fi
@@ -165,6 +177,8 @@ main() {
                 if test $# -gt 0; then
                     PROFILE=$1
                     info "Using the following profile: $PROFILE"
+                    run_galaxy
+                    run_playbook
                 else
                     warn 'no prfile specified, using gnome'
                 fi
@@ -178,10 +192,10 @@ main() {
                 ;;
                 -r|--run)
                 info 'Running playbook... Good Grief!'
+                run_galaxy
                 run_playbook
                 ;;
                 *)
-                header
                 check_dependencies
                 ;;
             esac

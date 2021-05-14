@@ -13,8 +13,9 @@
       tags: alacritty
     - role: chromium
       tags: chromium
-    - role: docker
-      tags: docker
+    # Docker has issues, need to find a better way
+    # - role: docker
+    #   tags: docker
     - role: git
       tags: [git, bootstrap]
     - role: mxmaster

@@ -1,1 +1,1 @@
-zplug "luismayta/zsh-docker-aliases", from:"github"
+zplug "akarzim/zsh-docker-aliases"

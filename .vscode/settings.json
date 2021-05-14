@@ -1,0 +1,18 @@
+{
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.minimap.enabled": false,
+    "editor.autoIndent": "keep",
+    "editor.detectIndentation": false,
+    "editor.tabCompletion": "on",
+    "files.associations": {
+        "*.j2": "jinja",
+        "*.yml": "yaml",
+        "*.conf": "shellscript",
+
+    },
+    "[markdown]": {
+        "editor.trimAutoWhitespace": false,
+        "files.trimTrailingWhitespace": false
+    },
+}

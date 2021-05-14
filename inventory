@@ -1,0 +1,11 @@
+[all]
+host=localhost
+
+[gnome]
+host=localhost
+
+[xmonad]
+host=localhost
+
+[bspwm]
+host=localhost
