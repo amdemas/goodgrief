@@ -1,8 +1,11 @@
 ---
-- src: linux-system-roles.tuned
-- src: geerlingguy.docker
-- src: anthony25.tlp
-- src: jaredhocutt.google_chrome
-- src: gantsign.visual-studio-code
-- src: robertdebock.rpmfusion
-# - src: zaxos.glances-ansible-role
+collections:
+  - name: community.general
+roles:
+  - src: linux-system-roles.tuned
+  - src: geerlingguy.docker
+  - src: anthony25.tlp
+  - src: jaredhocutt.google_chrome
+  - src: gantsign.visual-studio-code
+  - src: robertdebock.rpmfusion
+  # - src: zaxos.glances-ansible-role
