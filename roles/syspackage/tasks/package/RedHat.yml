@@ -4,4 +4,4 @@
       name: "{{ item.name }}"
       state: '{{ item.state | default("present") }}'
   with_items: "{{ os_packages }}"
-  become: yes
+  become: true

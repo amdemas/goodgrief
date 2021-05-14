@@ -13,7 +13,7 @@
       dest: "{{ ansible_user_dir }}/install.sh"
 
 - name: install nvm
-  shell: "sh {{ ansible_user_dir }}/install.sh"
+  shell: "{{ ansible_user_dir }}/install.sh"
   args:
       chdir: "{{ nvm_link_dir }}"
       creates: "{{ nvm_link_dir }}/nvm.sh"
@@ -21,10 +21,10 @@
       XDG_CONFIG_HOME: "{{ ansible_user_dir }}/.config/"
       NVM_DIR: "{{ nvm_link_dir }}"
 
-# - name: remove temp nvm installer
-#   file:
-#       path: /tmp/install.sh
-#       state: absent
+- name: remove temp nvm installer
+  file:
+      path: "{{ ansible_user_dir }}/install.sh"
+      state: absent
 
 - name: install node via nvm
   shell: >

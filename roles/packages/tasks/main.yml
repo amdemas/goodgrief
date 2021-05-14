@@ -7,21 +7,21 @@
   include_role:
     name: syspackage
   vars:
-    os_packages: "{{ xorg_packages }}"
+    os_packages: "{{ install_packages }}"
     apt_repos: "{{ external_packages }}"
 
 - name: make directories base configs
   file:
-      path: "{{ ansible_user_dir }}/.config/{{ item.path }}"
-      state: directory
-      mode: 0755
+    path: "{{ ansible_user_dir }}/.config/{{ item.path }}"
+    state: directory
+    mode: 0755
   with_items: "{{ symlink_files }}"
 
 - name: copy base configs
   copy:
-      src: "{{ item.file }}"
-      dest: "{{ ansible_user_dir }}/.config/{{ item.path }}/"
-      mode: preserve
+    src: "{{ item.file }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item.path }}/"
+    mode: preserve
   with_items: "{{ symlink_files }}"
 
 - name: include OS specific tasks
