@@ -135,7 +135,7 @@ run_galaxy_collections() {
             collection \
             install \
             -r \
-            galaxy_roles/requirements.yml
+            galaxy_roles/collections.yml
 }
 
 setup_colors() {
