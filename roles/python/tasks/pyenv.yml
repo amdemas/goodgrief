@@ -3,6 +3,7 @@
   get_url:
     url: https://pyenv.run
     dest: "{{ ansible_user_dir }}/pyenv.sh"
+    mode: a+x
 
 - name: install pyenv
   shell: "{{ ansible_user_dir }}/pyenv.sh"
