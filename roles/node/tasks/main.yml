@@ -10,7 +10,7 @@
 - name: Install NVM
   shell: |
     set -o pipefail
-    "curl -o- https://raw.githubusercontent.com/creationix/nvm/v{{ nvm_version }}/install.sh | NVM_DIR={{ nvm_link_dir }} XDG_CONFIG_HOME={{ ansible_user_dir }}/.config/ bash"
+    "curl -o- https://raw.githubusercontent.com/creationix/nvm/v{{ nvm_script_version }}/install.sh | NVM_DIR={{ nvm_link_dir }} XDG_CONFIG_HOME={{ ansible_user_dir }}/.config/ bash"
   args:
       warn: false
   register: nvm_result
