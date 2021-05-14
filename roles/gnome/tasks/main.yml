@@ -2,18 +2,18 @@
 - name: include distro-specific vars
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: install bspwm packages
+- name: install gnome packages
   include_role:
     name: syspackage
   vars:
     os_packages: "{{ gnome_packages }}"
 
-- name: make sure destination for templates exists
-  file:
-    path: "{{ item.dest | dirname }}"
-    state: directory
-    mode: 0755
-  with_items: "{{ gnome_files|default([]) }}"
+# - name: make sure destination for templates exists
+#   file:
+#     path: "{{ item.dest | dirname }}"
+#     state: directory
+#     mode: 0755
+#   with_items: "{{ gnome_files|default([]) }}"
 
 - name: create config templates in destination
   template:
