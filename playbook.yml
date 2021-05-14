@@ -24,8 +24,6 @@
       tags: [node, bootstrap]
     - role: packages
       tags: [packages, bootstrap]
-    # - role: robertdebock.rpmfusion
-    #   tags: packages
     - role: powersave
       tags: powersave
     - role: linux-system-roles.tuned
