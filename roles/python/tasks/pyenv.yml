@@ -1,39 +1,39 @@
 ---
 - name: download pyenv
   get_url:
-      url: https://pyenv.run
-      dest: "{{ ansible_user_dir }}/pyenv.sh"
+    url: https://pyenv.run
+    dest: "{{ ansible_user_dir }}/pyenv.sh"
 
 - name: install pyenv
-  shell: "sh {{ ansible_user_dir }}/pyenv.sh"
+  shell: "{{ ansible_user_dir }}/pyenv.sh"
   environment:
-      PYENV_ROOT: "{{ pyenv_root }}"
+    PYENV_ROOT: "{{ pyenv_root }}"
   args:
-      creates: "{{ pyenv_root }}"
+    creates: "{{ pyenv_root }}"
 
 - name: remove temp pyenv installer
   file:
-      path: /tmp/pyenv.sh
-      state: absent
+    path: "{{ ansible_user_dir }}/pyenv.sh"
+    state: absent
 
 - name: install pyenv versions
   shell:
-      cmd: 'eval "$({{ pyenv_root }}/bin/pyenv init -)" && {{ pyenv_root }}/bin/pyenv install {{ item }}'
-      creates: "{{ pyenv_root }}/versions/{{ item }}"
+    cmd: 'eval "$({{ pyenv_root }}/bin/pyenv init -)" && {{ pyenv_root }}/bin/pyenv install {{ item }}'
+    creates: "{{ pyenv_root }}/versions/{{ item }}"
   with_items: "{{ pyenv_versions }}"
   environment:
-      PYENV_ROOT: "{{ pyenv_root }}"
-      PATH: "{{ lookup('env', 'PATH') }}:{{ pyenv_root }}"
-      CFLAGS: "-I/usr/include/openssl"
-      LDFLAGS: "-L/usr/lib64"
+    PYENV_ROOT: "{{ pyenv_root }}"
+    PATH: "{{ lookup('env', 'PATH') }}:{{ pyenv_root }}"
+    CFLAGS: "-I/usr/include/openssl"
+    LDFLAGS: "-L/usr/lib64"
 
 - name: ensure pip packages are installed for pyenv versions.
   pip:
-      name: "{{ item[1].name | default(item[1]) }}"
-      version: "{{ item[1].version | default(omit) }}"
-      virtualenv: "{{ item[1].virtualenv | default(omit) }}"
-      executable: "{{ pyenv_root }}/versions/{{ item[0] }}/bin/pip"
-      extra_args: --user
+    name: "{{ item[1].name | default(item[1]) }}"
+    version: "{{ item[1].version | default(omit) }}"
+    virtualenv: "{{ item[1].virtualenv | default(omit) }}"
+    executable: "{{ pyenv_root }}/versions/{{ item[0] }}/bin/pip"
+    extra_args: --user
   with_nested:
-      - "{{ pip_package_loop }}"
-      - "{{ python_pip_install_packages }}"
+    - "{{ pip_package_loop }}"
+    - "{{ python_pip_install_packages }}"
