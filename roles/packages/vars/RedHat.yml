@@ -17,4 +17,4 @@ install_packages:
 
 external_packages:
     - repo: atim/bottom
-      state: present
+      state: enabled

@@ -1,7 +1,7 @@
 ---
-- name: Remove project integration_tests of the group copr
+- name: install copr repos
   community.general.copr:
-    state: '{{ item.state | default("present") }}'
+    state: '{{ item.state | default("enabled") }}'
     name: "{{ item.repo }}"
   with_items: "{{ external_repos }}"
   become: true
