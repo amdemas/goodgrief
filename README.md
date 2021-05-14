@@ -18,7 +18,7 @@ This Ansible playbook installs and maintain all the packages and dotfiles I use 
 The following command is all you need to have it ready to roll:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/dotfiles/master/bin/goodgrief)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/bin/goodgrief)"
 ```
 
 ### Applying a specific profile and/or tag
@@ -26,13 +26,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/dotfiles/master/bi
 The profiles determine the DE to setup and can be applied by setting the `-p` variable before the bootstraping commands. The definition of these profiles can be found in the `host_vars` directory. If no profile is specified, the [gnome profile](host_vars/gnome.yml) will be applied. The following example shows how to use this variable:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/dotfiles/master/bin/goodgrief) -p bspwm"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/bin/goodgrief) -p bspwm"
 ```
 
 It is also possible to run only specifc parts by using the `-t` options. For example, the following command will only run the bootstrap tasks, which will prepare the repositories and install some required packages:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/dotfiles/master/bin/goodgrief) -p bspwm -t alacritty "
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/bin/goodgrief) -p bspwm -t alacritty "
 ```
 
 ### Running the playbook manually

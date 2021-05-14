@@ -76,11 +76,11 @@
     - role: sxhkd
       tags: sxhkd
 
-- name: setup xmonand WM
-  hosts: xmonand
+- name: setup xmonad WM
+  hosts: xmonad
   roles:
-    - role: xmonand
-      tags: xmonand
+    - role: xmonad
+      tags: xmonad
     - role: lightdm
       tags: lightdm
     - role: picom
