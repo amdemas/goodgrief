@@ -1,11 +1,11 @@
 ---
 - name: stat computer model
-  shell: dmidecode | grep -A3 '^System Information'
+  shell: "dmidecode --type system | grep 'Product Name' | sed 's/\tProduct Name: //'"
   register: computerstat
   become: true
 
 - include_tasks: dell5520.yml
-  when: "'Precision 5520' in computerstat.stdout"
+  when: computerstat.stdout == "'Precision 5520' in computerstat.stdout"
 
 - include_tasks: dell5550.yml
   when: "'Precision 5550' in computerstat.stdout"
