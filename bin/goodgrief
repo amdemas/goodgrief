@@ -128,6 +128,15 @@ run_galaxy() {
             galaxy_roles/requirements.yml
 }
 
+run_galaxy_collections() {
+    info "Install galaxy collection requirements..."
+    cd $DOT_PATH
+    ansible-galaxy \
+            collection \
+            install \
+            -r \
+            galaxy_roles/requirements.yml
+}
 
 setup_colors() {
 	# Only use colors if connected to a terminal
@@ -148,6 +157,7 @@ main() {
         check_dependencies
         clone_repository
         run_galaxy
+        run_galaxy_collections
         run_playbook
     else
         header
@@ -166,6 +176,7 @@ main() {
                     TAGS=$1
                     info "Using the following tags: $TAGS"
                     run_galaxy
+                    run_galaxy_collections
                     run_playbook
                 else
                     warn 'no tags specified, using all'
@@ -178,6 +189,7 @@ main() {
                     PROFILE=$1
                     info "Using the following profile: $PROFILE"
                     run_galaxy
+                    run_galaxy_collections
                     run_playbook
                 else
                     warn 'no prfile specified, using gnome'
@@ -193,6 +205,7 @@ main() {
                 -r|--run)
                 info 'Running playbook... Good Grief!'
                 run_galaxy
+                run_galaxy_collections
                 run_playbook
                 ;;
                 *)

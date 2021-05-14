@@ -5,3 +5,4 @@ venv
 galaxy_roles/*
 **/local.zsh
 !galaxy_roles/requirements.yml
+!galaxy_roles/collections.yml

@@ -1,6 +1,6 @@
 ---
 - name: Remove project integration_tests of the group copr
-  copr:
+  community.general.copr:
     state: '{{ item.state | default("present") }}'
     name: "{{ item.repo }}"
   with_items: "{{ external_repos }}"
