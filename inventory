@@ -1,11 +1,11 @@
 [all]
-host=localhost
+ansible_connection=local
 
 [gnome]
-host=localhost
+ansible_connection=local
 
 [xmonad]
-host=localhost
+ansible_connection=local
 
 [bspwm]
-host=localhost
+ansible_connection=local

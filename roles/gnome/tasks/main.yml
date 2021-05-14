@@ -25,13 +25,13 @@
 
 - name: create new font directory
   file:
-    path: /home/{{ ansible_user_id }}/.fonts
+    path: "{{ ansible_user_dir }}/.fonts"
     state: directory
     mode: 0755
 
 - name: create font directories
   file:
-    path: /home/{{ ansible_user_id }}/.fonts/{{ item.name }}
+    path: "{{ ansible_user_dir }}/.fonts/{{ item.name }}"
     state: directory
     mode: 0755
   with_items: "{{ gnome_fonts|default([]) }}"
