@@ -152,8 +152,10 @@ gnome_install_extensions:
       - schema: org.gnome.shell.extensions.net.gfxmonk.impatience
         key: speed-factor
         value: "0.25"
+    state: "present"
   # stealmyfocus
   - id: 234
+    state: "present"
   # # Dash to Dock
   # - id: 307
   #   configs:
