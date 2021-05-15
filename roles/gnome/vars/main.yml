@@ -116,22 +116,22 @@ gnome_config_gsettings:
     value: "['<Primary>Page_Up']"
   - schema: org.gtk.settings.file-chooser
     key: clock-format
-    value: '"12h"'
+    value: "'12h'"
   - schema: org.gtk.settings.file-chooser
     key: date-format
-    value: '"regular"'
+    value: "'regular'"
   - schema: org.gtk.settings.file-chooser
     key: location-mode
-    value: '"path-bar"'
+    value: "'path-bar'"
   - schema: org.gtk.settings.file-chooser
     key: sidebar-width
     value: "158"
   - schema: org.gtk.settings.file-chooser
     key: sort-column
-    value: '"modified"'
+    value: "'modified'"
   - schema: org.gtk.settings.file-chooser
     key: sort-order
-    value: "descending"
+    value: "'descending'"
   - schema: org.gnome.mutter
     key: center-new-windows
     value: "true"
@@ -156,6 +156,12 @@ gnome_install_extensions:
   # stealmyfocus
   - id: 234
     state: "present"
+  # User Themes
+  - id: 19
+    configs:
+      - schema: org.gnome.shell.extensions.user-theme
+        key: name
+        value: "'{{ gnome_theme }}'"
   # # Dash to Dock
   # - id: 307
   #   configs:
@@ -190,12 +196,6 @@ gnome_install_extensions:
   #       - schema: org.gnome.shell.extensions.panel-osd
   #         key: force-expand
   #         value: "true"
-  # # User Themes
-  # - id: 19
-  #   configs:
-  #       - schema: org.gnome.shell.extensions.user-theme
-  #         key: name
-  #         value: "'{{ gnome_theme }}'"
   # # Volume Mixer
   # - id: 858
   # # system-monitor
