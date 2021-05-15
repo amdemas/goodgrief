@@ -1,27 +1,16 @@
 ---
 dependency:
-    name: galaxy
-    options:
-        role-file: ../../galaxy_roles/requirements.yml
+  name: galaxy
+  options:
+    role-file: ../../galaxy_roles/requirements.yml
 driver:
-    name: docker
+  name: docker
 lint: |
-    yamllint .
-    flake8
-    ansible-lint
+  ansible-lint
 platforms:
-    - name: default
-      image: geerlingguy/docker-fedora31-ansible:latest
-      command: ${MOLECULE_DOCKER_COMMAND:-""}
-      capabilities:
-          - SYS_ADMIN
-      volumes:
-          - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      override_command: true
-      privileged: true
+  - name: fedora
+    image: geerlingguy/docker-fedora34-ansible:latest
 provisioner:
-    name: ansible
-scenario:
-    name: default
+  name: ansible
 verifier:
-    name: testinfra
+  name: ansible

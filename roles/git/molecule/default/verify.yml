@@ -5,24 +5,24 @@
   hosts: all
   gather_facts: false
   tasks:
-      - name: "git - check git package status"
-        package:
-            name: "git"
-            state: "installed"
-        check_mode: yes
-        register: pkg_status
+    - name: "git - check git package status"
+      package:
+        name: "git"
+        state: "installed"
+      check_mode: true
+      register: pkg_status
 
-      - name: "git - test git package is installed"
-        assert:
-            that:
-                - not pkg_status.changed
+    - name: "git - test git package is installed"
+      assert:
+        that:
+          - not pkg_status.changed
 
-      - name: "git - check that gitconfig exists"
-        stat:
-            path: "/root/.config/git/config"
-        register: stat_result
+    - name: "git - check that gitconfig exists"
+      stat:
+        path: "/root/.config/git/config"
+      register: stat_result
 
-      - name: "git - test gitconfig exists"
-        assert:
-            that:
-                - stat_result.stat.exists
+    - name: "git - test gitconfig exists"
+      assert:
+        that:
+          - stat_result.stat.exists

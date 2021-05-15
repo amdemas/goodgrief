@@ -1,25 +1,25 @@
 ---
 - name: install taskwarrior
   package:
-      name: task
-      state: present
-  become: yes
+    name: task
+    state: present
+  become: true
 
 - name: install bugwarrior
   pip:
-      name: bugwarrior
-      extra_args: --user
+    name: bugwarrior
+    extra_args: --user
 
 - name: make sure destination for templates exists
   file:
-      path: "{{ ansible_user_dir }}/.config/task/"
-      state: directory
-      mode: 0755
+    path: "{{ ansible_user_dir }}/.config/task/"
+    state: directory
+    mode: 0755
 
 - name: copy configs to directory
   copy:
-      src: "{{ item }}"
-      dest: "{{ ansible_user_dir }}/.config/task/"
-      mode: preserve
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/task/"
+    mode: preserve
   with_fileglob:
-      - files/*
+    - files/*

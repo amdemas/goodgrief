@@ -3,14 +3,14 @@
   hosts: all
   gather_facts: false
   tasks:
-      - name: "chromium - check chromium package status"
-        package:
-            name: "chromium"
-            state: "installed"
-        check_mode: yes
-        register: pkg_status
+    - name: "chromium - check chromium package status"
+      package:
+        name: "chromium"
+        state: "installed"
+      check_mode: true
+      register: pkg_status
 
-      - name: "chromium - test chromium package is installed"
-        assert:
-            that:
-                - not pkg_status.changed
+    - name: "chromium - test chromium package is installed"
+      assert:
+        that:
+          - not pkg_status.changed

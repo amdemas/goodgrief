@@ -7,7 +7,7 @@
     name: "{{ item }}"
     state: present
   loop: "{{ git_packages }}"
-  become: yes
+  become: true
 
 - name: create global git config directory
   file:

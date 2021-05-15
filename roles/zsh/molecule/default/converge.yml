@@ -1,6 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  gather_facts: true
-  roles:
-      - role: zsh
+  tasks:
+    - name: "Include zsh"
+      include_role:
+        name: "zsh"

@@ -6,15 +6,8 @@ driver:
 lint: |
   ansible-lint
 platforms:
-  - name: default
-    image: geerlingguy/docker-fedora31-ansible:latest
-    capabilities:
-      - SYS_ADMIN
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /run/udev:/run/udev:ro
-    privileged: true
-    pre_build_image: true
+  - name: fedora
+    image: geerlingguy/docker-fedora34-ansible:latest
 provisioner:
   name: ansible
 verifier:

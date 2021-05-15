@@ -5,34 +5,34 @@
   hosts: all
   gather_facts: false
   tasks:
-      - name: "vim - check neovim package status"
-        package:
-            name: "neovim"
-            state: "installed"
-        check_mode: yes
-        register: pkg_status
+    - name: "vim - check neovim package status"
+      package:
+        name: "neovim"
+        state: "installed"
+      check_mode: true
+      register: pkg_status
 
-      - name: "vim - test neovim package is installed"
-        assert:
-            that:
-                - not pkg_status.changed
+    - name: "vim - test neovim package is installed"
+      assert:
+        that:
+          - not pkg_status.changed
 
-      - name: "vim - check that local plugins exists"
-        stat:
-            path: "/root/.config/nvim/config/local.plugins.yaml"
-        register: stat_result
+    - name: "vim - check that local plugins exists"
+      stat:
+        path: "/root/.config/nvim/config/local.plugins.yaml"
+      register: stat_result
 
-      - name: "vim - test local plugins exists"
-        assert:
-            that:
-                - stat_result.stat.exists
+    - name: "vim - test local plugins exists"
+      assert:
+        that:
+          - stat_result.stat.exists
 
-      - name: "vim - check that local settings exists"
-        stat:
-            path: "/root/.config/nvim/config/local.vim"
-        register: stat_result
+    - name: "vim - check that local settings exists"
+      stat:
+        path: "/root/.config/nvim/config/local.vim"
+      register: stat_result
 
-      - name: "vim - test local settings exists"
-        assert:
-            that:
-                - stat_result.stat.exists
+    - name: "vim - test local settings exists"
+      assert:
+        that:
+          - stat_result.stat.exists

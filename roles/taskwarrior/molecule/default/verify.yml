@@ -5,38 +5,38 @@
   hosts: all
   gather_facts: false
   tasks:
-      - name: Gather package facts
-        package_facts:
-            manager: auto
-      - name: "taskwarrior - check taskwarrior package status"
-        package:
-            name: "task"
-            state: "installed"
-        check_mode: yes
-        register: pkg_status
+    - name: Gather package facts
+      package_facts:
+        manager: auto
+    - name: "taskwarrior - check taskwarrior package status"
+      package:
+        name: "task"
+        state: "installed"
+      check_mode: true
+      register: pkg_status
 
-      - name: "taskwarrior - test taskwarrior package is installed"
-        assert:
-            that:
-                - not pkg_status.changed
+    - name: "taskwarrior - test taskwarrior package is installed"
+      assert:
+        that:
+          - not pkg_status.changed
 
-      - name: "taskwarrior - check that taskrc exists"
-        stat:
-            path: "/root/.config/task/taskrc"
-        register: stat_result
+    - name: "taskwarrior - check that taskrc exists"
+      stat:
+        path: "/root/.config/task/taskrc"
+      register: stat_result
 
-      - name: "taskwarrior - test taskrc exists"
-        assert:
-            that:
-                - stat_result.stat.exists
+    - name: "taskwarrior - test taskrc exists"
+      assert:
+        that:
+          - stat_result.stat.exists
 
-      - name: "taskwarrior - check bugwarrior package status"
-        stat:
-            path: "/root/.local/bin/bugwarrior-pull"
-        check_mode: yes
-        register: stat_result
+    - name: "taskwarrior - check bugwarrior package status"
+      stat:
+        path: "/root/.local/bin/bugwarrior-pull"
+      check_mode: true
+      register: stat_result
 
-      - name: "taskwarrior - test bugwarrior package is installed"
-        assert:
-            that:
-                - not stat_result.changed
+    - name: "taskwarrior - test bugwarrior package is installed"
+      assert:
+        that:
+          - not stat_result.changed

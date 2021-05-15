@@ -3,24 +3,24 @@
   hosts: all
   gather_facts: false
   tasks:
-      - name: "dunst - check dunst package status"
-        package:
-            name: "dunst"
-            state: "installed"
-        check_mode: yes
-        register: pkg_status
+    - name: "dunst - check dunst package status"
+      package:
+        name: "dunst"
+        state: "installed"
+      check_mode: true
+      register: pkg_status
 
-      - name: "dunst - test dunst package is installed"
-        assert:
-            that:
-                - not pkg_status.changed
+    - name: "dunst - test dunst package is installed"
+      assert:
+        that:
+          - not pkg_status.changed
 
-      - name: "dunst - check that dunstrc exists"
-        stat:
-            path: "/root/.config/dunst/dunstrc"
-        register: stat_result
+    - name: "dunst - check that dunstrc exists"
+      stat:
+        path: "/root/.config/dunst/dunstrc"
+      register: stat_result
 
-      - name: "dunst - test dunstrc exists"
-        assert:
-            that:
-                - stat_result.stat.exists
+    - name: "dunst - test dunstrc exists"
+      assert:
+        that:
+          - stat_result.stat.exists

@@ -25,7 +25,7 @@
       unarchive:
         src: "/tmp/{{ gnome_extension.name }}.zip"
         dest: "{{ gnome_extension_path }}/{{ gnome_extension.name }}"
-        remote_src: yes
+        remote_src: true
       when: not r_gnome_extension_check_existing.stat.exists
 
     - name: "check if extension has a schema - {{ gnome_extension.name }}"
@@ -37,23 +37,23 @@
       copy:
         src: "{{ gnome_extension_path }}/{{ gnome_extension.name }}/schemas/"
         dest: /usr/share/glib-2.0/schemas/
-        remote_src: yes
+        remote_src: true
         mode: preserve
-      become: yes
+      become: true
       when: (not r_gnome_extension_check_existing.stat.exists) and (r_gnome_extension_check_schema_dir.stat.exists)
       register: r_gnome_extension_copy_schema
 
     - name: init schemas
       command: glib-compile-schemas /usr/share/glib-2.0/schemas/
       when: r_gnome_extension_copy_schema is changed
-      become: yes
+      become: true
 
     - name: "modify extension settings - {{ gnome_extension.name }}"
       gsetting:
         user: "{{ ansible_user_id }}"
         key: "{{ outer_item.schema }}.{{ outer_item.key }}"
         value: "{{ outer_item.value }}"
-      become: yes
+      become: true
       with_items: "{{ gnome_extension.configs|default([]) }}"
       loop_control:
         loop_var: outer_item

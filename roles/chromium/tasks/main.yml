@@ -4,7 +4,7 @@
 
 - name: install chromium
   package:
-      name: "{{ item.name }}"
-      state: "{{ item.state | default('present') }}"
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
   with_items: "{{ chromium_package | default({}) }}"
-  become: yes
+  become: true

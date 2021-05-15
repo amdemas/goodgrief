@@ -5,44 +5,44 @@
   hosts: all
   gather_facts: false
   tasks:
-      - name: Collect only facts returned by facter
-        setup:
-            gather_subset:
-                - "user_shell"
+    - name: Collect only facts returned by facter
+      setup:
+        gather_subset:
+          - "user_shell"
 
-      - name: "zsh - check zsh package status"
-        package:
-            name: "zsh"
-            state: "installed"
-        check_mode: yes
-        register: pkg_status
+    - name: "zsh - check zsh package status"
+      package:
+        name: "zsh"
+        state: "installed"
+      check_mode: true
+      register: pkg_status
 
-      - name: "zsh - test zsh package is installed"
-        assert:
-            that:
-                - not pkg_status.changed
+    - name: "zsh - test zsh package is installed"
+      assert:
+        that:
+          - not pkg_status.changed
 
-      - name: "zsh - check that zshrv exists"
-        stat:
-            path: "/root/.zshrc"
-        register: stat_result
+    - name: "zsh - check that zshrv exists"
+      stat:
+        path: "/root/.zshrc"
+      register: stat_result
 
-      - name: "zsh - test zshrc exists"
-        assert:
-            that:
-                - stat_result.stat.exists
+    - name: "zsh - test zshrc exists"
+      assert:
+        that:
+          - stat_result.stat.exists
 
-      - name: "zsh - test zplug package is installed"
-        stat:
-            path: "/root/.local/share/zplug"
-        register: stat_result
+    - name: "zsh - test zplug package is installed"
+      stat:
+        path: "/root/.local/share/zplug"
+      register: stat_result
 
-      - name: "zsh - test zplug exists"
-        assert:
-            that:
-                - stat_result.stat.exists
+    - name: "zsh - test zplug exists"
+      assert:
+        that:
+          - stat_result.stat.exists
 
-      - name: "zsh - test zsh is the default shell"
-        assert:
-            that:
-                - ansible_facts.user_shell == '/usr/bin/zsh'
+    - name: "zsh - test zsh is the default shell"
+      assert:
+        that:
+          - ansible_facts.user_shell == '/usr/bin/zsh'

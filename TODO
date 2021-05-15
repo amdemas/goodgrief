@@ -17,8 +17,9 @@ Tested:
     ☐ chromium
     ☐ docker
     ☐ dunst
-    ☐ git
+    ✔ git
     ☐ gnome
+    ☐ lightdm
     ✔ mxmaster
     ☐ node
     ☐ packages
@@ -29,11 +30,11 @@ Tested:
     ☐ rofi
     ☐ ruby
     ☐ sxhkd
-    ☐ taskwarrior
+    ✔ taskwarrior
     ✔ tmux
-    ☐ vim
+    ✔ vim
     ☐ vscode
-    ☐ xbindkeys
     ☐ xmonad
+    ☐ xdg_dirs
     ☐ xorg
-    ☐ zsh
+    ✔ zsh
