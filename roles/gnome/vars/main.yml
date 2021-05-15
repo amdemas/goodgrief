@@ -146,7 +146,14 @@ gnome_config_gsettings:
     value: "'file:///{{ ansible_user_dir }}/.config/assets/wallpaper2.jpg'"
 
 gnome_install_extensions:
-  []
+  # impatience
+  - id: 277
+    configs:
+      - schema: org.gnome.shell.extensions.net.gfxmonk.impatience
+        key: speed-factor
+        value: "0.25"
+  # stealmyfocus
+  - id: 234
   # # Dash to Dock
   # - id: 307
   #   configs:
@@ -173,16 +180,8 @@ gnome_install_extensions:
   #         value: "'DOTS'"
   # # gsconnect
   # - id: 1319
-  # # stealmyfocus
-  # - id: 234
   # # launch new instance
   # - id: 600
-  # # impatience
-  # - id: 277
-  #   configs:
-  #       - schema: org.gnome.shell.extensions.net.gfxmonk.impatience
-  #         key: speed-factor
-  #         value: "0.25"
   # # Panel OSD
   # - id: 708
   #   configs:
