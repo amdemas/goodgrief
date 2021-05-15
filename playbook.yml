@@ -50,12 +50,14 @@
 
 - name: setup Gnome DE
   hosts: gnome
+  connection: local
   roles:
     - role: gnome
       tags: gnome
 
 - name: setup bspwm WM
   hosts: bspwm
+  connection: local
   roles:
     - role: bspwm
       tags: bspwm
@@ -76,6 +78,7 @@
 
 - name: setup xmonad WM
   hosts: xmonad
+  connection: local
   roles:
     - role: xmonad
       tags: xmonad

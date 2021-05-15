@@ -8,30 +8,23 @@
   vars:
     os_packages: "{{ gnome_packages }}"
 
-# - name: make sure destination for templates exists
-#   file:
-#     path: "{{ item.dest | dirname }}"
-#     state: directory
-#     mode: 0755
-#   with_items: "{{ gnome_files|default([]) }}"
+- name: make sure destination for templates exists
+  file:
+    path: "{{ item.dest | dirname }}"
+    state: directory
+    mode: 0700
+  with_items: "{{ gnome_files|default([]) }}"
 
 - name: create config templates in destination
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    force: true
     mode: preserve
   with_items: "{{ gnome_files|default([]) }}"
 
-- name: create new font directory
-  file:
-    path: "{{ ansible_user_dir }}/.fonts"
-    state: directory
-    mode: 0755
-
 - name: create font directories
   file:
-    path: "{{ ansible_user_dir }}/.fonts/{{ item.name }}"
+    path: "{{ ansible_user_dir }}/.local/share/fonts/{{ item.name }}"
     state: directory
     mode: 0755
   with_items: "{{ gnome_fonts|default([]) }}"
@@ -46,7 +39,7 @@
 - name: unpack and install fonts
   unarchive:
     src: "/tmp/{{ item.name }}.zip"
-    dest: "/home/{{ ansible_user_id }}/.fonts/{{ item.name }}"
+    dest: "{{ ansible_user_dir }}/.local/share/fonts/{{ item.name }}"
     remote_src: true
   with_items: "{{ gnome_fonts|default([]) }}"
   notify: refresh fonts

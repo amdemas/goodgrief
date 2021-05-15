@@ -20,9 +20,9 @@ gnome_fonts:
     fonts: "*.ttf"
 
 gnome_files:
-  - src: gtk3_settings.ini.j2
+  - src: gtk3_settings.j2
     dest: "{{ ansible_user_dir }}/.config/gtk-3.0/settings.ini"
-  - src: gtk4_settings.ini.j2
+  - src: gtk4_settings.j2
     dest: "{{ ansible_user_dir }}/.config/gtk-4.0/settings.ini"
   - src: bookmarks.j2
     dest: "{{ ansible_user_dir }}/.config/gtk-3.0/bookmarks"
