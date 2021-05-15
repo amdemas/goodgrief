@@ -3,22 +3,14 @@ dependency:
   name: galaxy
   options:
     role-file: galaxy_roles/requirements.yml
+    requirements-file: galaxy_roles/requirements.yml
 
 driver:
   name: docker
 
 platforms:
-  - name: gnome
-    image: geerlingguy/docker-fedora32-ansible:latest
-    #   dockerfile: ../resources/playbooks/Dockerfile.j2
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    capabilities:
-      - SYS_ADMIN
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    override_command: true
-    privileged: true
-    pre_build_image: true
+  - name: default
+    image: geerlingguy/docker-fedora34-ansible:latest
 
 provisioner:
   name: ansible
@@ -27,8 +19,9 @@ provisioner:
     TERM: xterm
   playbooks:
     converge: ../../playbook.yml
+
 scenario:
-  name: fedora
+  name: default
 
 verifier:
   name: ansible

@@ -1,29 +1,33 @@
 ---
 dependency:
-    name: galaxy
-    options:
-        role-file: galaxy_roles/requirements.yml
+  name: galaxy
+  options:
+    role-file: galaxy_roles/requirements.yml
 driver:
-    name: docker
+  name: docker
 platforms:
-    - name: ubuntu
-      image: ubuntu-upstart:latest
-      dockerfile: Dockerfile.j2
-      capabilities:
-          - SYS_ADMIN
-      volumes:
-          - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      command: /sbin/init
+  - name: ubuntu
+    image: ubuntu-upstart:latest
+    dockerfile: Dockerfile.j2
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /sbin/init
+
 provisioner:
-    name: ansible
-    options:
-        vvv: True
-    env:
-        ANSIBLE_ROLES_PATH: ../../roles
-    playbooks:
-        converge: ../../playbook.yml
+  name: ansible
+  options:
+    vvv: True
+  env:
+    ANSIBLE_ROLES_PATH: ../../roles
+  playbooks:
+    converge: ../../playbook.yml
+
 scenario:
-    name: ubuntu
+  name: ubuntu
+
 verifier:
-    name: testinfra
-    directory: ../resources/tests/
+  name: ansible
+  additional_files_or_dirs:
+    - ../../roles/*/molecule/default/verify.yml
