@@ -43,8 +43,6 @@
       tags: vim
     - role: vscode
       tags: vscode
-    - role: zathura
-      tags: zathura
     - role: zsh
       tags: [zsh, boostrap]
 
@@ -75,6 +73,8 @@
       tags: xorg
     - role: sxhkd
       tags: sxhkd
+    - role: zathura
+      tags: zathura
 
 - name: setup xmonad WM
   hosts: xmonad
@@ -92,3 +92,5 @@
       tags: dunst
     - role: xorg
       tags: xorg
+    - role: zathura
+      tags: zathura

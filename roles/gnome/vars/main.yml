@@ -165,6 +165,8 @@ gnome_install_extensions:
       - schema: org.gnome.shell.extensions.trayIconsReloaded
         key: tray-margin-left
         value: "4"
+  # Blur my Shell
+  - id: 3193
   # # Dash to Dock
   # - id: 307
   #   configs:

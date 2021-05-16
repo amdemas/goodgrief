@@ -10,7 +10,6 @@ mxmaster_packages:
   - name: gcc
   - name: gcc-c++
   - name: evemu
-  - name: solaar
 
 mxmaster_pip_packages:
   - name: evdev

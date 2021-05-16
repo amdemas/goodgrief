@@ -9,7 +9,6 @@ mxmaster_packages:
   - name: libevdev
   - name: libconfig
   - name: evemu
-  - name: solaar
 
 mxmaster_pip_packages:
   - name: evdev
