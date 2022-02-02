@@ -12,8 +12,8 @@ setopt pushd_to_home
 # Check spell command
 setopt correct
 
-# Check spell all
-setopt correct_all
+# Disable argument spell check
+unsetopt correct_all
 
 # Prohibit overwrite by redirection(> & >>) (Use >! and >>! to bypass.)
 setopt no_clobber
