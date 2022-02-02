@@ -1,9 +1,15 @@
 ---
+- name: add package repository
+  ansible.builtin.apt_repository:
+    repo: "{{ item.name }}"
+  with_items: "{{ external_repos }}"
+  become: yes
+
 - name: install needed system packages
   apt:
-      name: "{{ item.name }}"
-      state: '{{ item.state | default("present") }}'
-      #   install_recommends: yes
-      update_cache: yes
+    name: "{{ item.name }}"
+    state: '{{ item.state | default("present") }}'
+    #   install_recommends: yes
+    update_cache: yes
   with_items: "{{ os_packages }}"
   become: yes

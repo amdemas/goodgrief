@@ -1,3 +1,5 @@
 ---
 alacritty_packages:
   - name: alacritty
+
+alacritty_repos: []

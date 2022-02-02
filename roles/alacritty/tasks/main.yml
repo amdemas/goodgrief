@@ -6,6 +6,7 @@
     name: syspackage
   vars:
     os_packages: "{{ alacritty_packages }}"
+    external_repos: "{{ alacritty_repos }}"
 
 - name: make sure destination for templates exists
   file:

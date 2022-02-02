@@ -18,8 +18,8 @@ jobs:
       matrix:
         image:
           - default
-          - ubuntu
-          - arch
+          # - ubuntu
+          # - arch
     steps:
       - name: checkout
         uses: actions/checkout@v2

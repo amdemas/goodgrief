@@ -7,18 +7,16 @@ driver:
   name: docker
 platforms:
   - name: ubuntu
-    image: ubuntu-upstart:latest
-    dockerfile: Dockerfile.j2
-    capabilities:
-      - SYS_ADMIN
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    command: /sbin/init
+    image: geerlingguy/docker-ubuntu2004-ansible:latest
+    # dockerfile: Dockerfile.j2
+    # capabilities:
+    #   - SYS_ADMIN
+    # volumes:
+    #   - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    # command: /sbin/init
 
 provisioner:
   name: ansible
-  options:
-    vvv: True
   env:
     ANSIBLE_ROLES_PATH: ../../roles
   playbooks:

@@ -1,3 +1,6 @@
 ---
 alacritty_packages:
   - name: alacritty
+
+alacritty_repos:
+  - name: ppa:mmstick76/alacritty
