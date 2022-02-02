@@ -18,6 +18,9 @@
     #   tags: docker
     - role: git
       tags: [git, bootstrap]
+    - role: kube
+      tags: [kube, bootstrap]
+      become: true
     - role: mxmaster
       tags: mxmaster
     - role: node
@@ -32,7 +35,7 @@
     - role: python
       tags: [python, boostrap]
     - role: aws
-      tags: aws
+      tags: [aws, bootstrap]
     - role: ruby
       tags: [ruby, boostrap]
     - role: taskwarrior

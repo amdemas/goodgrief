@@ -23,7 +23,7 @@ npm_packages:
 
 pip_executable: ""
 
-python_pip_install_packages:
+python_pip_packages:
     - pycodestyle
     - pyflakes
     - flake8

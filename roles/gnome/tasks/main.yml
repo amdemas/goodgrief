@@ -62,3 +62,4 @@
   become: true
 
 - include_tasks: gedit.yml
+  when: "'Adwaita' not in {{ gnome_theme }}"

@@ -68,7 +68,7 @@ gnome_config_gsettings:
     value: "'{{ gnome_theme }}'"
   - schema: org.gnome.desktop.interface
     key: monospace-font-name
-    value: "'JetBrainsMono Nerd Font Mono 14'"
+    value: "'{{ font }} 14'"
   - schema: org.gnome.desktop.interface
     key: enable-hot-corners
     value: "false"

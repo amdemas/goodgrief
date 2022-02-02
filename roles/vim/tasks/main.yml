@@ -10,7 +10,7 @@
 
 - name: ensure pip_install_packages are installed for pip3.
   pip:
-    name: "{{ python_pip_install_packages }}"
+    name: "{{ python_pip }}"
     executable: "pip3"
     extra_args: --user
 

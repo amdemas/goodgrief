@@ -14,20 +14,3 @@
 # alias dnp='docker network prune'
 # alias dvls='docker volume ls'
 # alias dvp='docker volume prune'
-
-
-## kubernetes aliases
-function kon {
-  save_aliases=$(alias -L)
-  source ~/.zsh/lib/.kubectl_aliases
-  #source <(kubectl completion zsh)
-}
-
-function koff {
-  unalias -m '*'
-  eval ${save_aliases}
-  unset save_aliases
-}
-
-alias kns='kubens'
-alias kcx='kubectx'

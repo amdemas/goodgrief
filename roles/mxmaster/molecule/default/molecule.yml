@@ -7,8 +7,10 @@ lint: |
   ansible-lint
 platforms:
   - name: fedora
-    image: geerlingguy/docker-fedora34-ansible:latest
+    image: geerlingguy/docker-fedora35-ansible:latest
 provisioner:
   name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../../../../roles
 verifier:
   name: ansible

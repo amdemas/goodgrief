@@ -1,18 +1,16 @@
 ---
-# This is an example playbook to execute Ansible tests.
-
 - name: Verify
   hosts: all
   gather_facts: false
   tasks:
-      - name: "docker - check docker package status"
-        package:
-            name: "docker"
-            state: "installed"
-        check_mode: yes
-        register: pkg_status
+    - name: "docker - check docker package status"
+      package:
+        name: "docker"
+        state: "installed"
+      check_mode: yes
+      register: pkg_status
 
-      - name: "docker - test docker package is installed"
-        assert:
-            that:
-                - not pkg_status.changed
+    - name: "docker - test docker package is installed"
+      assert:
+        that:
+          - not pkg_status.changed

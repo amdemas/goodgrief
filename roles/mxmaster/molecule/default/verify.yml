@@ -25,3 +25,13 @@
       assert:
         that:
           - stat_result.stat.exists
+
+    - name: mxmaster - check that build directory doesnt exist
+      stat:
+        path: /tmp/hidpp/build
+      register: stat_result
+
+    - name: mxmaster - test build directory doesnt exist
+      assert:
+        that:
+          - not stat_result.stat.exists

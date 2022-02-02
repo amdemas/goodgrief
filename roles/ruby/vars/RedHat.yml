@@ -1,12 +1,21 @@
 ---
 rbenv_packages:
-    - curl
-    - gcc
-    - openssl-devel
-    - libyaml-devel
-    - readline-devel
-    - zlib-devel
-    - libffi-devel
-    - git
-    - bzip2
-    - make
+  - git-core
+  - curl
+  - gcc
+  - gcc-c++
+  - openssl-devel
+  - libyaml-devel
+  - readline
+  - readline-devel
+  - zlib
+  - zlib-devel
+  - libffi-devel
+  - git
+  - bzip2
+  - make
+  - patch
+  - autoconf
+  - libtool
+  - bison
+  - sqlite-devel

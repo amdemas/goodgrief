@@ -1,0 +1,23 @@
+# Usage: use use_nvm <version>
+#
+# Loads the specified nvm version into the environent
+#
+use_nvm() {
+  local node_version=$1
+
+  nvm_sh=nvm
+  if [[ -e $nvm_sh ]]; then
+    source $nvm_sh
+    nvm use $node_version
+  fi
+}
+
+# Usage: use ruby <version>
+#
+# Loads the specified ruby version into the environent
+#
+use_ruby() {
+  local ruby_dir=$HOME/.rubies/$1
+  load_prefix $ruby_dir
+  layout ruby
+}

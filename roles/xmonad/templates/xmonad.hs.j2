@@ -258,13 +258,9 @@ main :: IO ()
 main = do
 
     xmproc <- spawnPipe myStatusBar
-
-
     -- for independent screens
     -- nScreens <- countScreens
-
     -- for taffybar, add pagerHints below
-
     xmonad 
         $ dynamicProjects projects
         $ withNavigation2DConfig myNav2DConf
@@ -321,44 +317,44 @@ projects :: [Project]
 projects =
 
     [ Project   { projectName       = wsGEN
-                , projectDirectory  = "~/"
+                , projectDirectory  = "{{ ansible_user_dir }}/"
                 , projectStartHook  = Nothing
                 }
 
     , Project   { projectName       = wsSYS
-                , projectDirectory  = "~/"
+                , projectDirectory  = "{{ ansible_user_dir }}/"
                 , projectStartHook  = Just $ do spawnOn wsSYS myTerminal
                                                 spawnOn wsSYS myTerminal
                                                 spawnOn wsSYS myTerminal
                 }
 
     , Project   { projectName       = wsVIX
-                , projectDirectory  = "~/.config/dotfiles"
-                , projectStartHook  = Just $ do runInTerm "--title dotfiles" "code ~/.config/dotfiles"
+                , projectDirectory  = "{{ ansible_user_dir }}/.config/dotfiles"
+                , projectStartHook  = Just $ do runInTerm "--title dotfiles" "code {{ ansible_user_dir }}/.config/dotfiles"
                                                 spawnOn wsVIX myTerminal
                                                 spawnOn wsVIX myTerminal
                 }
 
     , Project   { projectName       = wsMON
-                , projectDirectory  = "~/"
+                , projectDirectory  = "{{ ansible_user_dir }}/"
                 , projectStartHook  = Just $ do runInTerm "--title glances" "glances"
                                                 runInTerm "--title ctop" "ctop"
                 }
 
     , Project   { projectName       = wsWRK
-                , projectDirectory  = "~/Projects"
+                , projectDirectory  = "{{ ansible_user_dir }}/Projects"
                 , projectStartHook  = Just $ do spawnOn wsWRK myBrowser
                                                 spawnOn wsWRK myTerminal
                                                 runInTerm "--title work" "/usr/bin/code"
                 }
 
     , Project   { projectName       = wsRAD
-                , projectDirectory  = "~/"
+                , projectDirectory  = "{{ ansible_user_dir }}/"
                 , projectStartHook  = Just $ do spawn myBrowser
                 }
 
     , Project   { projectName       = wsTMP
-                , projectDirectory  = "~/"
+                , projectDirectory  = "{{ ansible_user_dir }}/"
                 -- , projectStartHook  = Just $ do spawn $ myBrowser ++ " https://mail.google.com/mail/u/0/#inbox/1599e6883149eeac"
                 , projectStartHook  = Just $ do return ()
                 }
@@ -372,9 +368,9 @@ projects =
 
 myTerminal          = "/usr/bin/alacritty"
 myAltTerminal       = "tilix"
-myBrowser           = "~/.config/dotfiles/roles/xmonad/files/scripts/browser"
+myBrowser           = "{{ ansible_user_dir }}/.config/dotfiles/roles/xmonad/files/scripts/browser"
 myBrowserClass      = "Google-chrome"
-myStatusBar         = "xmobar ~/.config/dotfiles/roles/xmonad/files/xmobar/xmobar.conf"
+myStatusBar         = "xmobar {{ ansible_user_dir }}/.config/dotfiles/roles/xmonad/files/xmobar/xmobar.conf"
 myLauncher          = "rofi -matching fuzzy -modi combi -show combi -combi-modi drun"
 
 

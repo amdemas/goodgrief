@@ -119,6 +119,19 @@ run_playbook() {
             playbook.yml
 }
 
+run_playbook_tags() {
+    info "Running playbook..."
+    cd $DOT_PATH
+    ansible-playbook \
+            --ask-become-pass \
+            --diff \
+            -i inventory \
+            --tags $TAGS \
+            playbook.yml
+}
+
+
+
 run_galaxy() {
     info "Installing galaxy requirements..."
     cd $DOT_PATH
@@ -165,7 +178,7 @@ main() {
                     TAGS=$1
                     info "Using the following tags: $TAGS"
                     run_galaxy
-                    run_playbook
+                    run_playbook_tags
                 else
                     warn 'no tags specified, using all'
                 fi

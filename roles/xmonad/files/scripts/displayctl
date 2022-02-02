@@ -52,7 +52,7 @@ XUSER=$(ps -C Xorg -C X -ouser=)
 XUSERID=$(id -u $XUSER)
 
 # key environment variables
-export DISPLAY=":1"
+export DISPLAY=":0"
 export XAUTHORITY=$HOME/.Xauthority
 export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$XUSERID/bus"
 export PULSE_RUNTIME_PATH="/run/user/${XUSERID}/pulse/"
