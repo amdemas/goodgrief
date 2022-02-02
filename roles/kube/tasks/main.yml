@@ -1,0 +1,60 @@
+---
+- name: Download kubectl archive
+  get_url:
+    url: "https://storage.googleapis.com/kubernetes-release/release/v{{ kubectl_version }}/kubernetes-client-linux-amd64.tar.gz"
+    checksum: "sha512:{{ kube_checksum }}"
+    dest: "{{ tmp_directory }}"
+  tags:
+    - kubectl
+
+- name: Unarchive kubernetes-client
+  unarchive:
+    src: "{{ tmp_directory }}/kubernetes-client-linux-amd64.tar.gz"
+    dest: "{{ tmp_directory }}"
+    remote_src: true
+  tags:
+    - kubectl
+
+- name: Copy kubectl binary to destination directory
+  copy:
+    src: "{{ tmp_directory }}/kubernetes/client/bin/{{ item }}"
+    dest: "{{ bin_directory }}/{{ item }}"
+    mode: "0755"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    remote_src: true
+  with_items:
+    - kubectl
+
+- name: Download Minikube archive
+  become: true
+  become_user: root
+  get_url:
+    url: "https://github.com/kubernetes/minikube/releases/download/v{{ minikube_version }}/minikube-linux-arm64.tar.gz"
+    dest: "{{ tmp_directory }}"
+    checksum: "sha256:{{ minikube_checksum }}"
+    mode: 0755
+  tags:
+    - kubectl
+
+- name: Unarchive Minikube
+  unarchive:
+    src: "{{ tmp_directory }}/minikube-linux-arm64.tar.gz"
+    dest: "{{ tmp_directory }}"
+    remote_src: true
+  tags:
+    - kubectl
+
+- name: Copy minikube binary to destination directory
+  copy:
+    src: "{{ tmp_directory }}/out/{{ item.name }}"
+    dest: "{{ bin_directory }}/{{  item.dest }}"
+    mode: "0755"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    remote_src: true
+  with_items:
+    - name: minikube-linux-amd64
+      dest: minikube
+    - name: docker-machine-driver-kvm2
+      dest: docker-machine-driver-kvm2

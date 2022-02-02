@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Call setup
+      setup:
+
+- hosts: fedora
+  tasks:
+    - name: Include kube role
+      include_role:
+        name: kube

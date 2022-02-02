@@ -1,0 +1,10 @@
+---
+# defaults file for Kubernetes
+
+kubectl_version: "1.23.2"
+kube_checksum: c8653aa2bce09a29041b7347ce2d45710abd8bc3cfe79265e0aa04a24c2028344f0b280f52b2858e869bf997cd0e71b6ac8f22ec8a2b4b39328e73339746f565
+tmp_directory: "{{ lookup('env', 'TMPDIR') | default('/tmp',true) }}"
+bin_directory: "/usr/local/bin"
+
+minikube_version: "1.25.1"
+minikube_checksum: 3750908a1dc3ae9543e7f7e42db3d0b55ba4702d72eb77e286b0fa1d6f6ac941
