@@ -1,0 +1,4 @@
+---
+# defaults file for go
+
+go_user_dir: "{{ ansible_user_dir }}/.config/go"

@@ -1,0 +1,4 @@
+git_packages:
+  - go
+  - go-tools
+  - gcc-go

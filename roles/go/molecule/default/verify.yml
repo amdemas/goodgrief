@@ -1,0 +1,27 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  vars:
+    go_output: "1.16.5"
+  tasks:
+    - name: "go - execute go version to capture output"
+      command: "/usr/bin/go version"
+      register: go_version_output
+      changed_when: false
+
+    - name: "go - check go version output contains correct version string"
+      assert:
+        that:
+          - "go_output in go_version_output.stdout"
+
+    - name: "go - check that go config dir exists"
+      stat:
+        path: "/root/.config/go"
+      register: stat_result
+
+    - name: "go - test go config dir exists"
+      assert:
+        that:
+          - stat_result.stat.exists
