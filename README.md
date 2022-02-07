@@ -69,7 +69,7 @@ goodgrief -u
       <th align="left">Description</th>
     </tr>
   </thead>
-  <tbody>   
+  <tbody>
     <tr>
       <td><a href="roles/alacritty">alacritty</a></td>
       <td>Installs <a href="https://github.com/alacritty/alacritty">Alacritty</a>.</td>
@@ -103,8 +103,12 @@ goodgrief -u
       <td>Installs and configures the <a href="https://gnome.org/">Gnome</a> Desktop Environment.</td>
     </tr>
     <tr>
-      <td><a href="roles/lastpass">lastpass</a></td>
-      <td>Installs <a href="https://github.com/lastpass/lastpass-cli">lastpass-cli</a>.</td>
+      <td><a href="roles/go">Go</a></td>
+      <td>Installs and configures the <a href="https://go.dev/">Go</a> Language.</td>
+    </tr>
+    <tr>
+      <td><a href="roles/kube">Kubernetes</a></td>
+      <td>Installs and configures the <a href="https://kubernetes.io/">Kubectl</a> and <a href="https://minikube.sigs.k8s.io/docs/start/">minikube</a>.</td>
     </tr>
     <tr>
       <td><a href="roles/lightdm">lightdm</a></td>
@@ -131,12 +135,20 @@ goodgrief -u
       <td>Installs <a href="https://github.com/polybar/polybar">polybar</a>.</td>
     </tr>
     <tr>
+      <td><a href="roles/python">Python</a></td>
+      <td>Installs <a href="https://www.python.org/">Python</a> with Pipenv.</td>
+    </tr>
+    <tr>
       <td><a href="roles/rofi">rofi</a></td>
       <td>Installs <a href="https://github.com/davatorium/rofi">rofi</a>.</td>
     </tr>
     <tr>
       <td><a href="roles/ruby">ruby</a></td>
       <td>Installs <a href="https://github.com/rbenv/rbenv">rbenv to manage ruby environments</a>.</td>
+    </tr>
+    <tr>
+      <td><a href="roles/rust">Rust</a></td>
+      <td>Installs <a href="https://www.rust-lang.org/">rustup and cargo</a>.</td>
     </tr>
     <tr>
       <td><a href="roles/sxhkd">sxhkd</a></td>
