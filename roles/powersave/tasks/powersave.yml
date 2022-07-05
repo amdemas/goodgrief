@@ -1,6 +1,6 @@
 ---
 - name: install powersaving packages
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: '{{ item.state | default("present") }}'
   become: true
@@ -9,7 +9,7 @@
     - detect_sensors
 
 - name: enable powersaving services
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ item }}"
     enabled: true
   become: true

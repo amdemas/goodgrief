@@ -1,11 +1,12 @@
 ---
 - name: stat computer model
-  shell: "dmidecode -s system-product-name"
+  ansible.builtin.command: "dmidecode -s system-product-name"
   register: computerstat
+  when: setup_dell
   become: true
 
-- include_tasks: dell5520.yml
+- ansible.builtin.include_tasks: dell5520.yml
   when: computerstat.stdout.find('Precision 5520') != -1
 
-- include_tasks: dell5550.yml
+- ansible.builtin.include_tasks: dell5550.yml
   when: computerstat.stdout.find('Precision 5550') != -1

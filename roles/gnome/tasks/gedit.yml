@@ -1,24 +1,32 @@
 ---
+- name: check theme exists
+  stat:
+    path: "theme/{{ theme }}.xml"
+  register: theme_file
+
 - name: create style directory
-  file:
+  ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config/share/gedit/styles"
     state: directory
     mode: 0755
+  when: theme_file.stat.exists
 
 - name: copy configs to directory
-  copy:
+  ansible.builtin.copy:
     src: "theme/{{ theme }}.xml"
     dest: "{{ ansible_user_dir }}/.config/share/gedit/styles/"
     mode: preserve
+  when: theme_file.stat.exists
 
 - name: update Gedit theme
-  dconf:
+  ansible.builtin.dconf:
     key: "/org/gnome/gedit/preferences/editor/scheme"
     value: "'{{ theme }}-gedit'"
     state: present
+  when: theme_file.stat.exists
 
 - name: update Gedit font
-  dconf:
+  ansible.builtin.dconf:
     key: "/org/gnome/gedit/preferences/editor/editor-font"
     value: "'{{ font }} 14'"
     state: present

@@ -5,26 +5,26 @@
   hosts: all
   gather_facts: false
   tasks:
-      - name: "powersave - check tlp package status"
-        package:
-            name: "tlp"
-            state: "installed"
-        check_mode: yes
-        register: pkg_status
+    - name: "powersave - check tlp package status"
+      ansible.builtin.package:
+        name: "tlp"
+        state: "installed"
+      check_mode: true
+      register: pkg_status
 
-      - name: "powersave - test bspwm package is installed"
-        assert:
-            that:
-                - not pkg_status.changed
+    - name: "powersave - test tlp package is installed"
+      ansible.builtin.assert:
+        that:
+          - not pkg_status.changed
 
-      - name: "powersave - check powertop package status"
-        package:
-            name: "powertop"
-            state: "installed"
-        check_mode: yes
-        register: pkg_status
+    - name: "powersave - check powertop package status"
+      ansible.builtin.package:
+        name: "powertop"
+        state: "installed"
+      check_mode: true
+      register: pkg_status
 
-      - name: "powersave - test powertop package is installed"
-        assert:
-            that:
-                - not pkg_status.changed
+    - name: "powersave - test powertop package is installed"
+      ansible.builtin.assert:
+        that:
+          - not pkg_status.changed

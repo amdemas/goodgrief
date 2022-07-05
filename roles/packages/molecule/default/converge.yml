@@ -2,6 +2,6 @@
 - name: Converge
   hosts: all
   tasks:
-      - name: "Include packages"
-        include_role:
-            name: "packages"
+    - name: "Include packages"
+      include_role:
+        name: "packages"

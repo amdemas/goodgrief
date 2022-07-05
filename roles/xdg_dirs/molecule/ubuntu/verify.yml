@@ -14,23 +14,23 @@
       - { variable: "XDG_VIDEOS_DIR", directory: "$HOME/Videos" }
   tasks:
     - name: "xdg_dirs - check for user-dirs.dirs file"
-      stat:
+      ansible.builtin.stat:
         path: "/root/.config/user-dirs.dirs"
       register: stat_result
 
     - name: "xdg_dirs - test user-dirs.dirs file exists"
-      assert:
+      ansible.builtin.assert:
         that:
           - stat_result.stat.exists
 
     - name: "xdg_dirs - check for {{ item.directory }}"
-      stat:
+      ansible.builtin.stat:
         path: "{{ item.directory }}"
       register: stat_result
       loop: "{{ xdg_dirs }}"
 
     - name: "xdg_dirs - test {{ item.directory }} exists"
-      assert:
+      ansible.builtin.assert:
         that:
           - item.stat.exists
       loop: "{{ stat_result.results }}"

@@ -1,54 +1,92 @@
 ---
 - name: include distro-specific vars
-  include_vars: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
 - name: install gnome packages
-  include_role:
+  ansible.builtin.include_role:
     name: syspackage
   vars:
     os_packages: "{{ gnome_packages }}"
 
 - name: make sure destination for templates exists
-  file:
+  ansible.builtin.file:
     path: "{{ item.dest | dirname }}"
     state: directory
     mode: 0700
   with_items: "{{ gnome_files|default([]) }}"
 
 - name: create config templates in destination
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: preserve
   with_items: "{{ gnome_files|default([]) }}"
 
+- name: create theme directories
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.themes"
+    state: directory
+    mode: 0755
+
+- name: download themes
+  ansible.builtin.get_url:
+    url: "{{ item.url }}"
+    dest: "/tmp/{{ item.name }}.zip"
+    force: true
+  with_items: "{{ gnome_themes|default([]) }}"
+
+- name: create theme directory
+  ansible.builtin.file:
+    path: "/tmp/{{ item.name }}"
+    state: directory
+    mode: 0755
+  with_items: "{{ gnome_themes|default([]) }}"
+
+- name: unpack themes
+  ansible.builtin.unarchive:
+    src: "/tmp/{{ item.name }}.zip"
+    dest: "/tmp/{{ item.name }}"
+    remote_src: true
+    mode: 0755
+  with_items: "{{ gnome_themes|default([]) }}"
+
+- name: install themes
+  ansible.builtin.copy:
+    src: "/tmp/{{ item.name }}/{{ item.theme_folder }}"
+    dest: "{{ ansible_user_dir }}/.themes"
+    remote_src: true
+    mode: 0755
+  with_items: "{{ gnome_themes|default([]) }}"
+
 - name: create font directories
-  file:
+  ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.local/share/fonts/{{ item.name }}"
     state: directory
     mode: 0755
   with_items: "{{ gnome_fonts|default([]) }}"
 
 - name: download fonts
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ item.url }}"
     dest: "/tmp/{{ item.name }}.zip"
     force: true
   with_items: "{{ gnome_fonts|default([]) }}"
 
 - name: unpack and install fonts
-  unarchive:
+  ansible.builtin.unarchive:
     src: "/tmp/{{ item.name }}.zip"
     dest: "{{ ansible_user_dir }}/.local/share/fonts/{{ item.name }}"
     remote_src: true
+    mode: 0755
   with_items: "{{ gnome_fonts|default([]) }}"
   notify: refresh fonts
 
 - name: load Gnome extension information
-  include_tasks: get_extension_info.yml
+  ansible.builtin.include_tasks: get_extension_info.yml
   with_items: "{{ gnome_install_extensions }}"
 
-- include_tasks: install_extensions.yml
+- name: Install Gnome Extensions
+  ansible.builtin.include_tasks: install_extensions.yml
   vars:
     gnome_extension: "{{ item }}"
   loop: "{{ gnome_extensions_full }}"
@@ -62,4 +100,25 @@
   become: true
 
 - include_tasks: gedit.yml
-  when: "'Adwaita' not in {{ gnome_theme }}"
+  when: "'Adwaita' != theme|string"
+
+- name: verify profile picture
+  stat:
+    path: "/var/lib/AccountsService/icons/{{ ansible_user_id }}"
+  register: profile_picture
+
+- name: download profile picture
+  become: true
+  ansible.builtin.copy:
+    src: "{{ gnome_profile_path }}"
+    dest: /var/lib/AccountsService/icons/{{ ansible_user_id }}"
+    force: true
+  when: (profile_picture.stat.exists == true and profile_picture.stat.checksum != gnome_profile_checksum|string)
+
+- name: set profile picture
+  become: true
+  ansible.builtin.lineinfile:
+    path: "/var/lib/AccountsService/users/{{ ansible_user_id }}"
+    regexp: "^Icon="
+    line: "'Icon=/var/lib/AccountsService/icons/{{ ansible_user_id }}'"
+  ignore_errors: true

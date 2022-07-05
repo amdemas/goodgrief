@@ -11,6 +11,8 @@
       tags: bootstrap
     - role: alacritty
       tags: alacritty
+    - role: aws
+      tags: [aws, bootstrap]
     - role: chromium
       tags: chromium
     # Docker has issues, need to find a better way
@@ -18,6 +20,8 @@
     #   tags: docker
     - role: git
       tags: [git, bootstrap]
+    - role: go
+      tags: [go, bootstrap]
     - role: kube
       tags: [kube, bootstrap]
       become: true
@@ -34,10 +38,10 @@
       become: true
     - role: python
       tags: [python, boostrap]
-    - role: aws
-      tags: [aws, bootstrap]
     - role: ruby
       tags: [ruby, boostrap]
+    - role: rust
+      tags: [rust, boostrap]
     - role: taskwarrior
       tags: taskwarrior
     - role: tmux
@@ -55,45 +59,3 @@
   roles:
     - role: gnome
       tags: gnome
-
-- name: setup bspwm WM
-  hosts: bspwm
-  connection: local
-  roles:
-    - role: bspwm
-      tags: bspwm
-    - role: lightdm
-      tags: lightdm
-    - role: picom
-      tags: picom
-    - role: polybar
-      tags: polybar
-    - role: rofi
-      tags: rofi
-    - role: dunst
-      tags: dunst
-    - role: xorg
-      tags: xorg
-    - role: sxhkd
-      tags: sxhkd
-    - role: zathura
-      tags: zathura
-
-- name: setup xmonad WM
-  hosts: xmonad
-  connection: local
-  roles:
-    - role: xmonad
-      tags: xmonad
-    - role: lightdm
-      tags: lightdm
-    - role: picom
-      tags: picom
-    - role: rofi
-      tags: rofi
-    - role: dunst
-      tags: dunst
-    - role: xorg
-      tags: xorg
-    - role: zathura
-      tags: zathura

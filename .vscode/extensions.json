@@ -2,11 +2,10 @@
 {
     "recommendations": [
         "EditorConfig.EditorConfig",
-        "zbr.vscode-ansible",
+        "redhat.ansible",
         "redhat.vscode-yaml",
         "wholroyd.jinja",
         "bierner.github-markdown-preview",
         "donjayamanne.git-extension-pack",
-        "CoenraadS.bracket-pair-colorizer-2"
     ]
 }

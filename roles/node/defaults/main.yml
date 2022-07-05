@@ -2,14 +2,16 @@
 # defaults file for node
 
 node_install_packages:
-    - name: grunt
-      state: present
-    - name: replace
-      state: present
-    - name: yosay
-      state: present
+  - name: grunt
+    state: present
+  - name: replace
+    state: present
+  - name: yosay
+    state: present
 
+npm_dir: "{{ ansible_env.HOME }}/.config/npm"
 nvm_user: "{{ ansible_user_id }}"
 nvm_link_dir: "{{ ansible_env.HOME }}/.config/nvm"
 node_version: "13.12.0"
-nvm_script_version: "0.38.0"
+nvm_script_version: "0.39.1"
+nvm_checksum: sha256:fabc489b39a5e9c999c7cab4d281cdbbcbad10ec2f8b9a7f7144ad701b6bfdc7

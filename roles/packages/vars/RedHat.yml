@@ -1,20 +1,19 @@
 ---
 install_packages:
-    - name: util-linux-user
-    - name: curl
-    - name: wget
-    - name: zopfli
-    - name: rpm-build
-    - name: libevent-devel
-    - name: libxslt-devel
-    - name: libxml2-devel
-    - name: remmina
-    - name: hstr
-    - name: nscd
-    - name: python3-libselinux
-    - name: flameshot
-    - name: bottom
+  - name: util-linux-user
+  - name: curl
+  - name: wget
+  - name: zopfli
+  - name: rpm-build
+  - name: libevent-devel
+  - name: libxslt-devel
+  - name: libxml2-devel
+  - name: remmina
+  - name: hstr
+  - name: python3-libselinux
+  - name: flameshot
+  - name: bottom
 
 external_packages:
-    - repo: atim/bottom
-      state: enabled
+  - repo: atim/bottom
+    state: enabled

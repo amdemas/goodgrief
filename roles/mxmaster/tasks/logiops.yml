@@ -1,11 +1,11 @@
 ---
 - name: check if udev exists
-  stat:
+  ansible.builtin.stat:
     path: /usr/bin/udevadm
   register: udev
 
 - name: clone lastest (hidpp)
-  git:
+  ansible.builtin.git:
     repo: https://github.com/PixlOne/hidpp.git
     dest: "/tmp/hidpp"
     accept_hostkey: true
@@ -13,25 +13,25 @@
   register: hidpp
 
 - name: make build directory (hidpp) # noqa 503
-  file:
+  ansible.builtin.file:
     path: /tmp/hidpp/build
     state: directory
     mode: 0755
   when: hidpp.changed
 
 - name: run cmake build from sources (hidpp) # noqa 503 305
-  shell: cmake ..
+  ansible.builtin.shell: cmake ..
   args:
     chdir: "/tmp/hidpp/build"
   when: hidpp.changed
 
 - name: run make from sources (hidpp) # noqa 503
-  make:
+  ansible.builtin.make:
     chdir: "/tmp/hidpp/build"
   when: hidpp.changed
 
 - name: run make install from sources (hidpp) # noqa 503
-  make:
+  ansible.builtin.make:
     target: install
     chdir: "/tmp/hidpp/build"
   become: true
@@ -41,7 +41,7 @@
     - trigger udev
 
 - name: clone lastest (logiops) # noqa 503
-  git:
+  ansible.builtin.git:
     repo: https://github.com/PixlOne/logiops.git
     dest: "/tmp/logiops"
     update: true
@@ -50,32 +50,32 @@
   register: logiops
 
 - name: make build directory (logiops) # noqa 503
-  file:
+  ansible.builtin.file:
     path: /tmp/logiops/build
     state: directory
     mode: 0755
   when: logiops.changed
 
 - name: run cmake build from sources (logiops) # noqa 503 305
-  shell: cmake ..
+  ansible.builtin.shell: cmake ..
   args:
     chdir: "/tmp/logiops/build"
   when: logiops.changed
 
 - name: run make from sources (logiops) # noqa 503
-  make:
+  ansible.builtin.make:
     chdir: "/tmp/logiops/build"
   when: logiops.changed
 
 - name: run make install from sources (logiops) # noqa 503
-  make:
+  ansible.builtin.make:
     chdir: "/tmp/logiops/build"
     target: install
   become: true
   when: logiops.changed
 
 - name: copy logid.cfg to /etc/ # noqa 503
-  copy:
+  ansible.builtin.copy:
     src: logid.cfg
     dest: /etc/logid.cfg
     mode: preserve
@@ -84,7 +84,7 @@
     - reload logiops
 
 - name: clean up build
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: absent
   loop:

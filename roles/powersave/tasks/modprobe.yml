@@ -1,25 +1,27 @@
 ---
 - name: intel graphics power saving
-  copy:
+  ansible.builtin.copy:
     content: |
       options i915 modeset=1 i915_enable_rc6=1 i915_enable_fbc=1 lvds_downclock=1
     dest: /etc/modprobe.d/i915.conf
-    mode: "0644"
+    mode: 0644
     owner: root
     group: root
   become: true
 
 - name: intel wireless power saving
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/modprobe.d/iwlwifi.conf
     create: true
+    mode: 0644
     line: "options iwlwifi power_save=Y power_level=5 iwlmvm power_scheme=3"
   become: true
 
 - name: intel sound power saving
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/modprobe.d/snd_hda_intel.conf
     create: true
+    mode: 0644
     line: "options snd_hda_intel power_save_controlle=Y power_save=1"
   become: true
   notify: Update Grub and Initramfs

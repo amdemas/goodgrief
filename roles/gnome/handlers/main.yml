@@ -2,4 +2,4 @@
 # handlers file for gnome
 
 - name: refresh fonts
-  command: fc-cache -fv
+  ansible.builtin.command: fc-cache -fv

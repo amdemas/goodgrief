@@ -1,26 +1,26 @@
 ---
 - name: Deploy Grub Flags
-  replace:
+  ansible.builtin.replace:
     path: /etc/default/grub
     regexp: '^(GRUB_CMDLINE_LINUX=(?:(?![" ]{{ item.option | regex_escape }}=).)*)(?:[" ]{{ item.option | regex_escape }}=\S+)?(.*")$'
     replace: '\1 {{ item.option }}={{ item.value }}\2'
     backup: true
   with_items:
-    - {option: drm.debug, value: 0}
-    - {option: drm.vblankoffdelay, value: 1}
-    - {option: mmc_mod.use_blk_mq, value: 1}
-    - {option: nmi_watchdog, value: 0}
-    - {option: pcie_aspm, value: force}
-    - {option: pcie_aspm.policy, value: powersupersave}
-    - {option: scsi_mod.use_blk_mq, value: 1}
-    - {option: mem_sleep_default, value: deep}
+    - { option: drm.debug, value: 0 }
+    - { option: drm.vblankoffdelay, value: 1 }
+    - { option: mmc_mod.use_blk_mq, value: 1 }
+    - { option: nmi_watchdog, value: 0 }
+    - { option: pcie_aspm, value: force }
+    - { option: pcie_aspm.policy, value: powersupersave }
+    - { option: scsi_mod.use_blk_mq, value: 1 }
+    - { option: mem_sleep_default, value: deep }
   register: grub_setup
   become: true
 
 - name: set options for Dell laptop
-  copy:
+  ansible.builtin.copy:
     content: |
-        options dell-smm-hwmon ignore_dmi=1
+      options dell-smm-hwmon ignore_dmi=1
     dest: /etc/modprobe.d/dell_5540.conf
     mode: "0644"
     owner: root

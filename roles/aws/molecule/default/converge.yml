@@ -1,5 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-      - role: aws
+  tasks:
+    - name: "Include aws"
+      include_role:
+        name: "aws"

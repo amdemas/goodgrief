@@ -1,40 +1,35 @@
 Powersave:
-    ☐ Fix powersave when doing detect_sensors and dracut in docker
-
-Gnome:
-    ☐ Fix when doing dracut in docker
+    ☐ Issues with editing mounts
 
 Docker:
-    ☐ Its docker...
+    ☐ Can not seem to get this to work in molecule for now.
 
-Xmonad:
-    ☐ Look into setting up autorandr and have the config kept up to date
+Gnome:
+    ☐ Fails Idempotence test, must update gnome_shell_extension to get the current value to compare
+
+Ruby:
+    ☐  Fails installing current version, need to validate that version is still needed. (2.7.2)
 
 Tested:
     ✔ aws
     ✔ alacritty
-    ☐ bspwm
-    ☐ chromium
-    ☐ docker
-    ☐ dunst
+    ✔ chromium
+    ✘ docker
     ✔ git
-    ☐ gnome
-    ☐ lightdm
+    ✘ gnome
+    ✔ go
+    ✔ kube
     ✔ mxmaster
-    ☐ node
-    ☐ packages
-    ☐ picom
-    ☐ polybar
-    ☐ powersave
-    ☐ python 
-    ☐ rofi
-    ☐ ruby
-    ☐ sxhkd
+    ✔ node
+    ✔ packages
+    ✘ powersave
+    ✔ python
+    ✘ ruby
+    ✔ rust
+    ✔ syspackage
     ✔ taskwarrior
     ✔ tmux
     ✔ vim
-    ☐ vscode
-    ☐ xmonad
-    ☐ xdg_dirs
-    ☐ xorg
+    ✔ vscode
+    ✔ xdg_dirs
     ✔ zsh

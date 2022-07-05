@@ -1,19 +1,71 @@
 ---
-- include_tasks: powersave.yml
+- ansible.builtin.include_tasks: powersave.yml
   when: install_powersave
 
-- include_tasks: tlp.yml
+- ansible.builtin.include_tasks: tlp.yml
   when: install_powersave
 
-- include_tasks: dell.yml
+- ansible.builtin.include_tasks: dell.yml
   when: install_powersave
 
 - name: stat computer cpu
-  shell: "dmidecode -s processor-manufacturer"
+  ansible.builtin.command: "dmidecode -s processor-manufacturer"
   register: computercpu
+  when: install_powersave
   become: true
 
-- include_tasks: modprobe.yml
+- ansible.builtin.include_tasks: modprobe.yml
+  when: ("'Intel' in computercpu.stat.stdout" and install_powersave)
+
+- name: get mounts from /etc/mtab
+  ansible.builtin.command: cat /etc/mtab
+  changed_when: false
+  register: mount_options
+
+- name: ensure fstab uses noatime
+  ansible.builtin.mount:
+    path: "{{ item.split(' ')[1] }}"
+    state: mounted
+    fstype: "{{ item.split(' ')[2] }}"
+    src: "{{ item.split(' ')[0] }}"
+    opts: "{{ item.split(' ')[3].split(',') | union(['noatime']) | unique | join(',') }}"
+  with_items: "{{ mount_options.stdout_lines }}"
   when:
-     - "'Intel' in computercpu.stdout"
-     - install_powersave
+    - item.split(" ")[1] in  ["/", "/boot", "/home"]
+  become: true
+
+- name: get mounts from /etc/mtab
+  ansible.builtin.command: cat /etc/mtab
+  changed_when: false
+  register: mount_options
+
+- name: Ensure fstab uses nodiratime
+  ansible.builtin.mount:
+    path: "{{ item.split(' ')[1] }}"
+    state: mounted
+    fstype: "{{ item.split(' ')[2] }}"
+    src: "{{ item.split(' ')[0] }}"
+    opts: "{{ item.split(' ')[3].split(',') | union(['nodiratime']) | unique | join(',') }}"
+  with_items: "{{ mount_options.stdout_lines }}"
+  when:
+    - item.split(" ")[1] in  ["/", "/boot", "/home"]
+  become: true
+
+- name: discard Trim Enable
+  ansible.builtin.systemd:
+    name: fstrim.timer
+    state: started
+    enabled: true
+    daemon_reload: true
+  become: true
+
+- name: load IO Schedulers at boot
+  ansible.builtin.blockinfile:
+    path: /etc/modules-load.d/iosched.conf
+    create: true
+    block: |
+      bfq
+      mq-deadline
+      kyber-iosched
+    mode: 644
+  become: true

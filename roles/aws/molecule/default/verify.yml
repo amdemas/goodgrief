@@ -4,21 +4,21 @@
   gather_facts: true
   tasks:
     - name: gather package facts
-      package_facts:
+      ansible.builtin.package_facts:
         manager: auto
 
     - name: aws - test aws-cli package is installed
-      assert:
+      ansible.builtin.assert:
         that: "'{{ item }}' in ansible_facts.packages"
       with_items:
         - awscli
 
     - name: "aws - check that aws directory exists"
-      stat:
+      ansible.builtin.stat:
         path: "/root/.config/aws"
       register: stat_result
 
     - name: "aws - test aws directory exists"
-      assert:
+      ansible.builtin.assert:
         that:
           - stat_result.stat.exists

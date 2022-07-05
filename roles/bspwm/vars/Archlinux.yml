@@ -1,5 +1,0 @@
----
-bspwm_packages:
-    - name: bspwm
-    - name: ttf-font-awesome
-    - name: feh

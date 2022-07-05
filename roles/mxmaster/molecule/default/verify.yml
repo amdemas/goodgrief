@@ -4,7 +4,7 @@
   gather_facts: false
   tasks:
     - name: mxmaster - check logiops service
-      systemd:
+      ansible.builtin.systemd:
         name: logid.service
         daemon_reload: yes
         enabled: yes
@@ -12,26 +12,26 @@
       register: pkg_status
 
     - name: mxmaster - test logiops service is installed
-      assert:
+      ansible.builtin.assert:
         that:
           - not pkg_status.changed
 
     - name: mxmaster - check that logid.cfg exists
-      stat:
+      ansible.builtin.stat:
         path: /etc/logid.cfg
       register: stat_result
 
     - name: mxmaster - test logid.cfg exists
-      assert:
+      ansible.builtin.assert:
         that:
           - stat_result.stat.exists
 
     - name: mxmaster - check that build directory doesnt exist
-      stat:
+      ansible.builtin.stat:
         path: /tmp/hidpp/build
       register: stat_result
 
     - name: mxmaster - test build directory doesnt exist
-      assert:
+      ansible.builtin.assert:
         that:
           - not stat_result.stat.exists

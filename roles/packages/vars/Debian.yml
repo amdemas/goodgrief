@@ -1,16 +1,15 @@
 ---
 install_packages:
-    - name: curl
-    - name: wget
-    - name: zopfli
-    - name: libevent-dev
-    - name: libxslt-dev
-    - name: libxml2-dev
-    - name: remmina
-    - name: nscd
-    - name: flameshot
-    - name: bottom
+  - name: curl
+  - name: wget
+  - name: zopfli
+  - name: libevent-dev
+  - name: libxslt-dev
+  - name: libxml2-dev
+  - name: remmina
+  - name: flameshot
+  - name: bottom
 
 external_packages:
-    - repo: ppa:ultradvorka/ppa
-      state: present
+  - repo: ppa:ultradvorka/ppa
+    state: present

@@ -1,0 +1,15 @@
+---
+- name: Verify
+  hosts: all
+  vars:
+    rust_output: "1.24.3"
+  tasks:
+    - name: "rust - execute rustup version to capture output"
+      ansible.builtin.command: "{{ ansible_user_dir }}/.local/share/cargo/bin/rustup --version"
+      register: rust_version_output
+      changed_when: false
+
+    - name: "rust - check rustup version output contains correct version string"
+      ansible.builtin.assert:
+        that:
+          - "rust_output in rust_version_output.stdout"

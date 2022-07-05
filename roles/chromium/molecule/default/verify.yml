@@ -4,13 +4,13 @@
   gather_facts: false
   tasks:
     - name: "chromium - check chromium package status"
-      package:
+      ansible.builtin.package:
         name: "chromium"
         state: "installed"
       check_mode: true
       register: pkg_status
 
     - name: "chromium - test chromium package is installed"
-      assert:
+      ansible.builtin.assert:
         that:
           - not pkg_status.changed

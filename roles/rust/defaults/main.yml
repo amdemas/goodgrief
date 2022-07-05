@@ -1,0 +1,5 @@
+---
+# defaults file for rust
+
+cargo_user_dir: ".local/share/cargo"
+rust_user_dir: ".local/share/rustup"

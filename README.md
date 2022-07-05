@@ -26,13 +26,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/b
 The profiles determine the DE to setup and can be applied by setting the `-p` variable before the bootstraping commands. The definition of these profiles can be found in the `host_vars` directory. If no profile is specified, the [gnome profile](host_vars/gnome.yml) will be applied. The following example shows how to use this variable:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/bin/goodgrief) -p bspwm"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/bin/goodgrief) -p zc"
 ```
 
 It is also possible to run only specifc parts by using the `-t` options. For example, the following command will only run the bootstrap tasks, which will prepare the repositories and install some required packages:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/bin/goodgrief) -p bspwm -t alacritty "
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/bin/goodgrief) -p rust -t alacritty "
 ```
 
 ### Running the playbook manually
@@ -71,31 +71,23 @@ goodgrief -u
   </thead>
   <tbody>
     <tr>
-      <td><a href="roles/alacritty">alacritty</a></td>
+      <td><a href="roles/alacritty">Alacritty</a></td>
       <td>Installs <a href="https://github.com/alacritty/alacritty">Alacritty</a>.</td>
     </tr>
     <tr>
-      <td><a href="roles/aws">aws</a></td>
+      <td><a href="roles/aws">AWS</a></td>
       <td>Installs <a href="https://github.com/aws/aws-cli">aws-cli</a>.</td>
     </tr>
     <tr>
-      <td><a href="roles/bspwm">bspwm</a></td>
-      <td>Installs <a href="https://github.com/baskerville/bspwm">bspwm</a> and set up the wallpaper by using <a href="https://github.com/derf/feh">feh</a>.</td>
-    </tr>
-    <tr>
-      <td><a href="roles/chromium">chromium</a></td>
+      <td><a href="roles/chromium">Chromium</a></td>
       <td>Installs <a href="https://www.chromium.org/">Chromium</a>.</td>
     </tr>
     <tr>
-      <td><a href="roles/docker">docker</a></td>
+      <td><a href="roles/docker">Docker</a></td>
       <td>Manages the installation of <a href="https://docker.io/">Docker</a>.</td>
     </tr>
     <tr>
-      <td><a href="roles/dunst">dunst</a></td>
-      <td>Configures system notifications to use <a href="https://github.com/dunst-project/dunst">dunst</a>. The flag <a href="chrome://flags/#enable-native-notifications">enable-native-notifications</a> is required to get native notifications with Chromium.</td>
-    </tr>
-    <tr>
-      <td><a href="roles/git">git</a></td>
+      <td><a href="roles/git">Git</a></td>
       <td>Manages the installation of <a href="https://git-scm.com/">Git</a>.</td>
     </tr>
     <tr>
@@ -111,39 +103,23 @@ goodgrief -u
       <td>Installs and configures the <a href="https://kubernetes.io/">Kubectl</a> and <a href="https://minikube.sigs.k8s.io/docs/start/">minikube</a>.</td>
     </tr>
     <tr>
-      <td><a href="roles/lightdm">lightdm</a></td>
-      <td>Installs <a href="https://github.com/canonical/lightdm">lightdm</a> and the <a href="https://github.com/Antergos/web-greeter">lightdm-webkit2</a> greeter. <b>Arch Only</b></td>
-    </tr>
-    <tr>
       <td><a href="roles/mxmaster">mxmaster</a></td>
       <td>Installs and configures <a href="https://github.com/PixlOne/logiops">logiops</a> and <a href="https://github.com/pwr-Solaar/Solaar">solaar</a>.</td>
     </tr>
     <tr>
-      <td><a href="roles/node">node</a></td>
+      <td><a href="roles/node">Node</a></td>
       <td>Installs and configures node using <a href="https://github.com/nvm-sh/nvm">NVM</a>.</td>
     </tr>
     <tr>
-      <td><a href="roles/packages">packages</a></td>
+      <td><a href="roles/packages">Packages</a></td>
       <td>Installs various cli tools and applications.</td>
-    </tr>
-    <tr>
-      <td><a href="roles/picom">picom</a></td>
-      <td>Installs <a href="https://github.com/yshui/picom">picom</a> compositor.</td>
-    </tr>
-    <tr>
-      <td><a href="roles/polybar">polybar</a></td>
-      <td>Installs <a href="https://github.com/polybar/polybar">polybar</a>.</td>
     </tr>
     <tr>
       <td><a href="roles/python">Python</a></td>
       <td>Installs <a href="https://www.python.org/">Python</a> with Pipenv.</td>
     </tr>
     <tr>
-      <td><a href="roles/rofi">rofi</a></td>
-      <td>Installs <a href="https://github.com/davatorium/rofi">rofi</a>.</td>
-    </tr>
-    <tr>
-      <td><a href="roles/ruby">ruby</a></td>
+      <td><a href="roles/ruby">Ruby</a></td>
       <td>Installs <a href="https://github.com/rbenv/rbenv">rbenv to manage ruby environments</a>.</td>
     </tr>
     <tr>
@@ -151,11 +127,7 @@ goodgrief -u
       <td>Installs <a href="https://www.rust-lang.org/">rustup and cargo</a>.</td>
     </tr>
     <tr>
-      <td><a href="roles/sxhkd">sxhkd</a></td>
-      <td>Installs <a href="https://github.com/baskerville/sxhkd">sxhkd</a> and sets key bindings.</td>
-    </tr>
-    <tr>
-      <td><a href="roles/taskwarrior">taskwarrior</a></td>
+      <td><a href="roles/taskwarrior">Taskwarrior</a></td>
       <td>Installs <a href="https://taskwarrior.org/">taskwarrior</a>.</td>
     </tr>
     <tr>
@@ -169,10 +141,6 @@ goodgrief -u
     <tr>
       <td><a href="roles/vscode">vscode</a></td>
       <td>Installs <a href="https://code.visualstudio.com/">VSCode</a>. All settings are synced with <a href="https://code.visualstudio.com/docs/editor/settings-sync">Settings Sync</a>.</td>
-    </tr>
-    <tr>
-      <td><a href="roles/xorg">xorg</a></td>
-      <td>Installs <a href="https://www.x.org/wiki">Xorg</a>.</td>
     </tr>
     <tr>
       <td><a href="roles/zsh">zsh</a></td>
@@ -211,6 +179,6 @@ $ molecule test -s {default,arch,ubuntu}
 
 Alot of this is pulled from other peoples work. Thanks to everyone for their creativity!
 
-## Credits
+## License
 
 This project is under the GNU General Public License v3.0. Check [LICENSE](https://github.com/amdemas/goodgrief/blob/main/LICENSE) file to see the full text full text.

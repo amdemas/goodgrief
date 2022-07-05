@@ -6,10 +6,10 @@ dependency:
 driver:
   name: docker
 lint: |
-  ansible-lint
+  ansible-lint --exclude ../../../../.ansible/roles
 platforms:
   - name: fedora
-    image: geerlingguy/docker-fedora35-ansible:latest
+    image: geerlingguy/docker-fedora36-ansible:latest
 provisioner:
   name: ansible
 verifier:

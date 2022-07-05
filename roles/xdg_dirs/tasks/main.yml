@@ -1,12 +1,13 @@
 - name: create XDG user directories configuration file
-  lineinfile:
+  ansible.builtin.lineinfile:
     line: '{{ item.variable }}="{{ item.directory }}"'
     path: "$HOME/.config/user-dirs.dirs"
-    create: True
+    create: true
   with_items: "{{ xdg_dirs }}"
 
 - name: create configuration directory
-  file:
+  ansible.builtin.file:
     path: "{{ item.directory }}"
     state: directory
+    mode: 0755
   with_items: "{{ xdg_dirs }}"

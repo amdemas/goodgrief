@@ -7,5 +7,6 @@ roles:
   - src: anthony25.tlp
   - src: jaredhocutt.google_chrome
   - src: gantsign.visual-studio-code
+  - src: hurricanehrndz.rustup
   # - src: robertdebock.rpmfusion
   # - src: zaxos.glances-ansible-role

@@ -3,7 +3,7 @@
 
 # Installation and setup
 - name: make sure zsh is installed
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   with_items:
@@ -13,14 +13,14 @@
   become: true
 
 - name: copy zshrc configs
-  copy:
+  ansible.builtin.copy:
     src: zshrc
     dest: "{{ ansible_user_dir }}/.zshrc"
     force: true
     mode: preserve
 
 - name: clone latest zplug
-  git:
+  ansible.builtin.git:
     repo: "https://github.com/zplug/zplug.git"
     dest: "{{ ansible_user_dir }}/.local/share/zplug"
     accept_hostkey: true
@@ -28,7 +28,7 @@
     force: true
 
 - name: changing default shell to zsh
-  user:
+  ansible.builtin.user:
     name: "{{ ansible_user_id }}"
     shell: /usr/bin/zsh
     state: present

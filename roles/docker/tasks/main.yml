@@ -1,15 +1,16 @@
 ---
-- block:
-      - name: Setup Docker
-        include_role:
-            name: geerlingguy.docker
-        vars:
-            docker_edition: "{{ user_docker_edition }}"
-            docker_package: "{{ user_docker_package }}"
-            docker_package_state: "{{ user_docker_package_state }}"
-            docker_service_state: "{{ user_docker_service_state }}"
-            docker_service_enabled: "{{ user_docker_service_enabled }}"
-            docker_restart_handler_state: "{{ user_docker_restart_handler_state }}"
-            docker_install_compose: "{{ user_docker_install_compose }}"
-            docker_users: "{{ user_docker_users }}"
-  become: yes
+- name: setup Docker
+  block:
+    - name: run Docker role
+      ansible.builtin.include_role:
+        name: geerlingguy.docker
+      vars:
+        docker_edition: "{{ user_docker_edition }}"
+        docker_package: "{{ user_docker_package }}"
+        docker_package_state: "{{ user_docker_package_state }}"
+        docker_service_state: "{{ user_docker_service_state }}"
+        docker_service_enabled: "{{ user_docker_service_enabled }}"
+        docker_restart_handler_state: "{{ user_docker_restart_handler_state }}"
+        docker_install_compose: "{{ user_docker_install_compose }}"
+        docker_users: "{{ user_docker_users }}"
+  become: true

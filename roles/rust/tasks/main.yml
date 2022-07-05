@@ -1,0 +1,10 @@
+---
+- block:
+    - name: Setup Rust
+      ansible.builtin.include_role:
+        name: hurricanehrndz.rustup
+      vars:
+        rustup_user: "{{ ansible_user_id }}"
+        rustup_home_suffix: "{{ rust_user_dir }}"
+        rustup_cargo_home_suffix: "{{ cargo_user_dir }}"
+        rustup_configure_shell: false

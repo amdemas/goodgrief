@@ -2,8 +2,9 @@
 - name: Converge
   hosts: all
   tasks:
-      - name: "Include powersave"
-        include_role:
-            name: "powersave"
-        vars:
-            install_powersave: true
+    - name: run packages for rpm fusion
+      ansible.builtin.include_role:
+        name: packages
+    - name: include powersave
+      ansible.builtin.include_role:
+        name: powersave

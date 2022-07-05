@@ -1,24 +1,24 @@
 ---
 - name: download pyenv
-  get_url:
+  ansible.builtin.get_url:
     url: https://pyenv.run
     dest: "{{ ansible_user_dir }}/pyenv.sh"
     mode: a+x
 
 - name: install pyenv
-  shell: "{{ ansible_user_dir }}/pyenv.sh"
+  ansible.builtin.command: "{{ ansible_user_dir }}/pyenv.sh"
   environment:
     PYENV_ROOT: "{{ pyenv_root }}"
   args:
     creates: "{{ pyenv_root }}"
 
-- name: remove temp pyenv installer
-  file:
-    path: "{{ ansible_user_dir }}/pyenv.sh"
-    state: absent
+# - name: remove temp pyenv installer
+#   file:
+#     path: "{{ ansible_user_dir }}/pyenv.sh"
+#     state: absent
 
 - name: install pyenv versions
-  shell:
+  ansible.builtin.shell:
     cmd: 'eval "$({{ pyenv_root }}/bin/pyenv init -)" && {{ pyenv_root }}/bin/pyenv install {{ item }}'
     creates: "{{ pyenv_root }}/versions/{{ item }}"
   with_items: "{{ pyenv_versions }}"
@@ -29,7 +29,7 @@
     LDFLAGS: "-L/usr/lib64"
 
 - name: ensure pip packages are installed for pyenv versions.
-  pip:
+  ansible.builtin.pip:
     name: "{{ item[1].name | default(item[1]) }}"
     version: "{{ item[1].version | default(omit) }}"
     virtualenv: "{{ item[1].virtualenv | default(omit) }}"

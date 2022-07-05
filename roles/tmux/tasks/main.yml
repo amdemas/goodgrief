@@ -1,29 +1,28 @@
 ---
 - name: install needed system packages
-  package:
+  ansible.builtin.package:
     name: tmux
     state: present
-  become: yes
+  become: true
 
 - name: make sure destination for templates exists
-  file:
+  ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config/tmux"
     state: directory
     mode: 0755
 
 - name: copy configs to directory
-  copy:
+  ansible.builtin.copy:
     src: "{{ role_path }}/files/tmux.conf"
     dest: "{{ ansible_user_dir }}/.config/tmux/"
     mode: preserve
 
 - name: install Tmux Plugin Manager
-  git:
+  ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm
     dest: "{{ ansible_user_dir }}/.tmux/plugins/tpm"
     version: master
-
 # - name: load tpm and install plugins
-#   command: tmux source {{ ansible_user_dir }}/.config/tmux.conf && ~/.tmux/plugins/tpm/bin/install_plugins
-#   ignore_errors: yes
+#   ansible.builtin.command: tmux source {{ ansible_user_dir }}/.config/tmux.conf && ~/.tmux/plugins/tpm/bin/install_plugins
+#   ignore_errors: true
 #   when: true

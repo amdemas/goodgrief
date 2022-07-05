@@ -1,9 +1,18 @@
 ---
 gnome_shell_version: "40.0"
 
-gnome_theme: "Adwaita-dark"
-
 gnome_extension_path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions"
+
+gnome_profile_path: "/{{ ansible_user_dir }}/.config/dotfiles/assets/profile.jpg"
+
+gnome_profile_checksum: "aebfa46486ad50c6ccfa0ba5e326c921"
+
+gnome_background: "'file:///{{ ansible_user_dir }}/.config/dotfiles/assets/wallpaper.jpg'"
+
+gnome_themes:
+  - url: https://github.com/ZorinOS/zorin-desktop-themes/archive/refs/tags/3.4.3.zip
+    name: "zorin-desktop-themes-3.4.3"
+    theme_folder: "zorin-desktop-themes-3.4.3/ZorinBlue-Dark"
 
 gnome_fonts:
   - url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip"
@@ -62,10 +71,10 @@ gnome_config_gsettings:
     value: "'Cantarell 11'"
   - schema: org.gnome.desktop.interface
     key: icon-theme
-    value: "'{{ gnome_theme }}'"
+    value: "'{{ theme }}'"
   - schema: org.gnome.desktop.interface
     key: gtk-theme
-    value: "'{{ gnome_theme }}'"
+    value: "'{{ theme }}'"
   - schema: org.gnome.desktop.interface
     key: monospace-font-name
     value: "'{{ font }} 14'"
@@ -80,10 +89,10 @@ gnome_config_gsettings:
     value: "true"
   - schema: org.gnome.desktop.wm.preferences
     key: theme
-    value: "'{{ gnome_theme }}'"
+    value: "'{{ theme }}'"
   - schema: org.gnome.nautilus.preferences
     key: default-folder-viewer
-    value: "'icon-view'"
+    value: "'list-view'"
   - schema: org.gnome.nautilus.window-state
     key: maximized
     value: "true"
@@ -116,40 +125,42 @@ gnome_config_gsettings:
     value: "true"
   - schema: org.gnome.shell
     key: favorite-apps
-    value: '["chromium-browser.desktop", "com.gexperts.Tilix.desktop", "org.gnome.Nautilus.desktop", "code.desktop", "org.gnome.Software.desktop"]'
+    value: '["chromium-browser.desktop", "org.gnome.Terminal.desktop", "org.gnome.Nautilus.desktop", "code.desktop", "org.gnome.Software.desktop"]'
   - schema: org.gnome.desktop.background
     key: picture-uri
-    value: "'file:///{{ ansible_user_dir }}/.config/dotfiles/assets/wallpaper2.jpg'"
+    value: "{{ gnome_background }}"
+# - schema: org.gnome.terminal.legacy.profiles:.:b1dcc9dd-5262-4d8d-a863-c897e6d979b9
+#   key: audible-bell
+#   value: "true"
+# - schema: org.gnome.terminal.legacy.profiles:.:b1dcc9dd-5262-4d8d-a863-c897e6d979b9
+#   key: font
+#   value: "{{ font }} 18"
+# - schema: org.gnome.terminal.legacy.profiles:.:b1dcc9dd-5262-4d8d-a863-c897e6d979b9
+#   key: use-system-font
+#   value: "false"
+# - schema: org.gnome.terminal.legacy.profiles:.:b1dcc9dd-5262-4d8d-a863-c897e6d979b9
+#   key: use-theme-colors
+#   value: "true"
+# - schema: org.gnome.terminal.legacy.profiles:.:b1dcc9dd-5262-4d8d-a863-c897e6d979b9
+#   key: visible-name
+#   value: "Default"
 
 gnome_install_extensions:
-  # impatience
-  - id: 277
-    configs:
-      - schema: org.gnome.shell.extensions.net.gfxmonk.impatience
-        key: speed-factor
-        value: "0.25"
-    state: "present"
-  # stealmyfocus
-  - id: 234
-    state: "present"
-  # User Themes
-  - id: 19
-    configs:
-      - schema: org.gnome.shell.extensions.user-theme
-        key: name
-        value: "'{{ gnome_theme }}'"
   # launch new instance
   - id: 600
-  # Panel OSD
-  - id: 708
-    configs:
-      - schema: org.gnome.shell.extensions.panel-osd
-        key: force-expand
-        value: "true"
-  # gsconnect
-  - id: 1319
-  # Volume Mixer
-  - id: 858
+    state: "present"
+  # colorful battery indicator
+  - id: 4817
+    state: "present"
+  # NoAnnoyance v2
+  - id: 2182
+    state: "present"
+  # Espresso
+  - id: 4135
+    state: "present"
+  # Sound Input & Output Device Chooser
+  - id: 906
+    state: "present"
   # trayIconsReloaded
   - id: 2890
     configs:
@@ -161,81 +172,15 @@ gnome_install_extensions:
         value: "25"
       - schema: org.gnome.shell.extensions.trayIconsReloaded
         key: icons-limit
-        value: "7"
+        value: "4"
       - schema: org.gnome.shell.extensions.trayIconsReloaded
         key: tray-margin-left
         value: "4"
-  # Blur my Shell
-  - id: 3193
-  # # Dash to Dock
-  # - id: 307
-  #   configs:
-  #       - schema: org.gnome.shell.extensions.dash-to-dock
-  #         key: custom-theme-shrink
-  #         value: "false"
-  #       - schema: org.gnome.shell.extensions.dash-to-dock
-  #         key: dash-max-icon-size
-  #         value: "48"
-  #       - schema: org.gnome.shell.extensions.dash-to-dock
-  #         key: extend-height
-  #         value: "false"
-  #       - schema: org.gnome.shell.extensions.dash-to-dock
-  #         key: show-trash
-  #         value: "false"
-  #       - schema: org.gnome.shell.extensions.dash-to-dock
-  #         key: multi-monitor
-  #         value: "false"
-  #       - schema: org.gnome.shell.extensions.dash-to-dock
-  #         key: preferred-monitor
-  #         value: "0"
-  #       - schema: org.gnome.shell.extensions.dash-to-dock
-  #         key: running-indicator-style
-  #         value: "'DOTS'"
-  # # system-monitor
-  # - id: 120
-  #   configs:
-  #     - schema: org.gnome.shell.extensions.system-monitor
-  #       key: cpu-graph-width
-  #       value: "63"
-  #     - schema: org.gnome.shell.extensions.system-monitor
-  #       key: cpu-show-text
-  #       value: "false"
-  #     - schema: org.gnome.shell.extensions.system-monitor
-  #       key: fan-display
-  #       value: "true"
-  #     - schema: org.gnome.shell.extensions.system-monitor
-  #       key: fan-sensor-file
-  #       value: "/sys/class/hwmon/hwmon5/fan1_input"
-  #     - schema: org.gnome.shell.extensions.system-monitor
-  #       key: fan-show-text
-  #       value: "false"
-  #     - schema: org.gnome.shell.extensions.system-monitor
-  #       key: fan-style
-  #       value: "'digit'"
-  #     - schema: org.gnome.shell.extensions.system-monitor
-  #       key: icon-display
-  #       value: "false"
-  #     - schema: org.gnome.shell.extensions.system-monitor
-  #       key: memory-graph-width
-  #       value: "63"
-  #     - schema: org.gnome.shell.extensions.system-monitor
-  #       key: memory-show-text
-  #       value: "false"
-  #     - schema: org.gnome.shell.extensions.system-monitor
-  #       key: net-graph-width
-  #       value: "63"
-  #     - schema: org.gnome.shell.extensions.system-monitor
-  #       key: net-show-text
-  #       value: "false"
-  # # cpupower
-  # - id: 945
-  #   configs:
-  #     - schema: org.gnome.shell.extensions.cpupower
-  #       key: profiles
-  #       value: "[(0, 10, false, 'Energy Saver', '392760804'), (0, 30, false, 'Quiet', '3277198807'), (20, 80, true, 'Multimedia', '2856613468'), (50, 100, true, 'High Performance', '2676484404')]"
-  #     - schema: org.gnome.shell.extensions.cpupower
-  #       key: show-freq-in-taskbar
-  #       value: "true"
-  #     - schema: org.gnome.shell.extensions.cpupower
-  #       key: show-arrow-in-taskbar
-  #       value: "false"
+    state: "present"
+  # User Themes
+  - id: 19
+    configs:
+      - schema: org.gnome.shell.extensions.user-theme
+        key: name
+        value: "'{{ theme }}'"
+    state: "present"

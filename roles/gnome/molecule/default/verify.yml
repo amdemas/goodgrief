@@ -3,14 +3,14 @@
   hosts: all
   gather_facts: false
   tasks:
-      - name: "gnome - check gnome package status"
-        package:
-            name: "gnome-shell"
-            state: "installed"
-        check_mode: yes
-        register: pkg_status
+    - name: "gnome - check gnome package status"
+      ansible.builtin.package:
+        name: "gnome-shell"
+        state: "installed"
+      check_mode: true
+      register: pkg_status
 
-      - name: "gnome - test gnome package is installed"
-        assert:
-            that:
-                - not pkg_status.changed
+    - name: "gnome - test gnome package is installed"
+      ansible.builtin.assert:
+        that:
+          - not pkg_status.changed

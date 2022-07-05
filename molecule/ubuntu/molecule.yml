@@ -7,7 +7,7 @@ driver:
   name: docker
 platforms:
   - name: ubuntu
-    image: geerlingguy/docker-ubuntu2004-ansible:latest
+    image: geerlingguy/docker-ubuntu2204-ansible:latest
     # dockerfile: Dockerfile.j2
     # capabilities:
     #   - SYS_ADMIN

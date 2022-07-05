@@ -1,5 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-      - role: vscode
+  tasks:
+    - name: "Include vscode"
+      include_role:
+        name: "vscode"

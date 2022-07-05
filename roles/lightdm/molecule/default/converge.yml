@@ -1,9 +1,0 @@
----
-- name: Converge
-  hosts: all
-  tasks:
-      - name: "Include lightdm"
-        include_role:
-            name: "lightdm"
-        vars:
-            theme: nord

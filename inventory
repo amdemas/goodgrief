@@ -3,9 +3,3 @@ ansible_connection=local
 
 [gnome]
 ansible_connection=local
-
-[xmonad]
-ansible_connection=local
-
-[bspwm]
-ansible_connection=local

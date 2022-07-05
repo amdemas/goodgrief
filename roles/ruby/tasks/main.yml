@@ -1,15 +1,15 @@
 ---
 - name: include OS specific vars
-  include_vars: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
 - name: install needed system packages
-  package:
-      name: "{{ item }}"
-      state: present
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
   with_items: "{{ rbenv_packages }}"
-  become: yes
+  become: true
 
-- include_tasks: rbenv.yml
+- ansible.builtin.include_tasks: rbenv.yml
   loop: "{{ rbenv_versions }}"
   loop_control:
-      loop_var: rbenv_package_loop
+    loop_var: rbenv_package_loop

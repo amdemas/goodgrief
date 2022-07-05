@@ -1,5 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-      - role: python
+  tasks:
+    - name: "Include python"
+      include_role:
+        name: "python"

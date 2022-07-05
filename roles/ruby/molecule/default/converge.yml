@@ -1,5 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-      - role: ruby
+  tasks:
+    - name: include ruby
+      ansible.builtin.include_role:
+        name: ruby

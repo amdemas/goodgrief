@@ -1,6 +1,7 @@
 ---
-- block:
-    - name: Setup TLP
-      include_role:
+- name: run TLP setup
+  block:
+    - name: setup TLP
+      ansible.builtin.include_role:
         name: anthony25.tlp
   become: true

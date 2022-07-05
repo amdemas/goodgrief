@@ -59,7 +59,9 @@ function group_lazy_load {
 
 #all of our zsh files
 typeset -U config_files
+typeset -U local_files
 config_files=(${ZSH}/**/*.zsh)
+local_files=(${XDG_CONFIG_HOME}/extra/*.zsh)
 
 # load all env files
 for file in ${(M)config_files:#*/_env.zsh}
@@ -102,7 +104,14 @@ do
   source $file
 done
 
+# Load final.zsh to end loading
+for file in ${local_files}
+do
+  source $file
+done
+
 unset config_files
+unset local_files
 unset -f group_lazy_load
 
 if (( $+commands[direnv] )); then _evalcache direnv hook zsh; fi

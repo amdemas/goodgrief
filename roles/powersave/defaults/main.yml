@@ -3,6 +3,8 @@
 
 install_powersave: false
 
+setup_dell: false
+
 powersave_packages:
   - git
   - dptfxtract

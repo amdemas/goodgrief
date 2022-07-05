@@ -1,34 +1,43 @@
 ---
 # tasks file for node
+- name: check if nvm directory exists
+  ansible.builtin.stat:
+    path: "{{ nvm_link_dir }}"
+  register: nvm_dir
 
-- name: cerate nvm directory
-  file:
+- name: create nvm directory
+  ansible.builtin.file:
     path: "{{ nvm_link_dir }}"
     state: directory
     mode: "0755"
+  when: not nvm_dir.stat.exists
 
 - name: download nvm
-  get_url:
+  ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/creationix/nvm/v{{ nvm_script_version }}/install.sh"
     dest: "{{ ansible_user_dir }}/install.sh"
     mode: a+x
+    checksum: "{{ nvm_checksum }}"
+  when: not nvm_dir.stat.exists
 
 - name: install nvm
-  shell: "{{ ansible_user_dir }}/install.sh"
+  ansible.builtin.shell: "{{ ansible_user_dir }}/install.sh"
   args:
     chdir: "{{ nvm_link_dir }}"
     creates: "{{ nvm_link_dir }}/nvm.sh"
   environment:
     XDG_CONFIG_HOME: "{{ ansible_user_dir }}/.config/"
     NVM_DIR: "{{ nvm_link_dir }}"
+  when: not nvm_dir.stat.exists
 
 - name: remove temp nvm installer
-  file:
+  ansible.builtin.file:
     path: "{{ ansible_user_dir }}/install.sh"
     state: absent
+  when: not nvm_dir.stat.exists
 
 - name: install node via nvm
-  shell: >
+  ansible.builtin.shell: >
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm install {{ node_version }}
   args:
     executable: /bin/bash
@@ -37,9 +46,10 @@
   environment:
     XDG_CONFIG_HOME: "{{ ansible_user_dir }}/.config/"
     NVM_DIR: "{{ nvm_link_dir }}"
+  when: not nvm_dir.stat.exists
 
 - name: install packages via npm
-  npm:
+  ansible.builtin.npm:
     name: "{{ item.name }}"
     global: true
     state: '{{ item.state | default("present") }}'
@@ -50,13 +60,13 @@
     PATH: "{{ lookup('env', 'PATH') }}:{{ nvm_link_dir }}/versions/node/v{{ node_version }}/bin"
 
 - name: make npm config directory
-  file:
-    path: "{{ ansible_user_dir }}/.config/npm"
+  ansible.builtin.file:
+    path: "{{ npm_dir }}"
     state: directory
     mode: 0755
 
 - name: copy npmrc config
-  copy:
+  ansible.builtin.copy:
     src: npmrc
-    dest: "{{ ansible_user_dir }}/.config/npm/npmrc"
+    dest: "{{ npm_dir }}/npmrc"
     mode: preserve

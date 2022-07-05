@@ -1,3 +1,0 @@
----
-xorg_packages:
-  - name: xorg-x11-drv-fbdev

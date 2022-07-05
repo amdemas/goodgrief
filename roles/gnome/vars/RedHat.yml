@@ -1,2 +1,18 @@
 ---
-gnome_packages: []
+gnome_packages:
+  - name: "@gnome-desktop"
+    state: present
+  - name: unzip
+    state: present
+  - name: dconf
+    state: present
+  - name: dconf-editor
+    state: present
+  - name: python3-psutil
+    state: present
+  - name: chrome-gnome-shell
+    state: present
+  - name: fontawesome-fonts
+    state: present
+  - name: procps-ng
+    state: present

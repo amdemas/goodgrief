@@ -10,7 +10,7 @@ driver:
 
 platforms:
   - name: default
-    image: geerlingguy/docker-fedora35-ansible:latest
+    image: geerlingguy/docker-fedora36-ansible:latest
 
 provisioner:
   name: ansible

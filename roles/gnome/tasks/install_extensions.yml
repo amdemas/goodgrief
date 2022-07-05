@@ -1,19 +1,19 @@
 ---
 - block:
     - name: "check if extension is already installed - {{ gnome_extension.name }}"
-      stat:
+      ansible.builtin.stat:
         path: "{{ gnome_extension_path }}/{{ gnome_extension.name }}"
       register: r_gnome_extension_check_existing
 
     - name: "download extension - {{ gnome_extension.name }}"
-      get_url:
+      ansible.builtin.get_url:
         url: "{{ gnome_extension.url }}"
         dest: "/tmp/{{ gnome_extension.name }}.zip"
       register: r_gnome_extension_download
       when: not r_gnome_extension_check_existing.stat.exists
 
     - name: "create install directory - {{ gnome_extension.name }}"
-      file:
+      ansible.builtin.file:
         path: "{{ gnome_extension_path }}/{{ gnome_extension.name }}"
         state: directory
         owner: "{{ ansible_user_uid }}"
@@ -22,19 +22,19 @@
       when: not r_gnome_extension_check_existing.stat.exists
 
     - name: "install extension - {{ gnome_extension.name }}"
-      unarchive:
+      ansible.builtin.unarchive:
         src: "/tmp/{{ gnome_extension.name }}.zip"
         dest: "{{ gnome_extension_path }}/{{ gnome_extension.name }}"
         remote_src: true
       when: not r_gnome_extension_check_existing.stat.exists
 
     - name: "check if extension has a schema - {{ gnome_extension.name }}"
-      stat:
+      ansible.builtin.stat:
         path: "{{ gnome_extension_path }}/{{ gnome_extension.name }}/schemas/"
       register: r_gnome_extension_check_schema_dir
 
     - name: "copy all schemas for gsettings - {{ gnome_extension.name }}"
-      copy:
+      ansible.builtin.copy:
         src: "{{ gnome_extension_path }}/{{ gnome_extension.name }}/schemas/"
         dest: /usr/share/glib-2.0/schemas/
         remote_src: true
@@ -44,7 +44,7 @@
       register: r_gnome_extension_copy_schema
 
     - name: init schemas
-      command: glib-compile-schemas /usr/share/glib-2.0/schemas/
+      ansible.builtin.command: glib-compile-schemas /usr/share/glib-2.0/schemas/
       when: r_gnome_extension_copy_schema is changed
       become: true
 
@@ -66,8 +66,9 @@
 
   always:
     - name: delete temporary download directory
-      file:
+      ansible.builtin.file:
         path: "/tmp/{{ gnome_extension.name }}.zip"
         state: absent
+        mode: 0755
       changed_when: false
       when: not r_gnome_extension_check_existing.stat.exists

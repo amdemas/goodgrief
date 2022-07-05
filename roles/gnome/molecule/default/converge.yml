@@ -2,8 +2,9 @@
 - name: Converge
   hosts: all
   tasks:
-      - name: "Include gnome"
-        include_role:
-            name: "gnome"
-        vars:
-            theme: nord
+    - name: "Include gnome"
+      ansible.builtin.include_role:
+        name: "gnome"
+      vars:
+        theme: ZorinBlue-Dark
+        font: FiraCode Nerd Font Mono

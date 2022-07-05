@@ -27,8 +27,6 @@ provisioner:
     TERM: xterm
   playbooks:
     converge: ../../playbook.yml
-  ansible_args:
-    - --limit=bspwm
 
 scenario:
   name: arch
@@ -36,4 +34,4 @@ scenario:
 verifier:
   name: ansible
   additional_files_or_dirs:
-    - ../../roles/*/*/verify.yml
+    - ../../roles/*/molecule/default/verify.yml

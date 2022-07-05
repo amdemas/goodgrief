@@ -1,0 +1,4 @@
+---
+rust_packages:
+  - curl
+  - base-devel

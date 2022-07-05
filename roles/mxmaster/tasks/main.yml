@@ -1,12 +1,13 @@
 ---
 - name: include OS specific vars
-  include_vars: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
 - name: install needed system packages
-  include_role:
+  ansible.builtin.include_role:
     name: syspackage
   vars:
     os_packages: "{{ mxmaster_packages }}"
 
-- include_tasks: logiops.yml
+- name: run logiops tasks
+  ansible.builtin.include_tasks: logiops.yml
 # - include_tasks: libratbag.yml

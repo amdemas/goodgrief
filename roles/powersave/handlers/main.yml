@@ -2,23 +2,23 @@
 # handlers file for powersave
 
 - name: restart_service
-  systemd:
-      name: "{{ item.name }}"
-      state: restarted
-      daemon_reload: yes
+  ansible.builtin.systemd:
+    name: "{{ item.name }}"
+    state: restarted
+    daemon_reload: true
   when: item.changed
   with_items: "{{ services_created.results }}"
-  become: yes
+  become: true
 
 - name: detect_sensors
-  shell: /usr/sbin/sensors-detect < /dev/null
-  ignore_errors: yes
-  become: yes
+  ansible.builtin.command: /usr/sbin/sensors-detect < /dev/null
+  failed_when: "'FAILED' in command_result.stderr"
+  become: true
 
 - name: Update Grub and Initramfs
-  command: '{{ item }}'
+  ansible.builtin.command: "{{ item }}"
   with_items:
-    - 'grub2-mkconfig -o /boot/grub2/grub.cfg'
-    - 'dracut --force --regenerate-all -v'
+    - "grub2-mkconfig -o /boot/grub2/grub.cfg"
+    - "dracut --force --regenerate-all -v"
   when: grub_setup.changed
-  become: yes
+  become: true

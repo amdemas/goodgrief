@@ -1,3 +1,0 @@
----
-- name: refresh fonts
-  command: fc-cache -fv

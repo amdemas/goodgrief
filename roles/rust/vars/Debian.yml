@@ -1,0 +1,5 @@
+---
+rust_packages:
+  - curl
+  - gcc
+  - make

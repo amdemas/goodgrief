@@ -1,3 +1,0 @@
-#!/bin/bash
-
-feh --bg-fill $HOME/Pictures/Wallpapers/18231_gundam.jpg &

@@ -3,25 +3,26 @@
   hosts: all
   gather_facts: true
   tasks:
-      - name: "node - check for nvm"
-        stat:
-            path: "{{ ansible_env.HOME }}/.config/nvm"
-        register: stat_result
+    - name: "node - check for nvm"
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/.config/nvm"
+      register: stat_result
 
-      - name: "node - check that nvm exists"
-        assert:
-            that:
-                - stat_result.stat.exists
+    - name: "node - check that nvm exists"
+      ansible.builtin.assert:
+        that:
+          - stat_result.stat.exists
 
-      - name: "node - run nvm version"
-        shell: >
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm version | grep v13
-        environment:
-            NVM_DIR: "{{ ansible_env.HOME }}/.config/nvm"
-        ignore_errors: true
-        register: cmd_out
+    - name: "node - run nvm version"
+      ansible.builtin.shell: >
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm version | grep v13
+      environment:
+        NVM_DIR: "{{ ansible_env.HOME }}/.config/nvm"
+      ignore_errors: true
+      register: cmd_out
+      when: stat_result.stat.exists
 
-      - name: "node - check nvm version output"
-        assert:
-            that:
-                - cmd_out is succeeded
+    - name: "node - check nvm version output"
+      ansible.builtin.assert:
+        that:
+          - cmd_out is succeeded

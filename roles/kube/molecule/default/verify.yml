@@ -6,21 +6,21 @@
     minikube_output: "v1.25.1"
   tasks:
     - name: "kube - execute kubectl version to capture output"
-      command: kubectl version --client=true
+      ansible.builtin.command: kubectl version --client=true
       register: kubectl_version_output
       changed_when: false
 
     - name: "kube - check kubectl version output contains correct version string"
-      assert:
+      ansible.builtin.assert:
         that:
           - "kubectl_output in kubectl_version_output.stdout"
 
     - name: "kube - execute minikube version to capture output"
-      command: minikube version
+      ansible.builtin.command: minikube version
       register: minikube_version_output
       changed_when: false
 
     - name: "kube - check minikube version output contains correct version string"
-      assert:
+      ansible.builtin.assert:
         that:
           - "minikube_output in minikube_version_output.stdout"
