@@ -6,14 +6,12 @@ driver:
   name: docker
 
 lint: |
-  set -e
-  yamllint -c $ZSH/.yamllint .
   ansible-lint
-  flake8
 
 platforms:
   - name: fedora
     image: geerlingguy/docker-fedora36-ansible:latest
+
 provisioner:
   name: ansible
 

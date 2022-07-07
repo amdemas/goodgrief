@@ -2,8 +2,8 @@
 - name: Verify
   hosts: all
   vars:
-    kubectl_output: "v1.23.2"
-    minikube_output: "v1.25.1"
+    kubectl_output: "v1.24.0"
+    minikube_output: "v1.26.0"
   tasks:
     - name: "kube - execute kubectl version to capture output"
       ansible.builtin.command: kubectl version --client=true

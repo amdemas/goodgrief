@@ -1,10 +1,10 @@
 ---
 # defaults file for Kubernetes
 
-kubectl_version: "1.23.2"
-kube_checksum: c8653aa2bce09a29041b7347ce2d45710abd8bc3cfe79265e0aa04a24c2028344f0b280f52b2858e869bf997cd0e71b6ac8f22ec8a2b4b39328e73339746f565
+kubectl_version: "1.24.0"
+kube_checksum: 291a4d24a400666ec0e3d91fbaae0605de438abf4878ca81e4e8e923beefa8a434ade3a98e8538f654dfe7d32c2038a1610ca6863efe91d2649ea11c28a20a49
 tmp_directory: "/tmp"
 bin_directory: "/usr/local/bin"
 
 minikube_version: "1.26.0"
-minikube_checksum: 3750908a1dc3ae9543e7f7e42db3d0b55ba4702d72eb77e286b0fa1d6f6ac941
+minikube_checksum: 581dce8ccfefa0f0a873002ee9fd75ae562c569d6af9b126404ff6c1e0a92747

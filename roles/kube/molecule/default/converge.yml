@@ -1,12 +1,9 @@
 ---
 - hosts: all
   gather_facts: false
-  tasks:
-    - name: Call setup
-      setup:
 
 - hosts: fedora
   tasks:
     - name: Include kube role
-      include_role:
+      ansible.builtin.include_role:
         name: kube

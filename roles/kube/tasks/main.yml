@@ -4,6 +4,7 @@
     url: "https://storage.googleapis.com/kubernetes-release/release/v{{ kubectl_version }}/kubernetes-client-linux-amd64.tar.gz"
     checksum: "sha512:{{ kube_checksum }}"
     dest: "{{ tmp_directory }}"
+    mode: 0755
   tags:
     - kubectl
 
@@ -19,7 +20,7 @@
   ansible.builtin.copy:
     src: "{{ tmp_directory }}/kubernetes/client/bin/{{ item }}"
     dest: "{{ bin_directory }}/{{ item }}"
-    mode: "0755"
+    mode: 0755
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_id }}"
     remote_src: true
@@ -30,7 +31,7 @@
   become: true
   become_user: root
   ansible.builtin.get_url:
-    url: "https://github.com/kubernetes/minikube/releases/download/v{{ minikube_version }}/minikube-linux-arm64.tar.gz"
+    url: "https://github.com/kubernetes/minikube/releases/download/v{{ minikube_version }}/minikube-linux-amd64.tar.gz"
     dest: "{{ tmp_directory }}"
     checksum: "sha256:{{ minikube_checksum }}"
     mode: 0755
@@ -39,7 +40,7 @@
 
 - name: Unarchive Minikube
   ansible.builtin.unarchive:
-    src: "{{ tmp_directory }}/minikube-linux-arm64.tar.gz"
+    src: "{{ tmp_directory }}/minikube-linux-amd64.tar.gz"
     dest: "{{ tmp_directory }}"
     remote_src: true
   tags:
@@ -49,7 +50,7 @@
   ansible.builtin.copy:
     src: "{{ tmp_directory }}/out/{{ item.name }}"
     dest: "{{ bin_directory }}/{{  item.dest }}"
-    mode: "0755"
+    mode: 0755
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_id }}"
     remote_src: true
