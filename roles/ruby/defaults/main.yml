@@ -10,7 +10,7 @@ rbenv_root: "{{ xdg_data_home }}/rbenv"
 rbenv_version: v1.2.0
 
 rbenv_versions:
-  - "2.7.2p137"
+  - "2.7.4"
 
 rbenv_plugins:
   - name: rbenv-update
@@ -23,4 +23,4 @@ rbenv_plugins:
     repo: https://github.com/rbenv/rbenv-installer.git
     version: main
 
-default_ruby: 2.7.2p137
+default_ruby: 2.7.4

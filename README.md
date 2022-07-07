@@ -26,13 +26,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/b
 The profiles determine the DE to setup and can be applied by setting the `-p` variable before the bootstraping commands. The definition of these profiles can be found in the `host_vars` directory. If no profile is specified, the [gnome profile](host_vars/gnome.yml) will be applied. The following example shows how to use this variable:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/bin/goodgrief) -p zc"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/bin/goodgrief) -p gnome"
 ```
 
-It is also possible to run only specifc parts by using the `-t` options. For example, the following command will only run the bootstrap tasks, which will prepare the repositories and install some required packages:
+It is also possible to run only specific parts by using the `-t` options. For example, the following command will only run the bootstrap tasks, which will prepare the repositories and install some required packages:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/bin/goodgrief) -p rust -t alacritty "
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/amdemas/goodgrief/master/bin/goodgrief) -p gnome -t alacritty "
 ```
 
 ### Running the playbook manually
@@ -48,7 +48,7 @@ ansible-playbook -i inventory playbook.yml --diff [--limit PROFILE] [--tags TAGS
 Or run the helper script
 
 ```sh
-./bin/goodgrief -u
+./bin/goodgrief -h
 ```
 
 ### Updating

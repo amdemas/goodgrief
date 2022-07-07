@@ -6,5 +6,5 @@ kube_checksum: c8653aa2bce09a29041b7347ce2d45710abd8bc3cfe79265e0aa04a24c2028344
 tmp_directory: "/tmp"
 bin_directory: "/usr/local/bin"
 
-minikube_version: "1.25.1"
+minikube_version: "1.26.0"
 minikube_checksum: 3750908a1dc3ae9543e7f7e42db3d0b55ba4702d72eb77e286b0fa1d6f6ac941
