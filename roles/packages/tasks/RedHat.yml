@@ -1,13 +1,4 @@
 ---
-- name: install the rpmfusion and fonts repo packages
-  ansible.builtin.dnf:
-    state: present
-    disable_gpg_check: true
-    name:
-      - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts.distribution_version }}.noarch.rpm
-      - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts.distribution_version }}.noarch.rpm
-  become: true
-
 - name: improve DNF Performances
   ansible.builtin.blockinfile:
     path: /etc/dnf/dnf.conf

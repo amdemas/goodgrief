@@ -3,6 +3,11 @@
 - name: include OS specific vars
   ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
+- name: enable rpm fusion packages
+  ansible.builtin.include_role:
+    name: robertdebock.rpmfusion
+  when: ansible_os_family == 'RedHat'
+
 - name: install packages
   ansible.builtin.include_role:
     name: syspackage
