@@ -6,9 +6,9 @@
     - name: mxmaster - check logiops service
       ansible.builtin.systemd:
         name: logid.service
-        daemon_reload: yes
-        enabled: yes
-      check_mode: yes
+        daemon_reload: true
+        enabled: true
+      check_mode: true
       register: pkg_status
 
     - name: mxmaster - test logiops service is installed

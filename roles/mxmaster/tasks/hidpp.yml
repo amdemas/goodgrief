@@ -1,0 +1,41 @@
+---
+- name: check if udev exists
+  ansible.builtin.stat:
+    path: /usr/bin/udevadm
+  register: udev
+
+- name: clone lastest (hidpp)
+  ansible.builtin.git:
+    repo: https://github.com/PixlOne/hidpp.git
+    dest: "/tmp/hidpp"
+    accept_hostkey: true
+    version: "master"
+  register: hidpp
+
+- name: make build directory (hidpp) # noqa 503
+  ansible.builtin.file:
+    path: /tmp/hidpp/build
+    state: directory
+    mode: 0755
+  when: hidpp.changed
+
+- name: run cmake build from sources (hidpp) # noqa 503 305
+  ansible.builtin.shell: cmake ..
+  args:
+    chdir: "/tmp/hidpp/build"
+  when: hidpp.changed
+
+- name: run make from sources (hidpp) # noqa 503
+  ansible.builtin.make:
+    chdir: "/tmp/hidpp/build"
+  when: hidpp.changed
+
+- name: run make install from sources (hidpp) # noqa 503
+  ansible.builtin.make:
+    target: install
+    chdir: "/tmp/hidpp/build"
+  become: true
+  when: hidpp.changed
+  notify:
+    - reload udev
+    - trigger udev

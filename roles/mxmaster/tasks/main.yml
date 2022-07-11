@@ -8,6 +8,9 @@
   vars:
     os_packages: "{{ mxmaster_packages }}"
 
+# - name: run hidpp tasks
+#   ansible.builtin.include_tasks: hidpp.yml
+
 - name: run logiops tasks
   ansible.builtin.include_tasks: logiops.yml
 # - include_tasks: libratbag.yml

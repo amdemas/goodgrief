@@ -1,19 +1,19 @@
 ---
 # handlers file for mxmaster
 - name: reload udev # noqa 503 305
-  shell: udevadm control --reload
-  become: yes
+  ansible.builtin.command: udevadm control --reload
+  become: true
   when: udev.stat.exists
 
 - name: trigger udev # noqa 305
-  shell: udevadm trigger
-  become: yes
+  ansible.builtin.command: udevadm trigger
+  become: true
   when: udev.stat.exists
 
 - name: reload logiops
-  systemd:
+  ansible.builtin.systemd:
     name: logid.service
-    daemon_reload: yes
-    enabled: yes
+    daemon_reload: true
+    enabled: true
     state: reloaded
-  become: yes
+  become: true
