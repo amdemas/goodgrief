@@ -63,6 +63,7 @@
       gnome_shell_extension:
         extension: "{{ gnome_extension.name }}"
         state: "{{ gnome_extension.state|default('present') }}"
+      changed_when: false
 
   always:
     - name: delete temporary download directory

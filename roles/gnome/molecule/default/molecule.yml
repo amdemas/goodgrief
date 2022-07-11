@@ -6,8 +6,13 @@ driver:
 # lint: |
 #   ansible-lint
 platforms:
-  - name: fedora
-    image: geerlingguy/docker-fedora36-ansible:latest
+  - name: instance
+    image: quay.io/fedora/fedora:latest
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
 provisioner:
   name: ansible
 verifier:
