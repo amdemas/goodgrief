@@ -1,6 +1,3 @@
-Powersave:
-    ☐ Issues with editing mounts
-
 Docker:
     ☐ Can not seem to get this to work in molecule for now.
 
@@ -22,7 +19,7 @@ Tested:
     ✔ mxmaster
     ✔ node
     ✔ packages
-    ✘ powersave
+    ✔ powersave
     ✔ python
     ✘ ruby
     ✔ rust

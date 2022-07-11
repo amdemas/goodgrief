@@ -12,6 +12,7 @@
 
 - name: detect_sensors
   ansible.builtin.command: /usr/sbin/sensors-detect < /dev/null
+  register: command_result
   failed_when: "'FAILED' in command_result.stderr"
   become: true
 
@@ -20,5 +21,5 @@
   with_items:
     - "grub2-mkconfig -o /boot/grub2/grub.cfg"
     - "dracut --force --regenerate-all -v"
-  when: grub_setup.changed
   become: true
+  when: ansible_facts.virtualization_type | default('') not in ['docker', 'container', 'containerd']

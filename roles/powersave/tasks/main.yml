@@ -2,16 +2,17 @@
 - ansible.builtin.include_tasks: powersave.yml
   when: install_powersave
 
-- ansible.builtin.include_tasks: tlp.yml
-  when: install_powersave
+# - ansible.builtin.include_tasks: tlp.yml
+#   when: install_powersave
 
 - ansible.builtin.include_tasks: dell.yml
-  when: install_powersave
+  when: setup_dell
 
 - name: stat computer cpu
   ansible.builtin.command: "dmidecode -s processor-manufacturer"
   register: computercpu
   when: install_powersave
+  changed_when: false
   become: true
 
 - ansible.builtin.include_tasks: modprobe.yml
@@ -49,14 +50,6 @@
   with_items: "{{ mount_options.stdout_lines }}"
   when:
     - item.split(" ")[1] in  ["/", "/boot", "/home"]
-  become: true
-
-- name: discard Trim Enable
-  ansible.builtin.systemd:
-    name: fstrim.timer
-    state: started
-    enabled: true
-    daemon_reload: true
   become: true
 
 - name: load IO Schedulers at boot

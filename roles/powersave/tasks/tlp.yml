@@ -3,5 +3,5 @@
   block:
     - name: setup TLP
       ansible.builtin.include_role:
-        name: anthony25.tlp
+        name: aruhier.ansible_role_tlp
   become: true

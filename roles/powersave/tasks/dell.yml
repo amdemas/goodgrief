@@ -6,7 +6,7 @@
   become: true
 
 - ansible.builtin.include_tasks: dell5520.yml
-  when: computerstat.stdout.find('Precision 5520') != -1
+  when: ("'Precision 5520' in computerstat.stat.stdout" and setup_dell)
 
 - ansible.builtin.include_tasks: dell5550.yml
-  when: computerstat.stdout.find('Precision 5550') != -1
+  when: ("'Precision 5550' in computerstat.stat.stdout" and setup_dell)

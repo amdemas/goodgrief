@@ -7,7 +7,6 @@ setup_dell: false
 
 powersave_packages:
   - git
-  - dptfxtract
   - hdparm
   - lm_sensors
   - thermald
