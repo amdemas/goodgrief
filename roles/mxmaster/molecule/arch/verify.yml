@@ -3,19 +3,6 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: mxmaster - check logiops service
-      ansible.builtin.systemd:
-        name: logid.service
-        daemon_reload: true
-        enabled: true
-      check_mode: true
-      register: pkg_status
-
-    - name: mxmaster - test logiops service is installed
-      ansible.builtin.assert:
-        that:
-          - not pkg_status.changed
-
     - name: mxmaster - check that logid.cfg exists
       ansible.builtin.stat:
         path: /etc/logid.cfg

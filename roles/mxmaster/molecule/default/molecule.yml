@@ -6,8 +6,15 @@ driver:
 lint: |
   ansible-lint
 platforms:
-  - name: fedora
+  - name: instance
     image: geerlingguy/docker-fedora36-ansible:latest
+    cmd: /usr/sbin/init
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
 provisioner:
   name: ansible
   env:

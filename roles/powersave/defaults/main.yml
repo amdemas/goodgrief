@@ -6,11 +6,11 @@ install_powersave: false
 setup_dell: false
 
 powersave_packages:
-  - git
-  - hdparm
-  - lm_sensors
-  - thermald
-  - hddtemp
+  - name: git
+  - name: hdparm
+  - name: lm_sensors
+  - name: thermald
+  - name: hddtemp
 
 thermald_gitrepo: https://github.com/intel/thermal_daemon.git
 

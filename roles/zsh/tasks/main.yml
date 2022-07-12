@@ -1,16 +1,15 @@
 ---
 # tasks file for zsh
 
-# Installation and setup
-- name: make sure zsh is installed
-  ansible.builtin.package:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - zsh
-    - git
-    - direnv
-  become: true
+- name: check which shell is used
+  ansible.builtin.setup:
+    gather_subset: "user_shell"
+
+- name: install needed system packages
+  ansible.builtin.include_role:
+    name: syspackage
+  vars:
+    os_packages: "{{ zsh_packages }}"
 
 - name: copy zshrc configs
   ansible.builtin.copy:
@@ -27,10 +26,10 @@
     version: 2.4.2
     force: true
 
-- name: changing default shell to zsh
+- name: change default shell to zsh
   ansible.builtin.user:
     name: "{{ ansible_user_id }}"
     shell: /usr/bin/zsh
     state: present
   become: true
-  when: ansible_facts.user_shell != '/usr/bin/zsh'
+  when: ansible_facts.user_shell != "/usr/bin/zsh"

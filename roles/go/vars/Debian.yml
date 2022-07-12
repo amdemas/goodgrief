@@ -1,2 +1,2 @@
-git_packages:
-  - golang
+go_packages:
+  - name: golang

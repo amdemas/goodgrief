@@ -1,12 +1,10 @@
 ---
 - name: install powersaving packages
-  ansible.builtin.package:
-    name: "{{ item }}"
-    state: '{{ item.state | default("present") }}'
-  become: true
-  with_items: "{{ powersave_packages }}"
-  notify:
-    - detect_sensors
+  ansible.builtin.include_role:
+    name: syspackage
+  vars:
+    os_packages: "{{ powersave_packages }}"
+  notify: ["detect_sensors"]
 
 - name: enable powersaving services
   ansible.builtin.systemd:
@@ -17,5 +15,4 @@
     - fstrim.timer
     - thermald.service
   register: services_created
-  notify:
-    - restart_service
+  notify: ["restart_service"]

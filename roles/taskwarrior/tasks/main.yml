@@ -1,9 +1,9 @@
 ---
 - name: install taskwarrior
-  ansible.builtin.package:
-    name: task
-    state: present
-  become: true
+  ansible.builtin.include_role:
+    name: syspackage
+  vars:
+    os_packages: "{{ task_packages }}"
 
 - name: install bugwarrior
   ansible.builtin.pip:

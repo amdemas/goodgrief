@@ -1,19 +1,13 @@
 Docker:
     ☐ Can not seem to get this to work in molecule for now.
 
-Gnome:
-    ☐ Fails Idempotence test, must update gnome_shell_extension to get the current value to compare
-
-Ruby:
-    ☐  Fails installing current version, need to validate that version is still needed. (2.7.2)
-
 Tested:
     ✔ aws
     ✔ alacritty
     ✔ chromium
     ✘ docker
     ✔ git
-    ✘ gnome
+    ✔ gnome
     ✔ go
     ✔ kube
     ✔ mxmaster
@@ -21,7 +15,7 @@ Tested:
     ✔ packages
     ✔ powersave
     ✔ python
-    ✘ ruby
+    ✔ ruby
     ✔ rust
     ✔ syspackage
     ✔ taskwarrior

@@ -8,23 +8,19 @@
   connection: local
   roles:
     - role: xdg_dirs
-      tags: bootstrap
+      tags: [xdg, bootstrap]
     - role: alacritty
-      tags: alacritty
+      tags: [applications, alacritty]
     - role: aws
       tags: [aws, bootstrap]
     - role: chromium
-      tags: chromium
-    # Docker has issues, need to find a better way
-    # - role: docker
-    #   tags: docker
+      tags: [applications, chromium]
     - role: git
       tags: [git, bootstrap]
     - role: go
       tags: [go, bootstrap]
     - role: kube
       tags: [kube, bootstrap]
-      become: true
     - role: mxmaster
       tags: mxmaster
     - role: node
@@ -33,9 +29,6 @@
       tags: [packages, bootstrap]
     - role: powersave
       tags: powersave
-    - role: linux-system-roles.tuned
-      tags: [tuned, powersave]
-      become: true
     - role: python
       tags: [python, boostrap]
     - role: ruby
@@ -43,13 +36,13 @@
     - role: rust
       tags: [rust, boostrap]
     - role: taskwarrior
-      tags: taskwarrior
+      tags: [applications, taskwarrior]
     - role: tmux
-      tags: tmux
+      tags: [applications, tmux]
     - role: vim
-      tags: vim
+      tags: [applications, vim]
     - role: vscode
-      tags: vscode
+      tags: [applications, vscode]
     - role: zsh
       tags: [zsh, boostrap]
 

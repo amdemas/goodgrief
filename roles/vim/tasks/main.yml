@@ -1,12 +1,11 @@
 ---
 # tasks file for vim
 
-- name: install system packages
-  ansible.builtin.package:
-    name: "{{ item.name }}"
-    state: present
-  become: true
-  with_items: "{{ vim_packages }}"
+- name: install needed system packages
+  ansible.builtin.include_role:
+    name: syspackage
+  vars:
+    os_packages: "{{ vim_packages }}"
 
 - name: ensure pip_install_packages are installed for pip3.
   ansible.builtin.pip:

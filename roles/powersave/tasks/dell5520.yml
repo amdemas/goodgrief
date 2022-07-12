@@ -38,4 +38,4 @@
     owner: root
     group: root
   become: true
-  notify: Update Grub and Initramfs
+  notify: ["Update Grub and Initramfs"]

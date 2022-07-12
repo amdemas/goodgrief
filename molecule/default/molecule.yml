@@ -10,7 +10,12 @@ driver:
 
 platforms:
   - name: default
-    image: geerlingguy/docker-fedora36-ansible:latest
+    image: quay.io/fedora/fedora:latest
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
 
 provisioner:
   name: ansible

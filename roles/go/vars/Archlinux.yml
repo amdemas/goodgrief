@@ -1,4 +1,4 @@
-git_packages:
-  - go
-  - go-tools
-  - gcc-go
+go_packages:
+  - name: go
+  - name: go-tools
+  - name: gcc-go

@@ -175,10 +175,14 @@ $ cd role/<rolename>
 $ molecule test -s {default,arch,ubuntu}
 ```
 
+## Contributing
+
+Refer to the [contributing guide](https://github.com/amdemas/goodgrief/blob/main/CONTRIBUTING.md).
+
 ## Credits
 
 Alot of this is pulled from other peoples work. Thanks to everyone for their creativity!
 
 ## License
 
-This project is under the GNU General Public License v3.0. Check [LICENSE](https://github.com/amdemas/goodgrief/blob/main/LICENSE) file to see the full text full text.
+This project is under the MIT License. Check [LICENSE](https://github.com/amdemas/goodgrief/blob/main/LICENSE) file to see the full text full text.

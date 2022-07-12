@@ -3,11 +3,10 @@
   ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
 - name: install go and relevant packages
-  ansible.builtin.package:
-    name: "{{ item }}"
-    state: present
-  loop: "{{ git_packages }}"
-  become: true
+  ansible.builtin.include_role:
+    name: syspackage
+  vars:
+    os_packages: "{{ go_packages }}"
 
 - name: create global go config directory
   ansible.builtin.file:

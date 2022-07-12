@@ -1,13 +1,13 @@
 ---
 rbenv_packages:
-    - build-essential
-    - curl
-    - git
-    - libcurl4-openssl-dev
-    - libffi-dev
-    - libreadline-dev
-    - libssl-dev
-    - libxml2-dev
-    - libxslt1-dev
-    - zlib1g-dev
-    - bzip2
+  - name: build-essential
+  - name: curl
+  - name: git
+  - name: libcurl4-openssl-dev
+  - name: libffi-dev
+  - name: libreadline-dev
+  - name: libssl-dev
+  - name: libxml2-dev
+  - name: libxslt1-dev
+  - name: zlib1g-dev
+  - name: bzip2

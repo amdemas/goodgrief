@@ -1,5 +1,5 @@
 git_packages:
-    - git
-    - gawk
-    - git-extras
-    - hub
+  - name: git
+  - name: gawk
+  - name: git-extras
+  - name: hub

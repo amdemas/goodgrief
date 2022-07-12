@@ -9,13 +9,11 @@ lint: |
   ansible-lint --exclude ../../../../.ansible/roles
 platforms:
   - name: default
-    image: geerlingguy/docker-fedora35-ansible:latest
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    image: quay.io/fedora/fedora:latest
     capabilities:
       - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    override_command: true
     privileged: true
 provisioner:
   name: ansible

@@ -1,0 +1,28 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "git - check git package status"
+      ansible.builtin.package:
+        name: "git"
+        state: "installed"
+      check_mode: true
+      register: pkg_status
+
+    - name: "git - test git package is installed"
+      ansible.builtin.assert:
+        that:
+          - not pkg_status.changed
+
+    - name: "git - check that gitconfig exists"
+      ansible.builtin.stat:
+        path: "/root/.config/git/config"
+      register: stat_result
+
+    - name: "git - test gitconfig exists"
+      ansible.builtin.assert:
+        that:
+          - stat_result.stat.exists
