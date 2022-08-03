@@ -7,10 +7,8 @@ lint: |
   ansible-lint
 platforms:
   - name: instance
-    image: geerlingguy/docker-fedora36-ansible:latest
-    cmd: /usr/sbin/init
-    capabilities:
-      - SYS_ADMIN
+    image: "${MOLECULE_DISTRO:-geerlingguy/docker-fedora36-ansible:latest}"
+    command: ${MOLECULE_DOCKER_COMMAND:-"/usr/sbin/init"}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true

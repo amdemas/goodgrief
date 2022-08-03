@@ -3,21 +3,27 @@ dependency:
   name: galaxy
   options:
     role-file: ../../galaxy_roles/requirements.yml
+    requirements-file: ../../galaxy_roles/requirements.yml
+
 driver:
   name: docker
+
 lint: |
   ansible-lint --exclude ../../../../.ansible/roles
+
 platforms:
-  - name: default
-    image: quay.io/fedora/fedora:latest
-    capabilities:
-      - SYS_ADMIN
+  - name: instance
+    image: "${MOLECULE_DISTRO:-geerlingguy/docker-fedora36-ansible:latest}"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
+    pre_build_image: true
+
 provisioner:
   name: ansible
+
 scenario:
   name: default
+
 verifier:
   name: ansible

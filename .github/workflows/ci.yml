@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          - "geerlingguy/docker-fedora36-ansible:latest"
+          - "chriswayg/docker-archlinux-ansible:latest"
+          - "ubuntu-upstart:latest"
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          path: "${{ github.repository }}"
+      - name: run molecule
+        run: molecule test
+        env:
+          MOLECULE_DISTRO: ${{ matrix.image}}

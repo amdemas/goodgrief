@@ -1,7 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  gather_facts: true
+  become: true
 
   pre_tasks:
     - name: Wait for systemd to complete initialization. # noqa 303
@@ -15,7 +15,7 @@
       when: ansible_service_mgr == 'systemd'
       changed_when: false
       failed_when: systemctl_status.rc > 1
-      become: true
+
   tasks:
     - name: run docker role
       ansible.builtin.include_role:
