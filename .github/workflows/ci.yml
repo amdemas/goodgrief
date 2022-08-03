@@ -16,11 +16,20 @@ jobs:
           - "chriswayg/docker-archlinux-ansible:latest"
           - "ubuntu-upstart:latest"
     steps:
-      - name: checkout
+      - name: Checkout Code.
         uses: actions/checkout@v3
         with:
           path: "${{ github.repository }}"
-      - name: run molecule
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install test dependencies.
+        run: pip3 install ansible molecule[docker] docker
+
+      - name: Run molecule tests.
         run: molecule test
         env:
           MOLECULE_DISTRO: ${{ matrix.image}}
