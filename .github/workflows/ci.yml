@@ -18,7 +18,7 @@ jobs:
         image:
           - "geerlingguy/docker-fedora36-ansible:latest"
           - "chriswayg/docker-archlinux-ansible:latest"
-          - "ubuntu-upstart:latest"
+          # - "ubuntu-upstart:latest"
     steps:
       - name: Checkout Code.
         uses: actions/checkout@v3
