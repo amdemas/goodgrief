@@ -23,33 +23,20 @@
   changed_when: false
   register: mount_options
 
-- name: ensure fstab uses noatime
+- name: print return of mount_options
+  ansible.builtin.debug:
+    var: mount_options.stdout_lines
+
+- name: Ensure fstab uses nodiratime and noatime
   ansible.builtin.mount:
     path: "{{ item.split(' ')[1] }}"
     state: mounted
     fstype: "{{ item.split(' ')[2] }}"
     src: "{{ item.split(' ')[0] }}"
-    opts: "{{ item.split(' ')[3].split(',') | union(['noatime']) | unique | join(',') }}"
+    opts: "{{ item.split(' ')[3].split(',') | union(['nodiratime noatime']) | unique | join(',') }}"
   with_items: "{{ mount_options.stdout_lines }}"
   when:
-    - item.split(" ")[1] in  ["/", "/boot", "/home"]
-  become: true
-
-- name: get mounts from /etc/mtab
-  ansible.builtin.command: cat /etc/mtab
-  changed_when: false
-  register: mount_options
-
-- name: Ensure fstab uses nodiratime
-  ansible.builtin.mount:
-    path: "{{ item.split(' ')[1] }}"
-    state: mounted
-    fstype: "{{ item.split(' ')[2] }}"
-    src: "{{ item.split(' ')[0] }}"
-    opts: "{{ item.split(' ')[3].split(',') | union(['nodiratime']) | unique | join(',') }}"
-  with_items: "{{ mount_options.stdout_lines }}"
-  when:
-    - item.split(" ")[1] in  ["/", "/boot", "/home"]
+    - item.split(" ")[1] in  ["/", "/boot", "/home"] and "noatime,nodiratime" not in item.split(" ")[3]
   become: true
 
 - name: load IO Schedulers at boot

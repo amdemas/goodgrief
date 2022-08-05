@@ -9,8 +9,9 @@ lint: |
   ansible-lint --exclude ../../../../.ansible/roles
 platforms:
   - name: instance
-    image: "${MOLECULE_DISTRO:-geerlingguy/docker-fedora36-ansible:latest}"
-    command: ${MOLECULE_DOCKER_COMMAND:-"/usr/sbin/init"}
+    image: "${MOLECULE_DISTRO:-quay.io/fedora/fedora:latest}"
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
