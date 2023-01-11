@@ -37,7 +37,7 @@ function fake() {
 
 # Lazy load pyenv
 if type pyenv > /dev/null; then
-    export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:${PATH}"
+    # export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:${PATH}"
     function pyenv() {
         unset -f pyenv
         eval "$(command pyenv init -)"

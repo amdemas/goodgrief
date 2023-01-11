@@ -13,6 +13,7 @@ install_packages:
   - name: python3-libselinux
   - name: flameshot
   - name: bottom
+  - name: gnome-network-displays
 
 external_packages:
   - repo: atim/bottom

@@ -31,19 +31,6 @@ function gz() {
     gzip -c "$1" | wc -c
 }
 
- # Allow returning to Vim by pressing Ctrl+Z
-fancy-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
-    BUFFER="fg"
-    zle accept-line
-  else
-    zle push-input
-    zle clear-screen
-  fi
-}
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
-
 # SSH and attach tmux session
 function sst() {
   ssh "$1" -t tmux attach
