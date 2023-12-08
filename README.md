@@ -87,6 +87,10 @@ goodgrief -u
       <td>Manages the installation of <a href="https://docker.io/">Docker</a>.</td>
     </tr>
     <tr>
+      <td><a href="roles/fish">fish</a></td>
+      <td>Installs <a href="https://fishshell.com/">fish</a> along with <a href="https://github.com/jorgebucaran/fisher">fisher</a>. Refer to the <a href="roles/fish/files/fisher">fisher file</a> for the plugins used.</td>
+    </tr>
+    <tr>
       <td><a href="roles/git">Git</a></td>
       <td>Manages the installation of <a href="https://git-scm.com/">Git</a>.</td>
     </tr>
@@ -131,21 +135,14 @@ goodgrief -u
       <td>Installs <a href="https://taskwarrior.org/">taskwarrior</a>.</td>
     </tr>
     <tr>
-      <td><a href="roles/tmux">tmux</a></td>
+      <td><a href="roles/tmux">Tmux</a></td>
       <td>Installs <a href="https://github.com/tmux/tmux/wiki">tmux</a>.</td>
     </tr>
     <tr>
-      <td><a href="roles/vim">vim</a></td>
+      <td><a href="roles/vim">Neovim</a></td>
       <td>Installs <a href="https://neovim.io/">Neovim</a> using <a href="https://github.com/rafi/vim-config">rafi's sweet config</a>.</td>
     </tr>
-    <tr>
-      <td><a href="roles/vscode">vscode</a></td>
-      <td>Installs <a href="https://code.visualstudio.com/">VSCode</a>. All settings are synced with <a href="https://code.visualstudio.com/docs/editor/settings-sync">Settings Sync</a>.</td>
-    </tr>
-    <tr>
-      <td><a href="roles/zsh">zsh</a></td>
-      <td>Installs <a href="https://www.zsh.org/">zsh</a> along with <a href="https://github.com/zplug/zplug">zplug</a>. Refer to the <a href="roles/zsh/zplug.zsh">zplug.zsh</a> for the plugins used.</td>
-    </tr>
+
   </tbody>
 </table>
 

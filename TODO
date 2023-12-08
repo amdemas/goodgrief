@@ -1,6 +1,9 @@
 Docker:
     ☐ Can not seem to get this to work in molecule for now.
 
+Gnome:
+    ☐ Update to match current configuration and clean out stuff not being used
+
 Tested:
     ✔ aws
     ✔ alacritty
@@ -24,3 +27,4 @@ Tested:
     ✔ vscode
     ✔ xdg_dirs
     ✔ zsh
+
