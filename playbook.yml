@@ -9,6 +9,8 @@
   roles:
     - role: xdg_dirs
       tags: [xdg, bootstrap]
+    - role: fish
+      tags: [fish, boostrap]
     - role: alacritty
       tags: [applications, alacritty]
     - role: aws
@@ -36,15 +38,15 @@
     - role: rust
       tags: [rust, boostrap]
     - role: taskwarrior
-      tags: [applications, taskwarrior]
+      tags: [taskwarrior]
     - role: tmux
       tags: [applications, tmux]
     - role: vim
       tags: [applications, vim]
     - role: vscode
-      tags: [applications, vscode]
+      tags: [vscode]
     - role: zsh
-      tags: [zsh, boostrap]
+      tags: [zsh]
 
 - name: setup Gnome DE
   hosts: gnome
