@@ -1,1 +1,0 @@
-zplug "plugins/taskwarrior", from:oh-my-zsh

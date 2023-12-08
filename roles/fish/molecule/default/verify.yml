@@ -1,0 +1,38 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Collect only facts returned by facter
+      ansible.builtin.setup:
+        gather_subset:
+          - "user_shell"
+
+    - name: "fish - check fish package status"
+      ansible.builtin.package:
+        name: "fish"
+        state: "installed"
+      check_mode: true
+      register: pkg_status
+
+    - name: "fish - test fish package is installed"
+      ansible.builtin.assert:
+        that:
+          - not pkg_status.changed
+
+    - name: "fish - check that config.fish exists"
+      ansible.builtin.stat:
+        path: "/root/.config/fish/config.fish"
+      register: stat_result
+
+    - name: "fish - test config.fish exists"
+      ansible.builtin.assert:
+        that:
+          - stat_result.stat.exists
+
+    - name: "fish - test fish is the default shell"
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.user_shell == '/usr/bin/fish'

@@ -1,5 +1,5 @@
 ---
-gnome_shell_version: "40.0"
+gnome_shell_version: "45.0"
 
 gnome_extension_path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions"
 

@@ -1,1 +1,0 @@
-export PATH=${PATH}:${POETRY_HOME}/bin:${PYENV_ROOT}/bin

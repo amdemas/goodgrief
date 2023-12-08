@@ -1,7 +1,0 @@
----
-- name: install vscode
-  ansible.builtin.include_role:
-    name: gantsign.visual-studio-code
-  vars:
-    visual_studio_code_build: stable
-    visual_studio_code_gpgcheck: yes

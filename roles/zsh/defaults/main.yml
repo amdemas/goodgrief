@@ -1,7 +1,0 @@
----
-# defaults file for zsh
-
-zsh_packages:
-  - name: zsh
-  - name: git
-  - name: direnv

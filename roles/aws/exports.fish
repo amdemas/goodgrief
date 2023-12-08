@@ -1,0 +1,2 @@
+set -g AWS_SHARED_CREDENTIALS_FILE "$XDG_CONFIG_HOME"/aws/credentials
+set -g AWS_CONFIG_FILE "$XDG_CONFIG_HOME"/aws/config
