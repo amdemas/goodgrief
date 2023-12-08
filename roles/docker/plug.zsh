@@ -1,1 +1,0 @@
-zplug "akarzim/zsh-docker-aliases"

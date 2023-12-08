@@ -1,0 +1,48 @@
+---
+# tasks file for fish
+
+- name: check which shell is used
+  ansible.builtin.setup:
+    gather_subset: "user_shell"
+
+- name: install needed system packages
+  ansible.builtin.include_role:
+    name: syspackage
+  vars:
+    os_packages: "{{ fish_packages }}"
+
+- name: copy fish configs
+  ansible.builtin.copy:
+    src: config
+    dest: "{{ ansible_user_dir }}/.config/fish/config.fish"
+    force: true
+    mode: preserve
+
+- name: download latest fisher
+  get_url:
+    url: "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish"
+    dest: "{{ ansible_user_dir }}/fisher.sh"
+    accept_hostkey: true
+    version: 2.4.2
+    force: true
+
+- name: source fisher to install
+  shell: source /tmp/fisher.fish
+
+- name: change default shell to fish
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/fish
+    state: present
+  become: true
+  when: ansible_facts.user_shell != "/usr/bin/fish"
+
+
+- name: copy fisher plugins
+  ansible.builtin.fiile:
+    src: fisher
+    dest: "{{ ansible_user_dir }}/.config/fish/fish_plugins"
+    force: true
+    state: link
+
+

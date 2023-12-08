@@ -1,0 +1,8 @@
+---
+# defaults file for fish
+
+zsh_packages:
+  - name: fish
+  - name: git
+  - name: direnv
+  - name: bat

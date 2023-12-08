@@ -32,12 +32,13 @@ python_pip_packages:
     - vim-vint
 
 vim_packages:
-    - name: ShellCheck
-    - name: tidy
-    - name: vim
-    - name: neovim
-    - name: python-neovim
-    - name: python3-neovim
-    - name: the_silver_searcher
-    - name: ctags
-    - name: make
+  - name: ShellCheck
+  - name: tidy
+  - name: vim
+  - name: neovim
+  - name: python-neovim
+  - name: python3-neovim
+  - name: the_silver_searcher
+  - name: ctags
+  - name: make
+  - name: ripgrep

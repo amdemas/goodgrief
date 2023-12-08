@@ -1,0 +1,49 @@
+set fish_greeting ""
+
+set -gx TERM xterm-256color
+
+set -g XDG_DATA_HOME $HOME/.local/share
+set -g XDG_CONFIG_HOME $HOME/.config
+set -g FISH_EXTRA $HOME/.config/extra
+set -g XDG_CACHE_HOME $HOME/.cache
+set -g FISH_CONFIGS $HOME/.config/dotfiles
+set -g FDOTDIR $HOME/.zsh
+
+for f in $FISH_CONFIGS/**/*.fish
+    if string split -r -m1 / $f | string match -q 'exports.fish'
+        source $f
+    end
+end
+
+# Load Alias files
+for f in $FISH_CONFIGS/**/*.fish
+    if string split -r -m1 / $f | string match -q 'aliases.fish'
+        source $f
+    end
+end
+
+# Load Path additions files
+for f in $FISH_CONFIGS/**/*.fish
+    if string split -r -m1 / $f | string match -q 'path.fish'
+        source $f
+    end
+end
+
+# Load functions additions files
+for f in $FISH_CONFIGS/**/*.fish
+    if string split -r -m1 / $f | string match -q 'functions.fish'
+        source $f
+    end
+end
+
+# Load final additions, typically for chain loading shell items
+for f in $FISH_CONFIGS/**/*.fish
+    if string split -r -m1 / $f | string match -q 'final.fish'
+        source $f 1>/dev/null
+    end
+end
+
+for f in $FISH_EXTRA/*.fish
+    source $f
+end
+
