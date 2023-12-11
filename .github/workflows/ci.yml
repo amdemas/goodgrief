@@ -21,7 +21,7 @@ jobs:
           # - "ubuntu-upstart:latest"
     steps:
       - name: Checkout Code.
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: "dotfiles"
 
